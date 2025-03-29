@@ -7,6 +7,7 @@
 // 4. Light red -- #FF8A80
 // 5. Lighter red -- #FFB3B3
 // 6. Very light red -- #FFE0E0
+
 export const nodes = [
   // Root node
   {
@@ -24,6 +25,7 @@ export const nodes = [
     definition:
       "Data cannot be changed once created; instead, new data is produced for modifications.",
     shape: "hexagon",
+    shape: "rect",
     color: "#98EE99",
   },
   {
@@ -64,6 +66,7 @@ export const nodes = [
     label: "Object.freeze",
     definition: "Prevents modifications to an object.",
     shape: "rect",
+    color: "#B9F6CA",
   },
   {
     id: "objectAssign",
@@ -71,12 +74,14 @@ export const nodes = [
     definition:
       "Creates a new object by copying properties from source objects.",
     shape: "rect",
+    color: "#B9F6CA",
   },
   {
     id: "spreadOp",
     label: "Spread Operator",
     definition: "Copies elements into a new array or object.",
     shape: "rect",
+    color: "#B9F6CA",
   },
   {
     id: "arrayNew",
@@ -84,6 +89,7 @@ export const nodes = [
     definition:
       "Methods like map, filter, and reduce that do not mutate the original array.",
     shape: "rect",
+    color: "#B9F6CA",
   },
   // Second-level nodes for State
   {
@@ -92,6 +98,7 @@ export const nodes = [
     definition:
       "Prevent multiple parts of your code from modifying the same state concurrently.",
     shape: "rect",
+    color: "#B9F6CA",
   },
   {
     id: "useParams",
@@ -99,6 +106,7 @@ export const nodes = [
     definition:
       "Pass state as parameters to functions rather than using global variables.",
     shape: "rect",
+    color: "#B9F6CA",
   },
   {
     id: "returnNew",
@@ -106,6 +114,7 @@ export const nodes = [
     definition:
       "Functions should return new state rather than modifying existing state.",
     shape: "rect",
+    color: "#B9F6CA",
   },
   // Second-level nodes for Functions
   {
@@ -114,6 +123,7 @@ export const nodes = [
     definition:
       "Functions are treated as first-class citizens and can be passed around as values.",
     shape: "rect",
+    color: "#B9F6CA",
   },
   {
     id: "pureFunctions",
@@ -121,6 +131,7 @@ export const nodes = [
     definition:
       "Functions that produce the same output for the same input and have no side effects.",
     shape: "rect",
+    color: "#B9F6CA",
   },
   {
     id: "higherOrder",
@@ -128,19 +139,22 @@ export const nodes = [
     definition:
       "Functions that accept other functions as arguments or return them.",
     shape: "rect",
+    color: "#B9F6CA",
   },
   {
     id: "composition",
     label: "Function Composition",
     definition: "Combining simple functions to create more complex ones.",
     shape: "rect",
+    color: "#B9F6CA",
   },
   // Third-level node under Pure Functions
   {
     id: "noSideEffects",
     label: "No Side Effects",
     definition: "Pure functions do not affect external state.",
-    shape: "rect",
+    shape: "diamond",
+    color: "#E8F5E9",
   },
   // Second-level nodes for Anti-Patterns
   {
@@ -149,6 +163,7 @@ export const nodes = [
     definition:
       "Directly modifying objects or arrays leads to unpredictable behavior.",
     shape: "rect",
+    color: "#FFB3B3",
   },
   {
     id: "impureFunctions",
@@ -156,6 +171,7 @@ export const nodes = [
     definition:
       "Functions that produce side effects or depend on external state.",
     shape: "rect",
+    color: "#FFB3B3",
   },
   {
     id: "sharedState",
@@ -163,20 +179,23 @@ export const nodes = [
     definition:
       "Multiple parts of the program modifying the same state can lead to bugs.",
     shape: "rect",
+    color: "#FFB3B3",
   },
   // Third-level nodes under Mutability
   {
     id: "directMutation",
     label: "Direct Object/Array Mutation",
     definition: "Changing objects or arrays in place.",
-    shape: "rect",
+    shape: "diamond",
+    color: "#FFE0E0",
   },
   {
     id: "arrayMutators",
     label: "Array Methods",
     definition:
       "Using methods that modify the array in place (push, pop, splice, etc.).",
-    shape: "rect",
+    shape: "diamond",
+    color: "#FFE0E0",
   },
   // Third-level nodes under Impure Functions
   {
@@ -184,13 +203,15 @@ export const nodes = [
     label: "Side Effects",
     definition:
       "Functions that interact with external systems (I/O, DOM, etc.).",
-    shape: "rect",
+    shape: "diamond",
+    color: "#FFE0E0",
   },
   {
     id: "externalDependency",
     label: "External State Dependency",
     definition: "Functions that rely on or change external state.",
-    shape: "rect",
+    shape: "diamond",
+    color: "#FFE0E0",
   },
   // Second-level nodes for Benefits
   {
@@ -198,12 +219,14 @@ export const nodes = [
     label: "Testability",
     definition: "Easier to test due to predictable outputs.",
     shape: "rect",
+    color: "#B9F6CA",
   },
   {
     id: "predictability",
     label: "Predictability",
     definition: "Outputs remain consistent given the same inputs.",
     shape: "rect",
+    color: "#B9F6CA",
   },
   {
     id: "modularity",
@@ -211,6 +234,7 @@ export const nodes = [
     definition:
       "Well-defined, independent modules that are easier to maintain.",
     shape: "rect",
+    color: "#B9F6CA",
   },
   {
     id: "concurrency",
@@ -218,12 +242,14 @@ export const nodes = [
     definition:
       "Immutable data and pure functions reduce issues in concurrent contexts.",
     shape: "rect",
+    color: "#B9F6CA",
   },
   {
     id: "readability",
     label: "Readability",
     definition: "Clear and concise code that is easier to understand.",
     shape: "rect",
+    color: "#B9F6CA",
   },
 ];
 

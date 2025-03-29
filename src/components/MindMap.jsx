@@ -53,6 +53,16 @@ const MindMap = () => {
       return points.map((p) => p.join(",")).join(" ");
     };
 
+    const diamondPoints = (width, height) => {
+      const points = [
+        `${width / 2},0`,
+        `${width},${height / 2}`,
+        `${width / 2},${height}`,
+        `0,${height / 2}`,
+      ];
+      return points.join(" ");
+    };
+
     const node = g
       .append("g")
       .attr("class", "nodes")
@@ -80,28 +90,37 @@ const MindMap = () => {
       );
 
     node
-    .append((d) => {
-      if (d.shape === "hexagon") {
-        return document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "polygon"
-        );
-      } else if (d.shape === "rect") {
-        return document.createElementNS("http://www.w3.org/2000/svg", "rect");
-      }
-      return null;
-    })
-    .attr("points", (d) => (d.shape === "hexagon" ? hexagonPoints(20) : null))
-    .attr("fill", (d) => d.color); // Use the color from the node data
+      .append((d) => {
+        if (d.shape === "hexagon") {
+          return document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "polygon"
+          );
+        } else if (d.shape === "rect") {
+          return document.createElementNS("http://www.w3.org/2000/svg", "rect");
+        } else if (d.shape === "diamond") {
+          return document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+        }
+        return null;
+      })
+      .attr("points", (d) => {
+        if (d.shape === "hexagon") {
+          return hexagonPoints(20);
+        } else if (d.shape === "diamond") {
+          return diamondPoints(40, 40);
+        }
+        return null;
+      })
+      .attr("fill", (d) => d.color);
 
     node.each(function (d) {
-      const labelLines = d.label.split('\n');
+      const labelLines = d.label.split("\n");
 
       const div = document.createElement("div");
       div.style.position = "absolute";
       div.style.visibility = "hidden";
       div.style.whiteSpace = "nowrap";
-      div.innerHTML = d.label.replace('\n', '<br>');
+      div.innerHTML = d.label.replace("\n", "<br>");
       document.body.appendChild(div);
       const textWidth = div.offsetWidth + 20;
       const textHeight = div.offsetHeight + 20;
@@ -117,32 +136,75 @@ const MindMap = () => {
           .attr("height", shapeHeight)
           .attr("x", -shapeWidth / 2)
           .attr("y", -shapeHeight / 2);
+
+        const text = d3.select(this)
+          .append("text")
+          .attr("text-anchor", "middle")
+          .attr("dominant-baseline", "middle")
+          .style("fill", d.id === "root" ? "white" : "black");
+
+        if (labelLines.length > 1) {
+          labelLines.forEach((line, index) => {
+            text.append("tspan")
+              .attr("x", 0)
+              .attr("dy", index === 0 ? 0 : "1.2em")
+              .text(line);
+          });
+        } else {
+          text.text(d.label);
+        }
       } else if (d.shape === "hexagon") {
         d3.select(this)
           .select("polygon")
           .attr("points", hexagonPoints(shapeWidth / Math.sqrt(3)));
+
+        const text = d3.select(this)
+          .append("text")
+          .attr("text-anchor", "middle")
+          .attr("dominant-baseline", "middle")
+          .style("fill", d.id === "root" ? "white" : "black");
+
+        if (labelLines.length > 1) {
+          labelLines.forEach((line, index) => {
+            text.append("tspan")
+              .attr("x", 0)
+              .attr("dy", index === 0 ? 0 : "1.2em")
+              .text(line);
+          });
+        } else {
+          text.text(d.label);
+        }
+      } else if (d.shape === "diamond") {
+        d3.select(this)
+          .select("polygon")
+          .attr("points", diamondPoints(shapeWidth, shapeHeight));
+
+        // Calculate diamond center
+        const points = diamondPoints(shapeWidth, shapeHeight).split(" ");
+        const centerX = points.reduce((sum, p) => sum + parseFloat(p.split(",")[0]), 0) / points.length;
+        const centerY = points.reduce((sum, p) => sum + parseFloat(p.split(",")[1]), 0) / points.length;
+
+        const text = d3.select(this)
+          .append("text")
+          .attr("text-anchor", "middle")
+          .attr("dominant-baseline", "middle")
+          .attr("transform", `translate(${centerX}, ${centerY})`) // Apply transform
+          .style("fill", d.id === "root" ? "white" : "black");
+
+        if (labelLines.length > 1) {
+          labelLines.forEach((line, index) => {
+            text.append("tspan")
+              .attr("x", 0)
+              .attr("dy", index === 0 ? 0 : "1.2em")
+              .text(line);
+          });
+        } else {
+          text.text(d.label);
+        }
       }
 
-      const foreignObject = d3.select(this)
-        .append("foreignObject")
-        .attr("width", shapeWidth)
-        .attr("height", shapeHeight)
-        .attr("x", -shapeWidth / 2)
-        .attr("y", -shapeHeight / 2)
-        .append("xhtml:div")
-        .style("width", `${shapeWidth}px`)
-        .style("height", `${shapeHeight}px`)
-        .style("display", "flex")
-        .style("flex-direction", "column")
-        .style("align-items", "center")
-        .style("justify-content", "center")
-        .style("text-align", "center")
-        .style("word-wrap", "break-word")
-        .style("padding", "5px");
-
-      labelLines.forEach(line => {
-        foreignObject.append("xhtml:div").html(line);
-      });
+      d.shapeWidth = shapeWidth; // Store shapeWidth in node data
+      d.shapeHeight = shapeHeight; // Store shapeHeight in node data
     });
 
     const tooltip = d3
@@ -170,10 +232,38 @@ const MindMap = () => {
 
     simulation.on("tick", () => {
       link
-        .attr("x1", (d) => d.source.x)
-        .attr("y1", (d) => d.source.y)
-        .attr("x2", (d) => d.target.x)
-        .attr("y2", (d) => d.target.y);
+        .attr("x1", (d) => {
+          if (d.source.shape === "diamond") {
+            const points = diamondPoints(d.source.shapeWidth, d.source.shapeHeight).split(" ");
+            const centerX = points.reduce((sum, p) => sum + parseFloat(p.split(",")[0]), 0) / points.length;
+            return d.source.x + centerX;
+          }
+          return d.source.x;
+        })
+        .attr("y1", (d) => {
+          if (d.source.shape === "diamond") {
+            const points = diamondPoints(d.source.shapeWidth, d.source.shapeHeight).split(" ");
+            const centerY = points.reduce((sum, p) => sum + parseFloat(p.split(",")[1]), 0) / points.length;
+            return d.source.y + centerY;
+          }
+          return d.source.y;
+        })
+        .attr("x2", (d) => {
+          if (d.target.shape === "diamond") {
+            const points = diamondPoints(d.target.shapeWidth, d.target.shapeHeight).split(" ");
+            const centerX = points.reduce((sum, p) => sum + parseFloat(p.split(",")[0]), 0) / points.length;
+            return d.target.x + centerX;
+          }
+          return d.target.x;
+        })
+        .attr("y2", (d) => {
+          if (d.target.shape === "diamond") {
+            const points = diamondPoints(d.target.shapeWidth, d.target.shapeHeight).split(" ");
+            const centerY = points.reduce((sum, p) => sum + parseFloat(p.split(",")[1]), 0) / points.length;
+            return d.target.y + centerY;
+          }
+          return d.target.y;
+        });
       node.attr("transform", (d) => `translate(${d.x},${d.y})`);
     });
 
