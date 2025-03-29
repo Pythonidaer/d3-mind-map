@@ -80,19 +80,19 @@ const MindMap = () => {
       );
 
     node
-      .append((d) => {
-        if (d.shape === "hexagon") {
-          return document.createElementNS(
-            "http://www.w3.org/2000/svg",
-            "polygon"
-          );
-        } else if (d.shape === "rect") {
-          return document.createElementNS("http://www.w3.org/2000/svg", "rect");
-        }
-        return null;
-      })
-      .attr("points", (d) => (d.shape === "hexagon" ? hexagonPoints(20) : null))
-      .attr("fill", "#B9F6CA");
+    .append((d) => {
+      if (d.shape === "hexagon") {
+        return document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "polygon"
+        );
+      } else if (d.shape === "rect") {
+        return document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      }
+      return null;
+    })
+    .attr("points", (d) => (d.shape === "hexagon" ? hexagonPoints(20) : null))
+    .attr("fill", (d) => d.color); // Use the color from the node data
 
     node.each(function (d) {
       const labelLines = d.label.split('\n');
