@@ -1,0 +1,32 @@
+/* src/components/CodeExample.module.css */
+.codeExampleContainer {
+    margin: 1rem 0;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .codeTitle {
+    color: #333; /* Use a dark gray color for the title */
+    font-size: 1.2rem; /* Adjust font size */
+    font-weight: bold; /* Make the title bold */
+  }
+  
+  .codeBlock {
+    position: relative;
+  }
+  
+  .copyButton {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background-color: #555;
+    color: white;
+    border: none;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .copyButton:hover {
+    background-color: #777;
+  }

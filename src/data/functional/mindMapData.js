@@ -30,7 +30,7 @@ export const nodes = [
   },
   {
     id: "state",
-    label: `State in \n Functional Programming`,
+    label: `State \n Management`,
     definition:
       "Manage state by avoiding shared state, using parameters instead of globals, and returning new state from functions.",
     shape: "ellipse",
@@ -184,7 +184,7 @@ export const nodes = [
   // Third-level nodes under Mutability
   {
     id: "directMutation",
-    label: "Direct Object/Array Mutation",
+    label: "Direct Object/\nArray Mutation",
     definition: "Changing objects or arrays in place.",
     shape: "diamond",
     color: "#FFE0E0",
@@ -208,7 +208,7 @@ export const nodes = [
   },
   {
     id: "externalDependency",
-    label: "External State Dependency",
+    label: "External State \n Dependency",
     definition: "Functions that rely on or change external state.",
     shape: "diamond",
     color: "#FFE0E0",
