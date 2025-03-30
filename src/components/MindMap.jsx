@@ -42,6 +42,20 @@ const MindMap = () => {
       .attr("stroke", "#66BB6A")
       .attr("stroke-width", 3);
 
+    const rootRect = (width, height, radius) => {
+        return `
+        M ${radius}, 0
+        L ${width - radius}, 0
+        A ${radius}, ${radius} 0 0 1 ${width}, ${radius}
+        L ${width}, ${height - radius}
+        A ${radius}, ${radius} 0 0 1 ${width - radius}, ${height}
+        L ${radius}, ${height}
+        A ${radius}, ${radius} 0 0 1 0, ${height - radius}
+        L 0, ${radius}
+        A ${radius}, ${radius} 0 0 1 ${radius}, 0
+      `;
+    };
+
     const hexagonPoints = (radius) => {
       const points = [];
       for (let i = 0; i < 6; i++) {
@@ -96,10 +110,18 @@ const MindMap = () => {
             "http://www.w3.org/2000/svg",
             "polygon"
           );
+        } else if (d.shape === "roundRect") {
+          return document.createElementNS("http://www.w3.org/2000/svg", "path");
         } else if (d.shape === "rect") {
           return document.createElementNS("http://www.w3.org/2000/svg", "rect");
         } else if (d.shape === "diamond") {
           return document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+        }
+        return null;
+      })
+      .attr("d", (d) => {
+        if (d.shape === "roundRect") {
+          return rootRect(200, 130, 10);
         }
         return null;
       })
@@ -129,7 +151,32 @@ const MindMap = () => {
       const shapeWidth = d.shape === "rect" ? textWidth : Math.max(textWidth, textHeight);
       const shapeHeight = d.shape === "rect" ? textHeight : Math.max(textWidth, textHeight);
 
-      if (d.shape === "rect") {
+      if (d.id === "root") {
+        const rootWidth = 200;
+        const rootHeight = 100;
+
+        d3.select(this)
+          .select("path")
+          .attr("fill", "#333");
+
+        const text = d3.select(this)
+          .append("text")
+          .attr("text-anchor", "middle")
+          .attr("dominant-baseline", "middle")
+          .style("fill", "white")
+          .attr("transform", `translate(${rootWidth / 2}, ${rootHeight / 2})`);
+
+        if (labelLines.length > 1) { // Add this conditional check
+          labelLines.forEach((line, index) => {
+            text.append("tspan")
+              .attr("x", 0)
+              .attr("dy", index === 0 ? 0 : "1.2em")
+              .text(line);
+          });
+        } else {
+          text.text(d.label);
+        }
+      } else if (d.shape === "rect") {
         d3.select(this)
           .select("rect")
           .attr("width", shapeWidth)
@@ -188,7 +235,7 @@ const MindMap = () => {
           .append("text")
           .attr("text-anchor", "middle")
           .attr("dominant-baseline", "middle")
-          .attr("transform", `translate(${centerX}, ${centerY})`) // Apply transform
+          .attr("transform", `translate(${centerX}, ${centerY})`)
           .style("fill", d.id === "root" ? "white" : "black");
 
         if (labelLines.length > 1) {
@@ -203,8 +250,8 @@ const MindMap = () => {
         }
       }
 
-      d.shapeWidth = shapeWidth; // Store shapeWidth in node data
-      d.shapeHeight = shapeHeight; // Store shapeHeight in node data
+      d.shapeWidth = shapeWidth;
+      d.shapeHeight = shapeHeight;
     });
 
     const tooltip = d3
@@ -233,7 +280,9 @@ const MindMap = () => {
     simulation.on("tick", () => {
       link
         .attr("x1", (d) => {
-          if (d.source.shape === "diamond") {
+          if (d.source.id === "root") {
+            return d.source.x + 100;
+          } else if (d.source.shape === "diamond") {
             const points = diamondPoints(d.source.shapeWidth, d.source.shapeHeight).split(" ");
             const centerX = points.reduce((sum, p) => sum + parseFloat(p.split(",")[0]), 0) / points.length;
             return d.source.x + centerX;
@@ -241,7 +290,9 @@ const MindMap = () => {
           return d.source.x;
         })
         .attr("y1", (d) => {
-          if (d.source.shape === "diamond") {
+          if (d.source.id === "root") {
+            return d.source.y + 50;
+          } else if (d.source.shape === "diamond") {
             const points = diamondPoints(d.source.shapeWidth, d.source.shapeHeight).split(" ");
             const centerY = points.reduce((sum, p) => sum + parseFloat(p.split(",")[1]), 0) / points.length;
             return d.source.y + centerY;
@@ -249,7 +300,9 @@ const MindMap = () => {
           return d.source.y;
         })
         .attr("x2", (d) => {
-          if (d.target.shape === "diamond") {
+          if (d.target.id === "root") {
+            return d.target.x + 100;
+          } else if (d.target.shape === "diamond") {
             const points = diamondPoints(d.target.shapeWidth, d.target.shapeHeight).split(" ");
             const centerX = points.reduce((sum, p) => sum + parseFloat(p.split(",")[0]), 0) / points.length;
             return d.target.x + centerX;
@@ -257,7 +310,9 @@ const MindMap = () => {
           return d.target.x;
         })
         .attr("y2", (d) => {
-          if (d.target.shape === "diamond") {
+          if (d.target.id === "root") {
+            return d.target.y + 50;
+          } else if (d.target.shape === "diamond") {
             const points = diamondPoints(d.target.shapeWidth, d.target.shapeHeight).split(" ");
             const centerY = points.reduce((sum, p) => sum + parseFloat(p.split(",")[1]), 0) / points.length;
             return d.target.y + centerY;
@@ -279,7 +334,7 @@ const MindMap = () => {
     const resizeObserver = new ResizeObserver(() => {
       const newWidth = container.clientWidth;
       const newHeight = container.clientHeight;
-      svg.attr("width", newWidth).attr("height", newHeight);
+      svg.attr("width", newWidth).attr("height", newWidth);
       simulation.force("center", d3.forceCenter(newWidth / 2, newHeight / 2));
     });
 

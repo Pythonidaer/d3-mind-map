@@ -12,10 +12,10 @@ export const nodes = [
   // Root node
   {
     id: "root",
-    label: "Functional Programming",
+    label: "Functional \n Programming \n in JavaScript",
     definition:
       "A style of programming that emphasizes pure functions, immutability, and declarative code.",
-    shape: "hexagon",
+    shape: "roundRect",
     color: "#37474F",
   },
   // First-level nodes (direct children of root)
