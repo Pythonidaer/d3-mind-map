@@ -5,10 +5,8 @@
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    width: 80vw;
     margin: 0 auto;
     height: 80vh; /* Or any other desired height */
-    margin-top: 64px;
   }
 
   .mind-map svg {

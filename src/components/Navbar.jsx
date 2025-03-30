@@ -58,11 +58,11 @@ const Navbar = () => {
             X
           </div>
           <Link to="/about" style={{ textDecoration: 'none', color: '#333' }}>About</Link>
-          <Link to="/functional" style={{ textDecoration: 'none', color: '#333' }}>Functional</Link>
-          <Link to="/declarative" style={{ textDecoration: 'none', color: '#333' }}>Declarative</Link>
-          <Link to="/oop" style={{ textDecoration: 'none', color: '#333' }}>OOP</Link>
-          <Link to="/procedural" style={{ textDecoration: 'none', color: '#333' }}>Procedural</Link>
-          <Link to="/imperative" style={{ textDecoration: 'none', color: '#333' }}>Imperative</Link>
+          <Link to="/paradigm/functional" style={{ textDecoration: 'none', color: '#333' }}>Functional</Link>
+          <Link to="/paradigm/declarative" style={{ textDecoration: 'none', color: '#333' }}>Declarative</Link>
+          <Link to="/paradigm/oop" style={{ textDecoration: 'none', color: '#333' }}>OOP</Link>
+          <Link to="/paradigm/procedural" style={{ textDecoration: 'none', color: '#333' }}>Procedural</Link>
+          <Link to="/paradigm/imperative" style={{ textDecoration: 'none', color: '#333' }}>Imperative</Link>
         </div>
       </div>
     </nav>
