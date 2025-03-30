@@ -1,4 +1,4 @@
-// src/data/mindMapData.js
+// src/functional/mindMapData.js
 // -- Color Sequence
 // 0. Root: 37474F
 // 1. Very light green -- #98EE99
@@ -25,7 +25,7 @@ export const nodes = [
     definition:
       "Data cannot be changed once created; instead, new data is produced for modifications.",
     shape: "hexagon",
-    shape: "rect",
+    shape: "ellipse",
     color: "#98EE99",
   },
   {
@@ -33,7 +33,7 @@ export const nodes = [
     label: `State in \n Functional Programming`,
     definition:
       "Manage state by avoiding shared state, using parameters instead of globals, and returning new state from functions.",
-    shape: "hexagon",
+    shape: "ellipse",
     color: "#98EE99",
   },
   {
@@ -41,7 +41,7 @@ export const nodes = [
     label: "Functions",
     definition:
       "Functions are central to functional programming; they can be first-class, pure, higher-order, and composable.",
-    shape: "hexagon",
+    shape: "ellipse",
     color: "#98EE99",
   },
   {
@@ -57,7 +57,7 @@ export const nodes = [
     label: "Benefits",
     definition:
       "Functional programming improves testability, predictability, modularity, concurrency-friendliness, and readability.",
-    shape: "hexagon",
+    shape: "ellipse",
     color: "#98EE99",
   },
   // Second-level nodes for Immutability

@@ -1,0 +1,22 @@
+.aboutContainer {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 64px auto 0;
+  }
+  
+  .aboutContainer p {
+    line-height: 1.6; /* Add spacing between lines */
+    margin-bottom: 1.5rem; /* Add spacing between paragraphs */
+  }
+  
+  .aboutContainer h3 {
+    margin-top: 2rem; /* Add spacing before subheadings */
+    margin-bottom: 1rem;
+  }
+  
+  @media (max-width: 768px) {
+    .aboutContainer {
+      padding: 1rem;
+      margin-top: 56px; /* Adjust for smaller navbar on mobile */
+    }
+  }
