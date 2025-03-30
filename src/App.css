@@ -8,5 +8,52 @@
     width: 80vw;
     margin: 0 auto;
     height: 80vh; /* Or any other desired height */
+    margin-top: 64px;
+  }
+
+  .mind-map svg {
+    height: 80vh;
   }
   
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+  }
+  
+  .close-button {
+    display: none; /* Hide on desktop */
+  }
+  
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 250px;
+      height: 100vh;
+      background-color: white;
+      padding: 2rem;
+      gap: 1.5rem;
+      z-index: 1001;
+      transition: transform 0.3s ease-in-out;
+      transform: translateX(100%);
+    }
+  
+    .nav-links.mobile-menu {
+      display: flex;
+      transform: translateX(0);
+    }
+  
+    .hamburger {
+      display: block !important;
+    }
+  
+    .close-button {
+      display: block; /* Show on mobile */
+      font-size: 1.5rem;
+      cursor: pointer;
+      align-self: flex-end;
+    }
+  }
