@@ -5,6 +5,7 @@ const MindMap = ({ nodes, links }) => {
   const svgRef = useRef(null);
   const containerRef = useRef(null);
   const tooltipRef = useRef(null);
+  const touchStartPos = useRef({ x: 0, y: 0 });
 
   useLayoutEffect(() => {
     const container = containerRef.current;
@@ -333,12 +334,6 @@ const MindMap = ({ nodes, links }) => {
         }
       };
 
-      const handleScroll = () => {
-        hideTooltip();
-      };
-
-      window.addEventListener("scroll", handleScroll);
-
       node
         .on("mouseover", (event, d) => {
           tooltip.transition().duration(200).style("opacity", 0.9);
@@ -359,6 +354,7 @@ const MindMap = ({ nodes, links }) => {
           hideTooltip();
         })
         .on("touchstart", (event, d) => {
+          touchStartPos.current = { x: event.touches[0].clientX, y: event.touches[0].clientY };
           tooltip.transition().duration(200).style("opacity", 0.9);
           let left = event.touches[0].clientX + 10;
           let top = event.touches[0].clientY - 28;
@@ -378,6 +374,15 @@ const MindMap = ({ nodes, links }) => {
         })
         .on("touchcancel", () => {
           hideTooltip();
+        })
+        .on("touchmove", (event) => {
+          const currentPos = { x: event.touches[0].clientX, y: event.touches[0].clientY };
+          const deltaX = Math.abs(currentPos.x - touchStartPos.current.x);
+          const deltaY = Math.abs(currentPos.y - touchStartPos.current.y);
+
+          if (deltaX > 5 || deltaY > 5) {
+            hideTooltip();
+          }
         });
 
       simulation.on("tick", () => {
@@ -480,7 +485,6 @@ const MindMap = ({ nodes, links }) => {
       return () => {
         simulation.stop();
         svg.selectAll("*").remove();
-        window.removeEventListener("scroll", handleScroll);
         tooltip.remove();
         resizeObserver.disconnect();
       };
