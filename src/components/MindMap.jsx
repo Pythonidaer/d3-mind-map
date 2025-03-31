@@ -4,8 +4,6 @@ import * as d3 from "d3";
 const MindMap = ({ nodes, links }) => {
   const svgRef = useRef(null);
   const containerRef = useRef(null);
-  const tooltipRef = useRef(null);
-  const touchStartPos = useRef({ x: 0, y: 0 });
 
   useLayoutEffect(() => {
     const container = containerRef.current;
@@ -326,19 +324,14 @@ const MindMap = ({ nodes, links }) => {
         .style("max-height", "200px")
         .style("overflow-y", "auto");
 
-      tooltipRef.current = tooltip;
-
-      const hideTooltip = () => {
-        if (tooltipRef.current) {
-          tooltipRef.current.transition().duration(200).style("opacity", 0);
-        }
-      };
-
       node
         .on("mouseover", (event, d) => {
           tooltip.transition().duration(200).style("opacity", 0.9);
+          // Adjust tooltip position to stay within the viewport
           let left = event.clientX + 10;
           let top = event.clientY - 28;
+
+          // Ensure the tooltip doesn't go off-screen
           if (left + tooltip.node().offsetWidth > window.innerWidth) {
             left = window.innerWidth - tooltip.node().offsetWidth - 10;
           }
@@ -347,42 +340,24 @@ const MindMap = ({ nodes, links }) => {
           }
           tooltip
             .html(`<strong>${d.label}</strong><br>${d.definition}`)
-            .style("left", event.pageX + 10 + "px")
-            .style("top", event.pageY - 28 + "px");
+            .style("left", event.pageX + "px")
+            .style("top", event.pageY + "px");
+
+          const svgContainer = containerRef.current;
+          const svgContainerRect = svgContainer.getBoundingClientRect();
+
+          const screenWidth = window.innerWidth;
+          const maxWidth = 768;
+
+          if (screenWidth < maxWidth) {
+            console.log(svgContainerRect.top);
+            setTimeout(() => {
+              tooltip.transition().duration(200).style("opacity", 0.0);
+            }, 5000);
+          }
         })
         .on("mouseout", () => {
-          hideTooltip();
-        })
-        .on("touchstart", (event, d) => {
-          touchStartPos.current = { x: event.touches[0].clientX, y: event.touches[0].clientY };
-          tooltip.transition().duration(200).style("opacity", 0.9);
-          let left = event.touches[0].clientX + 10;
-          let top = event.touches[0].clientY - 28;
-          if (left + tooltip.node().offsetWidth > window.innerWidth) {
-            left = window.innerWidth - tooltip.node().offsetWidth - 10;
-          }
-          if (top + tooltip.node().offsetHeight > window.innerHeight) {
-            top = window.innerHeight - tooltip.node().offsetHeight - 10;
-          }
-          tooltip
-            .html(`<strong>${d.label}</strong><br>${d.definition}`)
-            .style("left", event.touches[0].pageX + 10 + "px")
-            .style("top", event.touches[0].pageY - 28 + "px");
-        })
-        .on("touchend", () => {
-          hideTooltip();
-        })
-        .on("touchcancel", () => {
-          hideTooltip();
-        })
-        .on("touchmove", (event) => {
-          const currentPos = { x: event.touches[0].clientX, y: event.touches[0].clientY };
-          const deltaX = Math.abs(currentPos.x - touchStartPos.current.x);
-          const deltaY = Math.abs(currentPos.y - touchStartPos.current.y);
-
-          if (deltaX > 5 || deltaY > 5) {
-            hideTooltip();
-          }
+          tooltip.transition().duration(200).style("opacity", 0);
         });
 
       simulation.on("tick", () => {
