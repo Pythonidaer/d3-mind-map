@@ -327,11 +327,8 @@ const MindMap = ({ nodes, links }) => {
       node
         .on("mouseover", (event, d) => {
           tooltip.transition().duration(200).style("opacity", 0.9);
-          // Adjust tooltip position to stay within the viewport
           let left = event.clientX + 10;
           let top = event.clientY - 28;
-
-          // Ensure the tooltip doesn't go off-screen
           if (left + tooltip.node().offsetWidth > window.innerWidth) {
             left = window.innerWidth - tooltip.node().offsetWidth - 10;
           }
@@ -344,6 +341,31 @@ const MindMap = ({ nodes, links }) => {
             .style("top", event.pageY - 28 + "px");
         })
         .on("mouseout", () => {
+          tooltip.transition().duration(200).style("opacity", 0);
+        })
+        .on("touchstart", (event, d) => {
+          tooltip.transition().duration(200).style("opacity", 0.9);
+          let left = event.touches[0].clientX + 10;
+          let top = event.touches[0].clientY - 28;
+          if (left + tooltip.node().offsetWidth > window.innerWidth) {
+            left = window.innerWidth - tooltip.node().offsetWidth - 10;
+          }
+          if (top + tooltip.node().offsetHeight > window.innerHeight) {
+            top = window.innerHeight - tooltip.node().offsetHeight - 10;
+          }
+          tooltip
+            .html(`<strong>${d.label}</strong><br>${d.definition}`)
+            .style("left", event.touches[0].pageX + 10 + "px")
+            .style("top", event.touches[0].pageY - 28 + "px");
+        })
+        .on("touchend", () => {
+          tooltip.transition().duration(200).style("opacity", 0);
+        })
+        .on("touchcancel", () => {
+          tooltip.transition().duration(200).style("opacity", 0);
+        })
+        .on("touchmove", () => {
+          //hide tooltip on scroll, or node movement.
           tooltip.transition().duration(200).style("opacity", 0);
         });
 
