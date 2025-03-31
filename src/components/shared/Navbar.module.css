@@ -1,0 +1,91 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: white;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navHidden {
+  transform: translateY(-100%);
+}
+
+.brand {
+  text-decoration: none;
+  color: #333;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.menuContainer {
+  display: flex;
+  align-items: center;
+}
+
+/* Hamburger icon – hidden by default on desktop */
+.hamburger {
+  display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Default nav links container for desktop */
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+/* Link styling */
+.link {
+  text-decoration: none;
+  color: #333;
+}
+
+/* Close button – hidden on desktop */
+.close-button {
+  display: none;
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 250px;
+    height: 100vh;
+    background-color: white;
+    padding: 2rem;
+    gap: 1.5rem;
+    z-index: 1001;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(100%);
+  }
+
+  /* When mobile menu is active, show it */
+  .mobileMenu {
+    display: flex;
+    transform: translateX(0);
+  }
+
+  /* Show hamburger on mobile */
+  .hamburger {
+    display: block !important;
+  }
+
+  /* Show close button on mobile */
+  .close-button {
+    display: block;
+    font-size: 1.5rem;
+    cursor: pointer;
+    align-self: flex-end;
+  }
+}
