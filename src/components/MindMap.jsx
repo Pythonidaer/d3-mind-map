@@ -4,6 +4,7 @@ import * as d3 from "d3";
 const MindMap = ({ nodes, links }) => {
   const svgRef = useRef(null);
   const containerRef = useRef(null);
+  const tooltipRef = useRef(null);
 
   useLayoutEffect(() => {
     const container = containerRef.current;
@@ -324,6 +325,20 @@ const MindMap = ({ nodes, links }) => {
         .style("max-height", "200px")
         .style("overflow-y", "auto");
 
+      tooltipRef.current = tooltip;
+
+      const hideTooltip = () => {
+        if (tooltipRef.current) {
+          tooltipRef.current.transition().duration(200).style("opacity", 0);
+        }
+      };
+
+      const handleScroll = () => {
+        hideTooltip();
+      };
+
+      window.addEventListener("scroll", handleScroll);
+
       node
         .on("mouseover", (event, d) => {
           tooltip.transition().duration(200).style("opacity", 0.9);
@@ -341,7 +356,7 @@ const MindMap = ({ nodes, links }) => {
             .style("top", event.pageY - 28 + "px");
         })
         .on("mouseout", () => {
-          tooltip.transition().duration(200).style("opacity", 0);
+          hideTooltip();
         })
         .on("touchstart", (event, d) => {
           tooltip.transition().duration(200).style("opacity", 0.9);
@@ -359,14 +374,10 @@ const MindMap = ({ nodes, links }) => {
             .style("top", event.touches[0].pageY - 28 + "px");
         })
         .on("touchend", () => {
-          tooltip.transition().duration(200).style("opacity", 0);
+          hideTooltip();
         })
         .on("touchcancel", () => {
-          tooltip.transition().duration(200).style("opacity", 0);
-        })
-        .on("touchmove", () => {
-          //hide tooltip on scroll, or node movement.
-          tooltip.transition().duration(200).style("opacity", 0);
+          hideTooltip();
         });
 
       simulation.on("tick", () => {
@@ -469,6 +480,7 @@ const MindMap = ({ nodes, links }) => {
       return () => {
         simulation.stop();
         svg.selectAll("*").remove();
+        window.removeEventListener("scroll", handleScroll);
         tooltip.remove();
         resizeObserver.disconnect();
       };
