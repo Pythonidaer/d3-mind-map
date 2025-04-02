@@ -1,6 +1,6 @@
 /* src/components/Article.module.css */
 .articleContainer {
-  padding: 2rem;
+  /* padding: 2rem; */
   max-width: 800px;
   margin: 0 auto;
 }
@@ -32,11 +32,4 @@
 .articleSection ul li {
   line-height: 1.6;
   margin-bottom: 0.5rem; /* Add space between list items */
-}
-
-
-@media (max-width: 768px) {
-  .articleContainer {
-    padding: 1rem;
-  }
 }
