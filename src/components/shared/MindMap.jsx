@@ -1,4 +1,5 @@
-import React, { useLayoutEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
+import { rootRect, hexagonPoints, diamondPoints } from './utils/utils'
 import * as d3 from 'd3'
 import styles from './MindMap.module.css'
 
@@ -6,7 +7,7 @@ const MindMap = ({ nodes, links }) => {
   const svgRef = useRef(null)
   const containerRef = useRef(null)
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const container = containerRef.current
     if (!container) return
 
@@ -42,41 +43,6 @@ const MindMap = ({ nodes, links }) => {
         .append('line')
         .attr('stroke', '#66BB6A')
         .attr('stroke-width', 3)
-
-      const rootRect = (width, height, radius) => {
-        return `
-          M ${radius}, 0
-          L ${width - radius}, 0
-          A ${radius}, ${radius} 0 0 1 ${width}, ${radius}
-          L ${width}, ${height - radius}
-          A ${radius}, ${radius} 0 0 1 ${width - radius}, ${height}
-          L ${radius}, ${height}
-          A ${radius}, ${radius} 0 0 1 0, ${height - radius}
-          L 0, ${radius}
-          A ${radius}, ${radius} 0 0 1 ${radius}, 0
-        `
-      }
-
-      const hexagonPoints = (radius) => {
-        const points = []
-        for (let i = 0; i < 6; i++) {
-          const angle = ((2 * Math.PI) / 6) * i
-          const x = radius * Math.cos(angle)
-          const y = radius * Math.sin(angle)
-          points.push([x, y])
-        }
-        return points.map((p) => p.join(',')).join(' ')
-      }
-
-      const diamondPoints = (width, height) => {
-        const points = [
-          `${width / 2},0`,
-          `${width},${height / 2}`,
-          `${width / 2},${height}`,
-          `0,${height / 2}`,
-        ]
-        return points.join(' ')
-      }
 
       const node = g
         .append('g')
@@ -311,7 +277,7 @@ const MindMap = ({ nodes, links }) => {
       const tooltip = d3
         .select('body')
         .append('div')
-        .style('position', 'fixed')
+        .style('position', 'absolute')
         .style('padding', '6px')
         .style('background', 'white')
         .style('border', '1px solid #ccc')
@@ -325,21 +291,20 @@ const MindMap = ({ nodes, links }) => {
       node
         .on('mouseover', (event, d) => {
           tooltip.transition().duration(200).style('opacity', 0.9)
-          // Adjust tooltip position to stay within the viewport
-          let left = event.clientX + 10
-          let top = event.clientY - 28
+          let left = event.pageX + 10
+          let top = event.pageY - 28
 
-          // Ensure the tooltip doesn't go off-screen
           if (left + tooltip.node().offsetWidth > window.innerWidth) {
             left = window.innerWidth - tooltip.node().offsetWidth - 10
           }
           if (top + tooltip.node().offsetHeight > window.innerHeight) {
             top = window.innerHeight - tooltip.node().offsetHeight - 10
           }
+
           tooltip
             .html(`<strong>${d.label}</strong><br>${d.definition}`)
-            .style('left', event.pageX + 10 + 'px')
-            .style('top', event.pageY - 28 + 'px')
+            .style('left', left + 'px')
+            .style('top', top + 'px')
         })
         .on('mouseout', () => {
           tooltip.transition().duration(200).style('opacity', 0)
@@ -436,7 +401,7 @@ const MindMap = ({ nodes, links }) => {
       const resizeObserver = new ResizeObserver(() => {
         const newWidth = container.clientWidth
         const newHeight = container.clientHeight
-        svg.attr('width', newWidth).attr('height', newWidth)
+        svg.attr('width', newWidth).attr('height', newHeight)
         simulation.force('center', d3.forceCenter(newWidth / 2, newHeight / 2))
       })
 
@@ -452,11 +417,9 @@ const MindMap = ({ nodes, links }) => {
   }, [nodes, links])
 
   return (
-    <>
-      <main className={styles['mind-map']} ref={containerRef}>
-        <svg ref={svgRef}></svg>
-      </main>
-    </>
+    <main className={styles['mind-map']} ref={containerRef}>
+      <svg ref={svgRef}></svg>
+    </main>
   )
 }
 
