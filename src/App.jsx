@@ -6,20 +6,23 @@ import Paradigm from './pages/Paradigm'
 import Home from './pages/Home'
 import About from './pages/About'
 import './App.css'
+import ScrollToTop from './components/shared/ScrollToTop'
 
 function App() {
   return (
     <Router>
-      <div>
-        <Navbar />
-        <Container>
-          <Routes>
-            <Route path='/paradigm/:paradigmName' element={<Paradigm />} />
-            <Route path='/' element={<Home />} />
-            <Route path='/about' element={<About />} />
-          </Routes>
-        </Container>
-      </div>
+      <ScrollToTop>
+        <div>
+          <Navbar />
+          <Container>
+            <Routes>
+              <Route path='/paradigm/:paradigmName' element={<Paradigm />} />
+              <Route path='/' element={<Home />} />
+              <Route path='/about' element={<About />} />
+            </Routes>
+          </Container>
+        </div>
+      </ScrollToTop>
     </Router>
   )
 }
