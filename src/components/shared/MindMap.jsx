@@ -1,11 +1,14 @@
+// src/components/mindmap/MindMap.jsx
 import React, { useEffect, useRef } from 'react'
 import { rootRect, hexagonPoints, diamondPoints } from './utils/utils'
 import * as d3 from 'd3'
 import styles from './MindMap.module.css'
+import useTooltip from '../../hooks/useToolTip'
 
 const MindMap = ({ nodes, links }) => {
   const svgRef = useRef(null)
   const containerRef = useRef(null)
+  const { handleMouseOver, handleMouseOut } = useTooltip()
 
   useEffect(() => {
     const container = containerRef.current
@@ -29,9 +32,9 @@ const MindMap = ({ nodes, links }) => {
           d3
             .forceLink(links)
             .id((d) => d.id)
-            .distance(150)
+            .distance(250)
         )
-        .force('charge', d3.forceManyBody().strength(-300))
+        .force('charge', d3.forceManyBody().strength(-500))
         .force('center', d3.forceCenter(width / 2, height / 2))
 
       const link = g
@@ -69,6 +72,10 @@ const MindMap = ({ nodes, links }) => {
               d.fy = null
             })
         )
+        .on('mouseover', function (event, d) {
+          handleMouseOver(event, { label: d.label, definition: d.definition })
+        })
+        .on('mouseout', handleMouseOut)
 
       node
         .append((d) => {
@@ -274,42 +281,6 @@ const MindMap = ({ nodes, links }) => {
         }
       })
 
-      const tooltip = d3
-        .select('body')
-        .append('div')
-        .style('position', 'absolute')
-        .style('padding', '6px')
-        .style('background', 'white')
-        .style('border', '1px solid #ccc')
-        .style('border-radius', '4px')
-        .style('pointer-events', 'none')
-        .style('opacity', 0)
-        .style('max-width', '300px')
-        .style('max-height', '200px')
-        .style('overflow-y', 'auto')
-
-      node
-        .on('mouseover', (event, d) => {
-          tooltip.transition().duration(200).style('opacity', 0.9)
-          let left = event.pageX + 10
-          let top = event.pageY - 28
-
-          if (left + tooltip.node().offsetWidth > window.innerWidth) {
-            left = window.innerWidth - tooltip.node().offsetWidth - 10
-          }
-          if (top + tooltip.node().offsetHeight > window.innerHeight) {
-            top = window.innerHeight - tooltip.node().offsetHeight - 10
-          }
-
-          tooltip
-            .html(`<strong>${d.label}</strong><br>${d.definition}`)
-            .style('left', left + 'px')
-            .style('top', top + 'px')
-        })
-        .on('mouseout', () => {
-          tooltip.transition().duration(200).style('opacity', 0)
-        })
-
       simulation.on('tick', () => {
         link
           .attr('x1', (d) => {
@@ -403,6 +374,7 @@ const MindMap = ({ nodes, links }) => {
         const newHeight = container.clientHeight
         svg.attr('width', newWidth).attr('height', newHeight)
         simulation.force('center', d3.forceCenter(newWidth / 2, newHeight / 2))
+        simulation.alpha(1).restart()
       })
 
       resizeObserver.observe(container)
@@ -410,11 +382,10 @@ const MindMap = ({ nodes, links }) => {
       return () => {
         simulation.stop()
         svg.selectAll('*').remove()
-        tooltip.remove()
         resizeObserver.disconnect()
       }
     }
-  }, [nodes, links])
+  }, [nodes, links, handleMouseOver, handleMouseOut])
 
   return (
     <main className={styles['mind-map']} ref={containerRef}>
