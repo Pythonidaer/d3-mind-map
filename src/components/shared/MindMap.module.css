@@ -12,20 +12,6 @@
   height: inherit;
 }
 
-/* TOOLTIP */
-/* .mindmap-tooltip {
-  position: absolute;
-  padding: 6px;
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  pointer-events: none;
-  opacity: 0;
-  max-width: 300px;
-  max-height: 200px;
-  overflow-y: auto;
-} */
-
 @media (max-width: 768px) {
   .mind-map {
     margin-bottom: 2rem;
