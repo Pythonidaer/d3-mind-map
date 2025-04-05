@@ -33,3 +33,43 @@ Your app is ready to be deployed!
 ## Analyzing Complexity
 
 SonarQube is a free VSCode Extension that can help analyze the complexity of your code. It is recommended to experiment with this and other tools to help you understand the complexity and overall quality of your code.
+
+## Analyzing Bundle Size
+
+Keeping track of bundle size is crucial for web performance. This project uses several tools to help analyze both the final build output and the source code itself.
+
+### Analyzing Source File Sizes (`analyze-src`)
+
+This uses a custom script (`analyze-src-sizes.js`) leveraging the `filesize` package to recursively list the size of each `.js` and `.jsx` file within the `src` directory. This is helpful for identifying large source files *before* they get bundled.
+
+**Command:**
+
+```bash
+npm run analyze-src
+```
+
+### Checking Production Bundle Size (`bundlesize`)
+
+This tool (`bundlesize`) checks the size of the generated production build assets against predefined limits specified in `bundlesize.config.json`. This ensures that the final JavaScript and CSS bundles don't exceed performance budgets. It's integrated into the test script.
+
+**Command:**
+
+```bash
+npm test
+```
+
+*(Note: This requires running `npm run build` first to generate the `dist` directory.)*
+
+### Visualizing Production Bundle (`vite-bundle-visualizer`)
+
+This tool generates an interactive treemap visualization of the contents of your production bundle. It helps you understand which modules contribute the most to the final bundle size. This is useful for identifying large dependencies or code-splitting opportunities.
+
+**Command:**
+
+Run this *after* building the project (`npm run build`):
+
+```bash
+npx vite-bundle-visualizer
+```
+
+This will build the project (if not already built with the same config) and open an `stats.html` file in your browser with the visualization.
