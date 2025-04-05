@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css';
 
@@ -6,6 +6,7 @@ const Navbar = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
   const [visible, setVisible] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,6 +18,27 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [prevScrollPos]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isMenuOpen && menuRef.current && !menuRef.current.contains(event.target)) {
+        const hamburgerButton = document.querySelector(`.${styles.hamburger}`);
+        if (!hamburgerButton || !hamburgerButton.contains(event.target)) {
+          setIsMenuOpen(false);
+        }
+      }
+    };
+
+    if (isMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isMenuOpen, styles.hamburger]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -34,6 +56,7 @@ const Navbar = () => {
           <div className={`${styles.bar} ${isMenuOpen ? styles.bar3Open : ''}`}></div>
         </button>
         <div
+          ref={menuRef}
           className={`${styles['nav-links']} ${
             isMenuOpen ? styles.mobileMenu : ''
           }`}
