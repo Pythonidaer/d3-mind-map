@@ -1,12 +1,35 @@
-# React + Vite
+# Mind Maps
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Mind Maps is a project that originally started out as a visualized, high-level overview for JavaScript paradigms. Since then, it has evolved into a two-sided opportunity to extend the functionality into customizable mindmaps. In addition to its extendable aspirations, the code is also an opportunity to experiment with differing JavaScript paradigms and improving the quality of my code.
 
-Currently, two official plugins are available:
+This project uses React and Vite.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Available Scripts
 
-## Expanding the ESLint configuration
+In the project directory, you can run:
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### `npm install`
+
+Installs the necessary packages to run the app.
+
+### `npm run dev`
+
+Runs the app in the development mode.
+Open [http://localhost:5173](http://localhost:5173) (or the port shown in the terminal) to view it in the browser.
+
+The page will reload if you make edits.
+You will also see any lint errors in the console.
+
+### `npm run build`
+
+Builds the app for production to the `dist` folder.
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.
+Your app is ready to be deployed!
+
+
+
+## Analyzing Complexity
+
+SonarQube is a free VSCode Extension that can help analyze the complexity of your code. It is recommended to experiment with this and other tools to help you understand the complexity and overall quality of your code.

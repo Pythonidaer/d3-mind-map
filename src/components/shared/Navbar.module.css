@@ -70,7 +70,46 @@
 /* Link styling */
 .link {
   text-decoration: none;
+  position: relative; /* Needed for the underline pseudo-element */
+  transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+/* Style the span inside the link */
+.link span {
+  display: inline-block; /* Allows positioning relative to the span */
+  position: relative;
   color: #333;
+  padding-bottom: 5px; /* Add some space for the underline */
+}
+
+/* Underline pseudo-element targeting the span */
+.link span::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #5e6264; /* Active/hover color - adjust as needed */
+  transition: width 0.3s ease-out; /* Animation for the underline */
+}
+
+/* Hover effect - target the span for color change and the span's ::after for underline */
+.link:hover span {
+  color: #5e6264; /* Change text color on hover */
+}
+
+.link:hover span::after {
+  width: 100%; /* Animate underline on hover */
+}
+
+/* Active link style - target the span for color change and the span's ::after for underline */
+.active span {
+  color: #5e6264; /* Active link text color */
+}
+
+.active span::after {
+  width: 100%; /* Show underline immediately for active link */
 }
 
 /* Sleek Close Button */

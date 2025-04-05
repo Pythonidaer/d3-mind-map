@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styles from './Navbar.module.css';
 
 const Navbar = () => {
@@ -46,9 +46,9 @@ const Navbar = () => {
 
   return (
     <nav className={`${styles.navbar} ${!visible ? styles.navHidden : ''}`}>
-      <Link to="/about" className={styles.brand}>
+      <NavLink to="/about" className={styles.brand}>
         JavaScript Paradigms
-      </Link>
+      </NavLink>
       <div className={styles.menuContainer}>
         <button className={styles.hamburger} onClick={toggleMenu} aria-label="Toggle Menu">
           <div className={`${styles.bar} ${isMenuOpen ? styles.bar1Open : ''}`}></div>
@@ -65,24 +65,48 @@ const Navbar = () => {
             <div className={`${styles.closeLine} ${isMenuOpen ? styles.line1Active : ''}`}></div>
             <div className={`${styles.closeLine} ${isMenuOpen ? styles.line2Active : ''}`}></div>
           </button>
-          <Link to="/about" className={styles.link} onClick={() => setIsMenuOpen(false)}>
-            About
-          </Link>
-          <Link to="/paradigm/functional" className={styles.link} onClick={() => setIsMenuOpen(false)}>
-            Functional
-          </Link>
-          <Link to="/paradigm/declarative" className={styles.link} onClick={() => setIsMenuOpen(false)}>
-            Declarative
-          </Link>
-          <Link to="/paradigm/oop" className={styles.link} onClick={() => setIsMenuOpen(false)}>
-            OOP
-          </Link>
-          <Link to="/paradigm/procedural" className={styles.link} onClick={() => setIsMenuOpen(false)}>
-            Procedural
-          </Link>
-          <Link to="/paradigm/imperative" className={styles.link} onClick={() => setIsMenuOpen(false)}>
-            Imperative
-          </Link>
+          <NavLink 
+            to="/about" 
+            className={({ isActive }) => isActive ? `${styles.link} ${styles.active}` : styles.link}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <span>About</span>
+          </NavLink>
+          <NavLink 
+            to="/paradigm/functional" 
+            className={({ isActive }) => isActive ? `${styles.link} ${styles.active}` : styles.link}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <span>Functional</span>
+          </NavLink>
+          <NavLink 
+            to="/paradigm/declarative" 
+            className={({ isActive }) => isActive ? `${styles.link} ${styles.active}` : styles.link}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <span>Declarative</span>
+          </NavLink>
+          <NavLink 
+            to="/paradigm/oop" 
+            className={({ isActive }) => isActive ? `${styles.link} ${styles.active}` : styles.link}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <span>OOP</span>
+          </NavLink>
+          <NavLink 
+            to="/paradigm/procedural" 
+            className={({ isActive }) => isActive ? `${styles.link} ${styles.active}` : styles.link}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <span>Procedural</span>
+          </NavLink>
+          <NavLink 
+            to="/paradigm/imperative" 
+            className={({ isActive }) => isActive ? `${styles.link} ${styles.active}` : styles.link}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <span>Imperative</span>
+          </NavLink>
         </div>
       </div>
     </nav>
