@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react'
-import { rootRect, hexagonPoints, diamondPoints } from './utils/utils'
+import { getTextDimensions, calculateShapeDimensions, applyShapeAttributes, renderNodeLabel, getLinkX, getLinkY } from './utils/utils'
+import PropTypes from 'prop-types'
 import * as d3 from 'd3'
 import styles from './MindMap.module.css'
 
@@ -15,6 +16,18 @@ const MindMap = ({ nodes, links }) => {
     const height = container.clientHeight
 
     if (svgRef.current) {
+      // --- Pre-calculate dimensions for each node --- START
+      nodes.forEach(d => {
+        const { textWidth, textHeight } = getTextDimensions(d.label || '');
+        const { shapeWidth, shapeHeight } = calculateShapeDimensions(d.shape, textWidth, textHeight);
+        console.log(`Node ${d.id} ('${d.label}'): text=(${textWidth}, ${textHeight}), shape=(${shapeWidth}, ${shapeHeight})`);
+        d.shapeWidth = shapeWidth; // Store on the node data
+        d.shapeHeight = shapeHeight; // Store on the node data
+        d.textWidth = textWidth; // Also store text width if needed later
+        d.textHeight = textHeight; // Also store text height if needed later
+      });
+      // --- Pre-calculate dimensions for each node --- END
+
       const svg = d3
         .select(svgRef.current)
         .attr('width', width)
@@ -29,9 +42,9 @@ const MindMap = ({ nodes, links }) => {
           d3
             .forceLink(links)
             .id((d) => d.id)
-            .distance(150)
+            .distance(200)
         )
-        .force('charge', d3.forceManyBody().strength(-300))
+        .force('charge', d3.forceManyBody().strength(-500))
         .force('center', d3.forceCenter(width / 2, height / 2))
 
       const link = g
@@ -70,209 +83,32 @@ const MindMap = ({ nodes, links }) => {
             })
         )
 
-      node
-        .append((d) => {
-          if (d.shape === 'hexagon') {
-            return document.createElementNS(
-              'http://www.w3.org/2000/svg',
-              'polygon'
-            )
-          } else if (d.shape === 'roundRect') {
-            return document.createElementNS(
-              'http://www.w3.org/2000/svg',
-              'path'
-            )
-          } else if (d.shape === 'rect') {
-            return document.createElementNS(
-              'http://www.w3.org/2000/svg',
-              'rect'
-            )
-          } else if (d.shape === 'diamond') {
-            return document.createElementNS(
-              'http://www.w3.org/2000/svg',
-              'polygon'
-            )
-          } else if (d.shape === 'ellipse') {
-            return document.createElementNS(
-              'http://www.w3.org/2000/svg',
-              'ellipse'
-            )
-          }
-          return null
-        })
-        .attr('d', (d) => {
-          if (d.shape === 'roundRect') {
-            return rootRect(200, 130, 10)
-          }
-          return null
-        })
-        .attr('points', (d) => {
-          if (d.shape === 'hexagon') {
-            return hexagonPoints(20)
-          } else if (d.shape === 'diamond') {
-            return diamondPoints(40, 40)
-          }
-          return null
-        })
-        .attr('fill', (d) => d.color)
-
-      node.each(function (d) {
-        const labelLines = d.label.split('\n')
-
-        const div = document.createElement('div')
-        div.style.position = 'absolute'
-        div.style.visibility = 'hidden'
-        div.style.whiteSpace = 'nowrap'
-        div.innerHTML = d.label.replace('\n', '<br>')
-        document.body.appendChild(div)
-        const textWidth = div.offsetWidth + 20
-        const textHeight = div.offsetHeight + 20
-        document.body.removeChild(div)
-
-        const shapeWidth =
-          d.shape === 'rect' ? textWidth : Math.max(textWidth, textHeight)
-        const shapeHeight =
-          d.shape === 'rect' ? textHeight : Math.max(textWidth, textHeight)
-
-        d.shapeWidth = shapeWidth
-        d.shapeHeight = shapeHeight
-
-        if (d.id === 'root') {
-          const rootWidth = 200
-          const rootHeight = 100
-
-          d3.select(this).select('path').attr('fill', '#333')
-
-          const text = d3
-            .select(this)
-            .append('text')
-            .attr('text-anchor', 'middle')
-            .attr('dominant-baseline', 'middle')
-            .style('fill', 'white')
-            .attr('transform', `translate(${rootWidth / 2}, ${rootHeight / 2})`)
-
-          if (labelLines.length > 1) {
-            labelLines.forEach((line, index) => {
-              text
-                .append('tspan')
-                .attr('x', 0)
-                .attr('dy', index === 0 ? 0 : '1.2em')
-                .text(line)
-            })
-          } else {
-            text.text(d.label)
-          }
+      // --- Modify node shape rendering to use calculated dimensions --- START
+      node.each(function(d) {
+        const nodeEl = d3.select(this);
+        let shapeSelection;
+        // Append correct SVG element based on shape
+        if (d.shape === 'hexagon' || d.shape === 'diamond') {
+          shapeSelection = nodeEl.append('polygon');
+        } else if (d.shape === 'roundRect') {
+          shapeSelection = nodeEl.append('path');
         } else if (d.shape === 'rect') {
-          d3.select(this)
-            .select('rect')
-            .attr('width', shapeWidth)
-            .attr('height', shapeHeight)
-            .attr('x', -shapeWidth / 2)
-            .attr('y', -shapeHeight / 2)
-
-          const text = d3
-            .select(this)
-            .append('text')
-            .attr('text-anchor', 'middle')
-            .attr('dominant-baseline', 'middle')
-            .style('fill', d.id === 'root' ? 'white' : 'black')
-
-          if (labelLines.length > 1) {
-            labelLines.forEach((line, index) => {
-              text
-                .append('tspan')
-                .attr('x', 0)
-                .attr('dy', index === 0 ? 0 : '1.2em')
-                .text(line)
-            })
-          } else {
-            text.text(d.label)
-          }
-        } else if (d.shape === 'hexagon') {
-          d3.select(this)
-            .select('polygon')
-            .attr('points', hexagonPoints(shapeWidth / Math.sqrt(3)))
-
-          const text = d3
-            .select(this)
-            .append('text')
-            .attr('text-anchor', 'middle')
-            .attr('dominant-baseline', 'middle')
-            .style('fill', d.id === 'root' ? 'white' : 'black')
-
-          if (labelLines.length > 1) {
-            labelLines.forEach((line, index) => {
-              text
-                .append('tspan')
-                .attr('x', 0)
-                .attr('dy', index === 0 ? 0 : '1.2em')
-                .text(line)
-            })
-          } else {
-            text.text(d.label)
-          }
-        } else if (d.shape === 'diamond') {
-          d3.select(this)
-            .select('polygon')
-            .attr('points', diamondPoints(shapeWidth, shapeHeight))
-
-          const points = diamondPoints(shapeWidth, shapeHeight).split(' ')
-          const centerX =
-            points.reduce((sum, p) => sum + parseFloat(p.split(',')[0]), 0) /
-            points.length
-          const centerY =
-            points.reduce((sum, p) => sum + parseFloat(p.split(',')[1]), 0) /
-            points.length
-
-          const text = d3
-            .select(this)
-            .append('text')
-            .attr('text-anchor', 'middle')
-            .attr('dominant-baseline', 'middle')
-            .attr('transform', `translate(${centerX}, ${centerY})`)
-            .style('fill', d.id === 'root' ? 'white' : 'black')
-
-          if (labelLines.length > 1) {
-            labelLines.forEach((line, index) => {
-              text
-                .append('tspan')
-                .attr('x', 0)
-                .attr('dy', index === 0 ? 0 : '1.2em')
-                .text(line)
-            })
-          } else {
-            text.text(d.label)
-          }
+          shapeSelection = nodeEl.append('rect');
         } else if (d.shape === 'ellipse') {
-          d3.select(this)
-            .select('ellipse')
-            .attr('cx', 0)
-            .attr('cy', 0)
-            .attr('rx', d.shapeWidth / 2)
-            .attr('ry', d.shapeHeight / 2)
-
-          const text = d3
-            .select(this)
-            .append('text')
-            .attr('text-anchor', 'middle')
-            .attr('dominant-baseline', 'middle')
-            .attr('x', 0)
-            .attr('y', 0)
-            .style('fill', d.id === 'root' ? 'white' : 'black')
-
-          if (labelLines.length > 1) {
-            labelLines.forEach((line, index) => {
-              text
-                .append('tspan')
-                .attr('x', 0)
-                .attr('dy', index === 0 ? 0 : '1.2em')
-                .text(line)
-            })
-          } else {
-            text.text(d.label)
-          }
+          shapeSelection = nodeEl.append('ellipse');
         }
-      })
+
+        if (shapeSelection) {
+            // Apply attributes using the helper and stored dimensions
+            applyShapeAttributes(shapeSelection, d, d.shapeWidth, d.shapeHeight);
+        }
+      });
+      // --- Modify node shape rendering to use calculated dimensions --- END
+
+      // Add text labels using the helper function
+      node.each(function(d) {
+        renderNodeLabel(d3.select(this), d);
+      });
 
       // Create a tooltip using absolute positioning so it scrolls with the page
       const tooltip = d3
@@ -310,30 +146,30 @@ const MindMap = ({ nodes, links }) => {
           // Prevent right overflow
           if (
             left + tooltipWidth >
-            document.documentElement.clientWidth + window.pageXOffset
+            document.documentElement.clientWidth + window.scrollX
           ) {
             left =
               document.documentElement.clientWidth +
-              window.pageXOffset -
+              window.scrollX -
               tooltipWidth -
               10
           }
           // Prevent left overflow
-          if (left < window.pageXOffset) {
-            left = window.pageXOffset + 10
+          if (left < window.scrollX) {
+            left = window.scrollX + 10
           }
           // Prevent top overflow
-          if (top < window.pageYOffset) {
+          if (top < window.scrollY) {
             top = event.pageY + 10
           }
           // Prevent bottom overflow
           if (
             top + tooltipHeight >
-            document.documentElement.clientHeight + window.pageYOffset
+            document.documentElement.clientHeight + window.scrollY
           ) {
             top =
               document.documentElement.clientHeight +
-              window.pageYOffset -
+              window.scrollY -
               tooltipHeight -
               10
           }
@@ -351,74 +187,10 @@ const MindMap = ({ nodes, links }) => {
 
       simulation.on('tick', () => {
         link
-          .attr('x1', (d) => {
-            if (d.source.id === 'root') {
-              return d.source.x + 100
-            } else if (d.source.shape === 'diamond') {
-              const points = diamondPoints(
-                d.source.shapeWidth,
-                d.source.shapeHeight
-              ).split(' ')
-              const centerX =
-                points.reduce(
-                  (sum, p) => sum + parseFloat(p.split(',')[0]),
-                  0
-                ) / points.length
-              return d.source.x + centerX
-            }
-            return d.source.x
-          })
-          .attr('y1', (d) => {
-            if (d.source.id === 'root') {
-              return d.source.y + 50
-            } else if (d.source.shape === 'diamond') {
-              const points = diamondPoints(
-                d.source.shapeWidth,
-                d.source.shapeHeight
-              ).split(' ')
-              const centerY =
-                points.reduce(
-                  (sum, p) => sum + parseFloat(p.split(',')[1]),
-                  0
-                ) / points.length
-              return d.source.y + centerY
-            }
-            return d.source.y
-          })
-          .attr('x2', (d) => {
-            if (d.target.id === 'root') {
-              return d.target.x + 100
-            } else if (d.target.shape === 'diamond') {
-              const points = diamondPoints(
-                d.target.shapeWidth,
-                d.target.shapeHeight
-              ).split(' ')
-              const centerX =
-                points.reduce(
-                  (sum, p) => sum + parseFloat(p.split(',')[0]),
-                  0
-                ) / points.length
-              return d.target.x + centerX
-            }
-            return d.target.x
-          })
-          .attr('y2', (d) => {
-            if (d.target.id === 'root') {
-              return d.target.y + 50
-            } else if (d.target.shape === 'diamond') {
-              const points = diamondPoints(
-                d.target.shapeWidth,
-                d.target.shapeHeight
-              ).split(' ')
-              const centerY =
-                points.reduce(
-                  (sum, p) => sum + parseFloat(p.split(',')[1]),
-                  0
-                ) / points.length
-              return d.target.y + centerY
-            }
-            return d.target.y
-          })
+          .attr('x1', d => getLinkX(d.source))
+          .attr('y1', d => getLinkY(d.source))
+          .attr('x2', d => getLinkX(d.target))
+          .attr('y2', d => getLinkY(d.target));
 
         node.attr('transform', (d) => {
           return d ? `translate(${d.x},${d.y})` : null
@@ -458,6 +230,11 @@ const MindMap = ({ nodes, links }) => {
       <svg ref={svgRef}></svg>
     </main>
   )
+}
+
+MindMap.propTypes = {
+  nodes: PropTypes.array.isRequired,
+  links: PropTypes.array.isRequired,
 }
 
 export default MindMap
