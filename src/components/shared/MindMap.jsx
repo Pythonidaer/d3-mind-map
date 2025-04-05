@@ -274,6 +274,7 @@ const MindMap = ({ nodes, links }) => {
         }
       })
 
+      // Create a tooltip using absolute positioning so it scrolls with the page
       const tooltip = d3
         .select('body')
         .append('div')
@@ -288,23 +289,61 @@ const MindMap = ({ nodes, links }) => {
         .style('max-height', '200px')
         .style('overflow-y', 'auto')
 
+      // Hide the tooltip when the user scrolls
+      const hideTooltip = () => {
+        tooltip.transition().duration(200).style('opacity', 0)
+      }
+      window.addEventListener('scroll', hideTooltip)
+
       node
         .on('mouseover', (event, d) => {
-          tooltip.transition().duration(200).style('opacity', 0.9)
-          let left = event.pageX + 10
-          let top = event.pageY - 28
+          tooltip
+            .html(`<strong>${d.label}</strong><br>${d.definition}`)
+            .style('display', 'block')
 
-          if (left + tooltip.node().offsetWidth > window.innerWidth) {
-            left = window.innerWidth - tooltip.node().offsetWidth - 10
+          const tooltipWidth = tooltip.node().offsetWidth
+          const tooltipHeight = tooltip.node().offsetHeight
+
+          let left = event.pageX + 10
+          let top = event.pageY - tooltipHeight - 10
+
+          // Prevent right overflow
+          if (
+            left + tooltipWidth >
+            document.documentElement.clientWidth + window.pageXOffset
+          ) {
+            left =
+              document.documentElement.clientWidth +
+              window.pageXOffset -
+              tooltipWidth -
+              10
           }
-          if (top + tooltip.node().offsetHeight > window.innerHeight) {
-            top = window.innerHeight - tooltip.node().offsetHeight - 10
+          // Prevent left overflow
+          if (left < window.pageXOffset) {
+            left = window.pageXOffset + 10
+          }
+          // Prevent top overflow
+          if (top < window.pageYOffset) {
+            top = event.pageY + 10
+          }
+          // Prevent bottom overflow
+          if (
+            top + tooltipHeight >
+            document.documentElement.clientHeight + window.pageYOffset
+          ) {
+            top =
+              document.documentElement.clientHeight +
+              window.pageYOffset -
+              tooltipHeight -
+              10
           }
 
           tooltip
-            .html(`<strong>${d.label}</strong><br>${d.definition}`)
             .style('left', left + 'px')
             .style('top', top + 'px')
+            .transition()
+            .duration(200)
+            .style('opacity', 0.9)
         })
         .on('mouseout', () => {
           tooltip.transition().duration(200).style('opacity', 0)
@@ -382,10 +421,7 @@ const MindMap = ({ nodes, links }) => {
           })
 
         node.attr('transform', (d) => {
-          if (d) {
-            return `translate(${d.x},${d.y})`
-          }
-          return null
+          return d ? `translate(${d.x},${d.y})` : null
         })
       })
 
@@ -411,6 +447,7 @@ const MindMap = ({ nodes, links }) => {
         simulation.stop()
         svg.selectAll('*').remove()
         tooltip.remove()
+        window.removeEventListener('scroll', hideTooltip)
         resizeObserver.disconnect()
       }
     }
