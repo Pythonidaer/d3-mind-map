@@ -89,6 +89,30 @@ The application is designed to be extensible. Follow these steps to add new cont
 
 That's it! No changes should be needed in the React components themselves (`App.jsx`, `Paradigm.jsx`, `Navbar.jsx`) as they are designed to read the configuration dynamically.
 
+## Future Enhancements
+
+### Alternative Subcategory Navigation View
+
+As the number of subcategories grows, especially within a single main category like "Fundamentals", the main Navbar dropdown may become too long. A future enhancement planned is to create a dedicated component/page that provides an alternative view for exploring all subcategories within a selected main category.
+
+**Potential UI Concepts:**
+
+*   **Grid View:** A visually appealing grid of cards or links, each representing a subcategory.
+*   **Scrolling Menu:** A horizontal, infinitely scrolling menu (similar to a stock ticker) displaying subcategory links.
+
+**Requirements & Implementation Notes:**
+
+1.  **New Component:** A new React component (e.g., `CategoryExplorer.jsx`) will be created to render this view.
+2.  **New Route:** A dedicated route, likely parameterized by the main category ID (e.g., `/explore/:categoryId` like `/explore/fundamentals`), will be added to `App.jsx` to render this component.
+3.  **Data Access:** This component must import and use the original `contentCategories` array from `src/config/contentCategories.js`. It cannot rely solely on the `getNavData` function, as it needs to display subcategories where `addToNav` is set to `false`.
+4.  **Filtering:** The component will filter the `contentCategories` data based on the `:categoryId` route parameter to find the correct main category and then map over its `subcategories` array to generate the links.
+5.  **Link Generation:** Links will be generated using the main category's `baseRoute` and the subcategory's `path` (e.g., `/fundamental/core`, `/fundamental/tooling_and_testing`).
+6.  **Grouping (Optional):** If designed to show multiple main categories, the UI should visually group subcategories by their parent.
+
+This enhancement will leverage the existing configuration structure in `src/config/contentCategories.js`, ensuring that all defined content, regardless of its `addToNav` status, remains discoverable.
+
+*(Other future ideas can be added here)*
+
 ## Analyzing Complexity
 
 SonarQube is a free VSCode Extension that can help analyze the complexity of your code. It is recommended to experiment with this and other tools to help you understand the complexity and overall quality of your code.

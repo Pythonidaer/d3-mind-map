@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import styles from './Navbar.module.css';
-import { getNavData, findCategoryByParam } from '../../config/contentCategories.js'; // Corrected import path
+import { contentCategories, getNavData, findCategoryByParam } from '../../config/contentCategories.js';
 
 const Navbar = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
@@ -9,37 +9,39 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef(null);
   const location = useLocation();
+  const navigate = useNavigate();
 
-  // Helper to parse category param from pathname
-  const getCategoryParamFromPath = (pathname) => {
-    const parts = pathname.split('/').filter(Boolean); // Split and remove empty strings
-    // Expecting format like ['', 'category', 'subcategory'] or ['', 'about']
-    if (parts.length >= 1 && (parts[0] === 'paradigm' || parts[0] === 'fundamental')) {
-      return parts[0];
-    }
-    return null; // Return null if not a content page path
-  };
+  const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
+  const categoryDropdownRef = useRef(null);
 
-  // --- Navigation Data and State ---
-  // Get structured nav data from config (memoized)
   const navData = useMemo(() => getNavData(), []);
 
-  // State for the currently selected main category in the dropdown
-  // Initialize state lazily based on the INITIAL URL pathname
+  const getCategoryParamFromPath = (pathname) => {
+    const parts = pathname.split('/').filter(Boolean);
+    if (parts.length < 1) return null;
+
+    const potentialParam = parts[0];
+
+    const availableRoutes = contentCategories?.map(c => c.baseRoute) || [];
+
+    const isKnownCategory = contentCategories?.some(
+      cat => cat.baseRoute === `/${potentialParam}`
+    );
+
+    return isKnownCategory ? potentialParam : null;
+  };
+
   const [selectedCategory, setSelectedCategory] = useState(() => {
     const initialPath = location.pathname;
-    const initialParam = getCategoryParamFromPath(initialPath);
+    const initialParam = getCategoryParamFromPath(initialPath); 
     if (initialParam) {
       const initialCategory = findCategoryByParam(initialParam); 
-      // Need the full category object from navData for state
       const categoryFromNavData = navData.dynamic.find(cat => cat.id === initialCategory?.id);
       if (categoryFromNavData) return categoryFromNavData; 
     }
-    return navData.defaultCategory; // Fallback to default
+    return navData.defaultCategory; 
   });
 
-  // --- Effects ---
-  // Effect for hiding/showing navbar on scroll
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
@@ -50,7 +52,6 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [prevScrollPos]);
 
-  // Effect for closing mobile menu on outside click
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (isMenuOpen && menuRef.current && !menuRef.current.contains(event.target)) {
@@ -68,19 +69,15 @@ const Navbar = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isMenuOpen, styles.hamburger]);
 
-  // Effect to sync selectedCategory state with URL CHANGES (after initial load)
   useEffect(() => {
-    // This effect now only handles navigation *after* the initial render
     const currentPath = location.pathname;
-    const categoryParam = getCategoryParamFromPath(currentPath);
+    const categoryParam = getCategoryParamFromPath(currentPath); 
 
     const currentSelectedIdInState = selectedCategory?.id; 
     let categoryToSelect = null;
 
     if (categoryParam) {
-      // We are on a content page (URL has a category)
       const categoryFromUrl = findCategoryByParam(categoryParam);
-      // Update state only if the URL's category is different from the current state
       if (categoryFromUrl && categoryFromUrl.id !== currentSelectedIdInState) {
         categoryToSelect = navData.dynamic.find(cat => cat.id === categoryFromUrl.id) || navData.defaultCategory;
       }
@@ -93,53 +90,85 @@ const Navbar = () => {
       //          Refresh /about : Dropdown resets to Paradigms (by useState)
     }
 
-    // Update state only if a change is needed
     if (categoryToSelect) { 
         setSelectedCategory(categoryToSelect);
     }
     
-    // DEPENDENCY ARRAY: React only to pathname changes. 
-    // categoryParam is derived from pathname, so no need to list it separately.
-  }, [location.pathname]); // Only depend on pathname
+  }, [location.pathname]); 
 
-  // --- Handlers ---
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-
-  const handleCategoryChange = (event) => {
-    const selectedId = event.target.value;
-    const newSelectedCategory = navData.dynamic.find(cat => cat.id === selectedId);
-    console.log("Dropdown changed: Found category:", newSelectedCategory); // Debug log
-    if (newSelectedCategory) {
-      setSelectedCategory(newSelectedCategory);
-    }
+  const toggleCategoryDropdown = () => {
+    setIsCategoryDropdownOpen(!isCategoryDropdownOpen);
   };
 
-  // Helper to close menu on link click
-  const handleLinkClick = () => setIsMenuOpen(false);
+  const handleCategorySelect = (categoryId) => {
+    const newSelectedCategory = navData.dynamic.find(cat => cat.id === categoryId);
+    if (newSelectedCategory) {
+      setSelectedCategory(newSelectedCategory);
+      // Navigate to the first subcategory of the selected category
+      if (newSelectedCategory.subcategories && newSelectedCategory.subcategories.length > 0) {
+        const firstSubcategoryPath = newSelectedCategory.subcategories[0].path;
+        navigate(firstSubcategoryPath);
+      } else {
+        // Fallback if category has no subcategories (edge case)
+        // Navigate to a base path or handle differently if needed
+        console.warn("Selected category has no subcategories to navigate to.");
+        // Example: navigate based on baseRoute if available (requires adding baseRoute to navData)
+      }
+    }
+    setIsCategoryDropdownOpen(false); // Close dropdown after selection
+  };
 
-  // --- Render ---
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  const handleLinkClick = () => {
+    setIsMenuOpen(false);
+    setIsCategoryDropdownOpen(false);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (categoryDropdownRef.current && !categoryDropdownRef.current.contains(event.target)) {
+        setIsCategoryDropdownOpen(false);
+      }
+    };
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [categoryDropdownRef]);
+
   return (
     <nav className={`${styles.navbar} ${!visible ? styles.navHidden : ''}`}>
-      {/* Simple Brand Link to Home/About */}
-      <NavLink to="/" className={styles.brand} onClick={handleLinkClick}>
-        Mind Maps {/* Changed Brand Text */}
-      </NavLink>
 
-      {/* Category Selector Dropdown */}
       {navData.dynamic.length > 0 && (
-        <div className={styles.categorySelectorContainer}>
-          <select
-            className={styles.categorySelector}
-            value={selectedCategory?.id || ''}
-            onChange={handleCategoryChange}
-            aria-label="Select Content Category"
+        <div className={styles.categoryDropdownContainer} ref={categoryDropdownRef}>
+          <button
+            type="button"
+            className={styles.categoryDropdownTrigger} 
+            onClick={toggleCategoryDropdown}
+            aria-haspopup="true"
+            aria-expanded={isCategoryDropdownOpen}
           >
-            {navData.dynamic.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
+            {selectedCategory ? selectedCategory.name : 'Select Category'} <span className={styles.dropdownArrow}>▼</span> 
+          </button>
+
+          {isCategoryDropdownOpen && (
+            <ul className={styles.categoryDropdownMenu}> 
+              {navData.dynamic.map((category) => (
+                <li key={category.id}>
+                  <button
+                    type="button"
+                    className={styles.categoryDropdownItem} 
+                    onClick={() => handleCategorySelect(category.id)}
+                  >
+                    {category.name}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       )}
 
@@ -150,18 +179,15 @@ const Navbar = () => {
           <div className={`${styles.bar} ${isMenuOpen ? styles.bar3Open : ''}`}></div>
         </button>
 
-        {/* Links Container (Desktop and Mobile) */}
         <div
           ref={menuRef}
           className={`${styles['nav-links']} ${isMenuOpen ? styles.mobileMenu : ''}`}
         >
-          {/* Close Button for Mobile */}
           <button className={styles['close-button']} onClick={toggleMenu} aria-label="Close Menu">
             <div className={`${styles.closeLine} ${isMenuOpen ? styles.line1Active : ''}`}></div>
             <div className={`${styles.closeLine} ${isMenuOpen ? styles.line2Active : ''}`}></div>
           </button>
 
-          {/* Static Links */}
           {navData.static.map((page) => (
             <NavLink
               key={page.id}
@@ -173,7 +199,6 @@ const Navbar = () => {
             </NavLink>
           ))}
 
-          {/* Dynamic Subcategory Links (based on selectedCategory) */}
           {selectedCategory && selectedCategory.subcategories.map((sub) => (
             <NavLink
               key={sub.id}

@@ -22,8 +22,27 @@ export const contentCategories = [
     dataPath: 'fundamentals',
     addToNav: true,
     subcategories: [
-       { id: 'syntax', name: 'Syntax', path: 'syntax', addToNav: true },
+       { id: 'core', name: 'Core', path: 'core', addToNav: true },
+       { id: 'data', name: 'Data', path: 'data', addToNav: true },
+       { id: 'browser', name: 'Browser', path: 'browser', addToNav: true },
+       { id: 'async', name: 'Async', path: 'async', addToNav: true },
+       { id: 'advanced', name: 'Advanced', path: 'advanced', addToNav: true },
+       { id: 'tooling_and_testing', name: 'Tooling & Testing', path: 'tooling_and_testing', addToNav: false },
        // Future fundamental topics (like 'variables', 'data-types') added here
+    ],
+  },
+  {
+    id: 'solid',
+    name: 'SOLID',
+    baseRoute: '/solid',
+    dataPath: 'solid',
+    addToNav: true,
+    subcategories: [
+      { id: 'srp', name: 'SRP', path: 'srp', addToNav: true },
+      { id: 'ocp', name: 'OCP', path: 'ocp', addToNav: true },
+      { id: 'lsp', name: 'LSP', path: 'lsp', addToNav: true },
+      { id: 'isp', name: 'ISP', path: 'isp', addToNav: true },
+      { id: 'dip', name: 'DIP', path: 'dip', addToNav: true },
     ],
   },
   // Add future categories like 'Testing', 'SOLID' here following the same structure
