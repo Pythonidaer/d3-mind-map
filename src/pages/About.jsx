@@ -4,75 +4,48 @@ import styles from './About.module.css' // Import the CSS module
 const About = () => {
   return (
     <div className={styles.aboutContainer}>
-      <h1>About JavaScript Paradigms</h1>
+      <h1>The Mind Map Method</h1>
       <p>
-        This project explores the diverse world of multi-paradigmatic
-        programming, showcasing the different approaches possible within
-        JavaScript development. A <strong>programming paradigm</strong> is a
-        fundamental style of computer programming, serving as a model or pattern
-        for how developers structure and organize their code.
+        This project leverages the established visual thinking methodology of mind mapping, which structures information hierarchically around a central concept. The initial inspiration for this work was the potential to streamline the creation of these diagrams, particularly in addressing the repetitive and time-intensive aspects of their generation at scale. Subsequently, a modular and reusable Mind Map component was developed, complemented by an Article component capable of integrating relevant Code Example snippets.
+      </p>
+      <p>
+        As the collection of mind maps expanded, the application of a categorization strategy, aligning with the principles of chunking, became apparent. This organizational approach allows for the logical grouping of related mind maps, enhancing user navigation and comprehension. Fundamentally, this project implements the Mind Map Method, empowering users to provide structured data for comprehensive articles that elaborate on each visually represented concept.
       </p>
 
-      <h3>Functional Programming</h3>
+      <h3>Interactive Visualizations with D3.js</h3>
       <p>
-        <strong>Functional Programming (FP)</strong> treats computation as the
-        evaluation of mathematical functions and avoids changing-state and
-        mutable data. In JavaScript, FP principles like pure functions,
-        immutability, and higher-order functions enhance code clarity and
-        maintainability.
+        The dynamic visualizations in this project are powered by <strong>D3.js (Data-Driven Documents)</strong>, a versatile JavaScript library for manipulating documents based on data, enabling the creation of rich and interactive graphics directly within the web browser. To visually represent the interconnected concepts within each mind map, D3 was utilized to construct interactive graphs. In these graphs, individual concepts are represented as nodes, and the relationships between them are depicted as links. The text doesn't perfectly fit into each root node, but future iterations may resolve this issue. Ultimately, not that big of a deal for what I needed it for. Just use a <strong>line break:</strong> <code>\n</code> if you need to.
+      </p>
+      <p>
+        The layout of these mind map graphs is specifically driven by a <strong>force-directed algorithm</strong>, a powerful technique within network visualization. This approach treats nodes as if they were charged particles that repel each other, while the links between them act like springs, pulling connected nodes together. The graph's final arrangement emerges from a simulation of these forces, resulting in a dynamic equilibrium where nodes are positioned to optimally represent their relationships and relative proximity. This allows users to intuitively grasp the connections between ideas, as closely related concepts tend to cluster together, while less related ones are positioned further apart. Furthermore, the interactive nature of these force-directed graphs often allows users to manipulate the nodes, observing how the entire network dynamically adjusts, fostering a deeper understanding of the underlying structure and relationships within the mind map.
       </p>
 
-      <h3>Declarative Programming</h3>
+      <h3>My Personal Library</h3>
       <p>
-        <strong>Declarative Programming</strong> focuses on *what* the program
-        should accomplish, rather than *how* it should achieve it. In
-        JavaScript, frameworks like React utilize declarative patterns to manage
-        UI states and updates.
+        This website is my personal implementation of the mindmaps. Currently I have created Paradigms, Fundamentals, and SOLID, each with JavaScript in mind. However, you can remove these configurations from your own fork, and create your own mindmap categories. You can even choose to leave out items from the navigation bar. <em>Note: </em> future features may include the addition of a toggleable, secondary navigation bar to accomodate for categories which may have too many items to fit in the primary navigation bar.
       </p>
 
-      <h3>Object-Oriented Programming (OOP)</h3>
+      <h3>Key Components</h3>
       <p>
-        <strong>Object-Oriented Programming (OOP)</strong> organizes software
-        design around data, or objects, rather than functions and logic.
-        JavaScript, while prototypal, supports OOP concepts like encapsulation,
-        inheritance, and polymorphism.
+        This project features several key components that work together to present the information:
       </p>
+      <ul>
+        <li>
+          <strong>Mind Map:</strong> This component is responsible for rendering the interactive mind map visualization. It takes data defining the nodes and their relationships and uses D3.js with custom functionality to display them as a dynamic graph. Users can hover over nodes on the map to explore different branches and concepts.
+        </li>
+        <li>
+          <strong>Article:</strong> This component serves as elaborations on the concepts within each mind map. This component's formatting is still being worked on. As of now, it can also optionally render Code Example snippets.
+        </li>
+        <li>
+          <strong>Code Example:</strong> This component is used to display relevant code snippets that illustrate concepts discussed in the associated article and mind map. It includes syntax highlighting and allows user to copy the code. If you want to change the imported syntax highlighting style, just update the <code>import</code> in the <code>CodeExample.jsx</code> file. To find options that are available, search the <code>node_modules</code> folder for the <code>react-syntax-highlighter/dist/esm/styles/prism</code> .
+        </li>
+      </ul>
 
-      <h3>Procedural Programming</h3>
       <p>
-        <strong>Procedural Programming</strong> divides the program into
-        procedures (functions), emphasizing a sequential flow of control. While
-        JavaScript supports procedural elements, it is often combined with other
-        paradigms.
-      </p>
-
-      <h3>Imperative Programming</h3>
-      <p>
-        <strong>Imperative Programming</strong> explicitly describes the steps a
-        computer must take to accomplish a task. JavaScript's core syntax allows
-        for imperative patterns, giving developers fine-grained control over
-        execution.
-      </p>
-
-      <h3>Mind Maps</h3>
-      <p>
-        <strong>Mind maps</strong> are visual tools used to organize and
-        represent information. In this project, mind maps visually represent the
-        relationships and concepts within each programming paradigm.
-      </p>
-
-      <h3>D3.js and the Graph</h3>
-      <p>
-        <strong>D3.js (Data-Driven Documents)</strong> is a powerful JavaScript
-        library for manipulating documents based on data. We use D3.js to create
-        interactive and dynamic graphs, visually connecting concepts and
-        demonstrating the relationships between elements in each programming
-        paradigm's mind map. The graph is a force-directed graph, where nodes
-        and links are positioned dynamically to represent relationships and
-        proximity.
+        By combining these components, this project offers a unique and engaging way to explore complex topics through interactive visualizations and detailed explanations.
       </p>
     </div>
-  )
-}
+  );
+};
 
-export default About
+export default About;

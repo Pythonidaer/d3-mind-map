@@ -1,7 +1,7 @@
 // src/components/CodeExample.jsx
 import React, { useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { nightOwl } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { a11yDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import styles from './CodeExample.module.css';
 
 function CodeExample({ title, code }) {
@@ -17,7 +17,7 @@ function CodeExample({ title, code }) {
     <div className={styles.codeExampleContainer}>
       {title && <h3 className={styles.codeTitle}>{title}</h3>}
       <div className={styles.codeBlock}>
-        <SyntaxHighlighter language="javascript" style={nightOwl}>
+        <SyntaxHighlighter language="javascript" style={a11yDark}>
           {code}
         </SyntaxHighlighter>
         <button className={styles.copyButton} onClick={handleCopyClick}>
