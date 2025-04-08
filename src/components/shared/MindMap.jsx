@@ -20,7 +20,6 @@ const MindMap = ({ nodes, links }) => {
       nodes.forEach(d => {
         const { textWidth, textHeight } = getTextDimensions(d.label || '');
         const { shapeWidth, shapeHeight } = calculateShapeDimensions(d.shape, textWidth, textHeight);
-        console.log(`Node ${d.id} ('${d.label}'): text=(${textWidth}, ${textHeight}), shape=(${shapeWidth}, ${shapeHeight})`);
         d.shapeWidth = shapeWidth; // Store on the node data
         d.shapeHeight = shapeHeight; // Store on the node data
         d.textWidth = textWidth; // Also store text width if needed later

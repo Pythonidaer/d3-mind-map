@@ -22,6 +22,7 @@
   color: #333;
   font-size: 1.5rem;
   font-weight: bold;
+  flex-grow: 1; /* Allow brand to take available space */
 }
 
 .menuContainer {
@@ -105,6 +106,8 @@
 
 /* Active link style - target the span for color change and the span's ::after for underline */
 .active span {
+  font-weight: bold;
+
   color: #5e6264; /* Active link text color */
 }
 
@@ -150,6 +153,72 @@
 
 .line2Active {
   transform: rotate(-45deg);
+}
+
+/* --- NEW Category Dropdown Styles --- */
+.categoryDropdownContainer {
+  position: relative; /* Positioning context for the absolute menu */
+  display: inline-block; /* Or block, depending on layout needs */
+}
+
+.categoryDropdownTrigger {
+  /* Base styles from .brand */
+  font-size: 1.5rem; 
+  font-weight: bold;
+  color: #3a4454; 
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  /* Button reset and specific styles */
+  background-color: #eee; /* Default background for better contrast */
+  border: none;
+  cursor: pointer;
+  display: flex; /* Align text and arrow */
+  align-items: center;
+}
+
+.categoryDropdownTrigger:hover {
+  background-color: #4a5568; /* Match .brand hover */
+  color: #fff;
+}
+
+.dropdownArrow {
+  margin-left: 8px; /* Space between text and arrow */
+  font-size: 0.8em; /* Smaller arrow */
+}
+
+.categoryDropdownMenu {
+  position: absolute;
+  top: 100%; /* Position below the trigger */
+  left: 0;
+  background-color: #2d3748; /* Match navbar bg or slightly different */
+  border: 1px solid #4a5568; 
+  border-radius: 5px;
+  list-style: none;
+  padding: 5px 0;
+  margin: 5px 0 0 0; /* Add some top margin */
+  min-width: 180px; /* Ensure menu has decent width */
+  z-index: 1001; /* Ensure it's above other content */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.categoryDropdownItem {
+  background: none;
+  border: none;
+  color: #eee;
+  padding: 8px 15px;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-size: 1rem;
+  display: block; /* Ensure it takes full width */
+}
+
+.categoryDropdownItem:hover {
+  background-color: #4a5568;
+  color: #fff;
 }
 
 /* Responsive styles for mobile devices */
