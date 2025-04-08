@@ -7,6 +7,10 @@ import { getContentConfig } from '../config/contentCategories'; // Import the he
 const MindMap = lazy(() => import('../components/shared/MindMap'));
 const Article = lazy(() => import('../components/shared/Article'));
 
+// Pre-load all possible data files
+const mindMapFiles = import.meta.glob('../data/**/mindMapData.js');
+const articleFiles = import.meta.glob('../data/**/articleData.js');
+
 const Paradigm = () => {
   const { categoryParam, subcategoryParam } = useParams(); // Use new params
   const [mindMapData, setMindMapData] = useState(null);
@@ -39,13 +43,13 @@ const Paradigm = () => {
       setContentConfig(config); // Store config for potential use in rendering
 
       try {
-        // Construct dynamic import paths using config
+        // Construct the file paths
         const mindMapPath = `../data/${config.category.dataPath}/${config.subcategory.path}/mindMapData.js`;
         const articlePath = `../data/${config.category.dataPath}/${config.subcategory.path}/articleData.js`;
 
-        // Dynamically import the data modules
-        const mindMapModule = await import(/* @vite-ignore */ mindMapPath);
-        const articleModule = await import(/* @vite-ignore */ articlePath);
+        // Use the glob-imported modules
+        const mindMapModule = await mindMapFiles[mindMapPath]();
+        const articleModule = await articleFiles[articlePath]();
 
         // Validate if the expected exports exist
         if (!mindMapModule || !mindMapModule.nodes || !mindMapModule.links) {
