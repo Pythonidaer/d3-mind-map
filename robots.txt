@@ -1,0 +1,34 @@
+# www.robotstxt.org/
+# Allow crawling of all content
+User-agent: *
+Allow: /
+
+# Sitemap location
+# Sitemap: https://d3-mind-map.netlify.app/sitemap.xml
+
+# How to create a sitemap for React/Vite app:
+# 1. Install the vite-plugin-sitemap package:
+#    npm install vite-plugin-sitemap --save-dev
+#
+# 2. Update vite.config.js to include the sitemap plugin:
+#    import { VitePluginSitemap } from 'vite-plugin-sitemap'
+#    export default defineConfig({
+#      plugins: [
+#        react(),
+#        VitePluginSitemap({
+#          hostname: 'https://d3-mind-map.netlify.app',
+#          routes: [
+#            '/',
+#            '/about',
+#            // Add all your React Router routes here
+#          ],
+#          lastmod: new Date().toISOString()
+#        })
+#      ]
+#    })
+#
+# 3. The sitemap will be generated automatically during build
+#    npm run build
+#
+# 4. After deployment, uncomment the Sitemap line above with your actual domain
+# Note: Make sure all your React Router routes are listed in the routes array

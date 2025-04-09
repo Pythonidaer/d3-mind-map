@@ -12,7 +12,7 @@ const About = () => {
         As the collection of mind maps expanded, the application of a categorization strategy, aligning with the principles of chunking, became apparent. This organizational approach allows for the logical grouping of related mind maps, enhancing user navigation and comprehension. Fundamentally, this project implements the Mind Map Method, empowering users to provide structured data for comprehensive articles that elaborate on each visually represented concept.
       </p>
 
-      <h3>Interactive Visualizations with D3.js</h3>
+      <h2>Interactive Visualizations with D3.js</h2>
       <p>
         The dynamic visualizations in this project are powered by <strong>D3.js (Data-Driven Documents)</strong>, a versatile JavaScript library for manipulating documents based on data, enabling the creation of rich and interactive graphics directly within the web browser. To visually represent the interconnected concepts within each mind map, D3 was utilized to construct interactive graphs. In these graphs, individual concepts are represented as nodes, and the relationships between them are depicted as links. The text doesn't perfectly fit into each root node, but future iterations may resolve this issue. Ultimately, not that big of a deal for what I needed it for. Just use a <strong>line break:</strong> <code>\n</code> if you need to.
       </p>
@@ -20,12 +20,12 @@ const About = () => {
         The layout of these mind map graphs is specifically driven by a <strong>force-directed algorithm</strong>, a powerful technique within network visualization. This approach treats nodes as if they were charged particles that repel each other, while the links between them act like springs, pulling connected nodes together. The graph's final arrangement emerges from a simulation of these forces, resulting in a dynamic equilibrium where nodes are positioned to optimally represent their relationships and relative proximity. This allows users to intuitively grasp the connections between ideas, as closely related concepts tend to cluster together, while less related ones are positioned further apart. Furthermore, the interactive nature of these force-directed graphs often allows users to manipulate the nodes, observing how the entire network dynamically adjusts, fostering a deeper understanding of the underlying structure and relationships within the mind map.
       </p>
 
-      <h3>My Personal Library</h3>
+      <h2>My Personal Library</h2>
       <p>
         This website is my personal implementation of the mindmaps. Currently I have created Paradigms, Fundamentals, and SOLID, each with JavaScript in mind. However, you can remove these configurations from your own fork, and create your own mindmap categories. You can even choose to leave out items from the navigation bar. <em>Note: </em> future features may include the addition of a toggleable, secondary navigation bar to accomodate for categories which may have too many items to fit in the primary navigation bar.
       </p>
 
-      <h3>Key Components</h3>
+      <h2>Key Components</h2>
       <p>
         This project features several key components that work together to present the information:
       </p>
@@ -41,9 +41,7 @@ const About = () => {
         </li>
       </ul>
 
-      <p>
-        By combining these components, this project offers a unique and engaging way to explore complex topics through interactive visualizations and detailed explanations.
-      </p>
+      <p>Enjoy!</p>
     </div>
   );
 };
