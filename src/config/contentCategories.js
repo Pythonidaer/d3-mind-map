@@ -45,7 +45,24 @@ export const contentCategories = [
       { id: 'dip', name: 'DIP', path: 'dip', addToNav: true },
     ],
   },
-  // Add future categories like 'Testing', 'SOLID' here following the same structure
+  {
+    id: 'testing',
+    name: 'Testing',
+    baseRoute: '/testing',
+    dataPath: 'testing',
+    addToNav: true,
+    subcategories: [
+      { id: 'unit', name: 'Unit Tests', path: 'unit', addToNav: true },
+      { id: 'integration', name: 'Integration Tests', path: 'integration', addToNav: false },
+      { id: 'e2e', name: 'End-to-End Tests', path: 'e2e', addToNav: false },
+      { id: 'tdd', name: 'TDD', path: 'tdd', addToNav: true },
+      { id: 'testable_code', name: 'Testable Code', path: 'testable_code', addToNav: true },
+      { id: 'tooling', name: 'Tools', path: 'tooling', addToNav: true },
+      { id: 'patterns', name: 'Patterns', path: 'patterns', addToNav: true },
+      { id: 'pyramid', name: 'Pyramid', path: 'pyramid', addToNav: true }
+    ]
+  },
+  // Add future categories  here following the same structure
 ];
 
 // Static pages configuration
