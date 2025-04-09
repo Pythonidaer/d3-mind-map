@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "bundlesize",
+    "test": "bundlesize --config src/config/bundlesize.config.json",
     "analyze-src": "node analyze-src-sizes.js"
   },
   "dependencies": {
