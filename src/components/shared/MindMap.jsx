@@ -41,9 +41,9 @@ const MindMap = ({ nodes, links }) => {
           d3
             .forceLink(links)
             .id((d) => d.id)
-            .distance(200)
+            .distance(300)
         )
-        .force('charge', d3.forceManyBody().strength(-500))
+        .force('charge', d3.forceManyBody().strength(-400))
         .force('center', d3.forceCenter(width / 2, height / 2))
 
       const link = g

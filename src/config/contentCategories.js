@@ -148,6 +148,21 @@ export const contentCategories = [
       },
     ],
   },
+  {
+    id: 'js-react-interview',
+    name: 'JS & React Interview',
+    baseRoute: '/js-react-interview',
+    dataPath: 'js-react-interview',
+    addToNav: true,
+    subcategories: [
+      { id: 'javascript', name: 'JavaScript', path: 'javascript', addToNav: true },
+      { id: 'react', name: 'React', path: 'react', addToNav: true },
+      { id: 'component-patterns', name: 'Component Patterns', path: 'component-patterns', addToNav: true },
+      { id: 'interview-questions', name: 'Interview Questions', path: 'interview-questions', addToNav: true },
+      { id: 'engineering-principles', name: 'Engineering Principles', path: 'engineering-principles', addToNav: true },
+      { id: 'system-thinking', name: 'System Thinking', path: 'system-thinking', addToNav: true },
+    ],
+  },
   // Add future categories  here following the same structure
 ]
 
