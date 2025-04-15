@@ -1,31 +1,72 @@
-.loadingContainer {
+.loader {
+  width: 100%;
+  min-height: 50vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100px; /* Adjust as needed */
+  padding-top: 2rem;
 }
 
-.spinner {
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  border-left-color: #3498db;
+.circleLoader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.circle {
+  position: absolute;
+  border: 3.5px solid transparent;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  animation: spin 1s linear infinite;
-  margin-bottom: 10px;
+  animation: rotate 3s infinite ease-in-out;
 }
 
-.loadingText {
-  font-size: 0.9rem;
-  color: #555;
+.circle1 {
+  width: min(250px, 70vw);
+  height: min(250px, 70vw);
+  border-top-color: rgb(152, 238, 153);
+  border-right-color: rgb(152, 238, 153);
+  animation-delay: -0.15s;
 }
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
+.circle2 {
+  width: min(200px, 56vw);
+  height: min(200px, 56vw);
+  border-top-color: rgb(255, 138, 128);
+  border-right-color: rgb(255, 138, 128);
+  animation-delay: -0.3s;
+}
+
+.circle3 {
+  width: min(150px, 42vw);
+  height: min(150px, 42vw);
+  border-top-color: rgb(152, 238, 153);
+  border-right-color: rgb(152, 238, 153);
+  animation-delay: -0.45s;
+}
+
+.circle4 {
+  width: min(100px, 28vw);
+  height: min(100px, 28vw);
+  border-top-color: rgb(255, 138, 128);
+  border-right-color: rgb(255, 138, 128);
+  animation-delay: -0.6s;
+}
+
+@keyframes rotate {
+  50% {
     transform: rotate(360deg);
   }
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

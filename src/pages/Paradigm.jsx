@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react'
-import { useParams, Navigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import styles from './Paradigm.module.css'
 import { getContentConfig } from '../config/contentCategories'
 import Loading from '../components/shared/Loading'
@@ -71,32 +71,21 @@ const Paradigm = () => {
     return <div className={styles.error}>Error: {error}</div>
   }
 
-  let loadingMessage = ''
-  if (!mindMapData?.nodes && !articleData && !error) {
-    loadingMessage = 'Loading Mind Map and Article...'
-  } else if (!mindMapData?.nodes && !error) {
-    loadingMessage = 'Loading Mind Map...'
-  } else if (!articleData && !error) {
-    loadingMessage = 'Loading Article...'
-  } else {
-    loadingMessage = 'Content not available.'
-  }
-
   return (
     <div className={styles.paradigmContainer}>
       <h1 className={styles.title}>{pageTitle}</h1>
-      <Suspense fallback={<Loading />}>
-        {mindMapData?.nodes && articleData ? (
-          <>
-            <MindMap nodes={mindMapData.nodes} links={mindMapData.links} />
-            <Article article={articleData} />
-          </>
-        ) : (
-          <div className={styles.message}>
-            {!error ? loadingMessage : 'Content not available due to error.'}
-          </div>
-        )}
-      </Suspense>
+      {error ? (
+        <div className={styles.error}>{error}</div>
+      ) : (
+        <Suspense fallback={<Loading />}>
+          {mindMapData?.nodes && articleData && (
+            <>
+              <MindMap nodes={mindMapData.nodes} links={mindMapData.links} />
+              <Article article={articleData} />
+            </>
+          )}
+        </Suspense>
+      )}
     </div>
   )
 }
