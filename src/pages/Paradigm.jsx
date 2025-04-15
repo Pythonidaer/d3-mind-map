@@ -1,120 +1,100 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react';
-import { useParams, Navigate } from 'react-router-dom';
-import styles from './Paradigm.module.css';
-import { getContentConfig } from '../config/contentCategories'; // Import the helper
+import React, { useState, useEffect, Suspense, lazy } from 'react'
+import { useParams } from 'react-router-dom'
+import styles from './Paradigm.module.css'
+import { getContentConfig } from '../config/contentCategories'
+import Loading from '../components/shared/Loading'
 
-// Lazy load components
-const MindMap = lazy(() => import('../components/shared/MindMap'));
-const Article = lazy(() => import('../components/shared/Article'));
-
-// Pre-load all possible data files
-const mindMapFiles = import.meta.glob('../data/**/mindMapData.js');
-const articleFiles = import.meta.glob('../data/**/articleData.js');
+const MindMap = lazy(() => import('../components/shared/MindMap'))
+const Article = lazy(() => import('../components/shared/Article'))
 
 const Paradigm = () => {
-  const { categoryParam, subcategoryParam } = useParams(); // Use new params
-  const [mindMapData, setMindMapData] = useState(null);
-  const [articleData, setArticleData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [contentConfig, setContentConfig] = useState(null);
-  const [pageTitle, setPageTitle] = useState(null);
+  const { categoryParam, subcategoryParam } = useParams()
+  const [mindMapData, setMindMapData] = useState(null)
+  const [articleData, setArticleData] = useState(null)
+  const [error, setError] = useState(null)
+  const [pageTitle, setPageTitle] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
+
+  // Pre-load all possible data files
+  const mindMapFiles = import.meta.glob('../data/**/mindMapData.js')
+  const articleFiles = import.meta.glob('../data/**/articleData.js')
 
   useEffect(() => {
     const loadData = async () => {
-      setLoading(true);
-      setError(null);
-      setMindMapData(null);
-      setArticleData(null);
-      setContentConfig(null);
+      setIsLoading(true)
+      setError(null)
+      setMindMapData(null)
+      setArticleData(null)
 
-      // Get configuration based on URL parameters
-      const config = getContentConfig(categoryParam, subcategoryParam);
+      const config = getContentConfig(categoryParam, subcategoryParam)
 
       if (!config) {
-        console.error(`No config found for /${categoryParam}/${subcategoryParam}`);
-        setError('Content configuration not found.');
-        setLoading(false);
-        // Optional: Redirect to a 404 page or the homepage/about page
-        // return <Navigate to="/about" replace />;
-        return;
+        console.error(
+          `No config found for /${categoryParam}/${subcategoryParam}`
+        )
+        setError('Content configuration not found.')
+        setIsLoading(false)
+        return
       }
-
-      setContentConfig(config); // Store config for potential use in rendering
 
       try {
-        // Construct the file paths
-        const mindMapPath = `../data/${config.category.dataPath}/${config.subcategory.path}/mindMapData.js`;
-        const articlePath = `../data/${config.category.dataPath}/${config.subcategory.path}/articleData.js`;
+        const mindMapPath = `../data/${config.category.dataPath}/${config.subcategory.path}/mindMapData.js`
+        const articlePath = `../data/${config.category.dataPath}/${config.subcategory.path}/articleData.js`
 
-        // Use the glob-imported modules
-        const mindMapModule = await mindMapFiles[mindMapPath]();
-        const articleModule = await articleFiles[articlePath]();
+        const [mindMapModule, articleModule] = await Promise.all([
+          mindMapFiles[mindMapPath](),
+          articleFiles[articlePath]()
+        ])
 
-        // Validate if the expected exports exist
         if (!mindMapModule || !mindMapModule.nodes || !mindMapModule.links) {
-          throw new Error(`Mind map data structure invalid or missing exports in ${mindMapPath}`);
+          throw new Error(`Mind map data structure invalid...`)
         }
-        // Assuming Article expects a default export for now
-        if (!articleModule || articleModule.default === undefined) { 
-          throw new Error(`Article data structure invalid or missing default export in ${articlePath}`);
+        if (!articleModule || articleModule.default === undefined) {
+          throw new Error(`Article data structure invalid...`)
         }
 
-        setMindMapData({ nodes: mindMapModule.nodes, links: mindMapModule.links });
-        setArticleData(articleModule.default); // Use default export
-        setError(null); // Clear previous errors
-        setPageTitle(config.subcategory.name); // Use the subcategory name for the title
+        setMindMapData({
+          nodes: mindMapModule.nodes,
+          links: mindMapModule.links,
+        })
+        setArticleData(articleModule.default)
+        setError(null)
+        setPageTitle(config.subcategory.name)
       } catch (err) {
-        console.error("Failed to load content for", config.subcategory.name, err);
-        setError(`Failed to load content for ${config.subcategory.name}. Check console and data files.`);
-        // Reset data states on error to prevent rendering with old/invalid data
-        setMindMapData(null);
-        setArticleData(null);
-        setPageTitle('Error'); // Set title to Error
+        console.error('Failed to load content...', err)
+        setError(`Failed to load content...`)
+        setMindMapData(null)
+        setArticleData(null)
+        setPageTitle('Error')
       } finally {
-        setLoading(false);
+        setIsLoading(false)
       }
-    };
+    }
 
-    loadData();
-  }, [categoryParam, subcategoryParam]); // Reload data when params change
-
-  if (loading) {
-    // Added a specific loading message
-    return <div className={styles.message}>Loading content for {subcategoryParam}...</div>;
-  }
+    loadData()
+  }, [categoryParam, subcategoryParam])
 
   if (error) {
-    // Display specific error
-    return <div className={styles.error}>Error: {error}</div>;
-  }
-
-  if (!mindMapData || !articleData) {
-    // Fallback message if data isn't loaded for some reason (other than error/loading)
-    return <div className={styles.message}>Content not available.</div>;
+    return <div className={styles.error}>Error: {error}</div>
   }
 
   return (
     <div className={styles.paradigmContainer}>
-      <h1 className={styles.title}>{pageTitle}</h1>
-      <Suspense fallback={<div className={styles.message}>Loading Mind Map...</div>}>
-        {/* Conditionally render MindMap only if mindMapData has nodes */}
-        {mindMapData && mindMapData.nodes ? (
-            <MindMap nodes={mindMapData.nodes} links={mindMapData.links} />
-        ) : (
-            !error && <div className={styles.message}>Mind Map data not available.</div>
-        )}
-      </Suspense>
-      <Suspense fallback={<div className={styles.message}>Loading Article...</div>}>
-        {/* Conditionally render Article only if articleData is available */}
-        {articleData ? (
-            <Article article={articleData} /> // Pass prop as 'article', not 'data'
-        ) : (
-            !error && <div className={styles.message}>Article content not available.</div>
-        )}
-      </Suspense>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <Suspense fallback={<Loading />}>
+          {mindMapData?.nodes && articleData && (
+            <>
+              <h1 className={styles.title}>{pageTitle}</h1>
+              <MindMap nodes={mindMapData.nodes} links={mindMapData.links} />
+              <Article article={articleData} />
+            </>
+          )}
+        </Suspense>
+      )}
     </div>
-  );
-};
+  )
+}
 
-export default Paradigm;
+export default Paradigm
