@@ -13,13 +13,15 @@ const Paradigm = () => {
   const [articleData, setArticleData] = useState(null)
   const [error, setError] = useState(null)
   const [pageTitle, setPageTitle] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
 
-  // Pre-load all possible data files (moved inside component scope)
+  // Pre-load all possible data files
   const mindMapFiles = import.meta.glob('../data/**/mindMapData.js')
   const articleFiles = import.meta.glob('../data/**/articleData.js')
 
   useEffect(() => {
     const loadData = async () => {
+      setIsLoading(true)
       setError(null)
       setMindMapData(null)
       setArticleData(null)
@@ -31,6 +33,7 @@ const Paradigm = () => {
           `No config found for /${categoryParam}/${subcategoryParam}`
         )
         setError('Content configuration not found.')
+        setIsLoading(false)
         return
       }
 
@@ -38,8 +41,10 @@ const Paradigm = () => {
         const mindMapPath = `../data/${config.category.dataPath}/${config.subcategory.path}/mindMapData.js`
         const articlePath = `../data/${config.category.dataPath}/${config.subcategory.path}/articleData.js`
 
-        const mindMapModule = await mindMapFiles[mindMapPath]()
-        const articleModule = await articleFiles[articlePath]()
+        const [mindMapModule, articleModule] = await Promise.all([
+          mindMapFiles[mindMapPath](),
+          articleFiles[articlePath]()
+        ])
 
         if (!mindMapModule || !mindMapModule.nodes || !mindMapModule.links) {
           throw new Error(`Mind map data structure invalid...`)
@@ -61,6 +66,8 @@ const Paradigm = () => {
         setMindMapData(null)
         setArticleData(null)
         setPageTitle('Error')
+      } finally {
+        setIsLoading(false)
       }
     }
 
@@ -73,13 +80,13 @@ const Paradigm = () => {
 
   return (
     <div className={styles.paradigmContainer}>
-      <h1 className={styles.title}>{pageTitle}</h1>
-      {error ? (
-        <div className={styles.error}>{error}</div>
+      {isLoading ? (
+        <Loading />
       ) : (
         <Suspense fallback={<Loading />}>
           {mindMapData?.nodes && articleData && (
             <>
+              <h1 className={styles.title}>{pageTitle}</h1>
               <MindMap nodes={mindMapData.nodes} links={mindMapData.links} />
               <Article article={articleData} />
             </>
