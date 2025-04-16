@@ -1,3 +1,5 @@
+import { COLORS } from '../../../theme/colors';
+
 export const nodes = [
   {
     id: 'root',
@@ -5,7 +7,7 @@ export const nodes = [
     definition:
       'A monotheistic religion centered on the life, teachings, death, and resurrection of Jesus Christ.',
     shape: 'roundRect',
-    color: '#37474F',
+    color: COLORS.root,
   },
   {
     id: 'canonConcepts',
@@ -13,7 +15,7 @@ export const nodes = [
     definition:
       'Key terms for understanding what books are considered official scripture (canonical) versus non-authoritative (apocryphal).',
     shape: 'ellipse',
-    color: '#98EE99',
+    color: COLORS.veryLightGreen,
   },
   {
     id: 'canonicalBooks',
@@ -21,7 +23,7 @@ export const nodes = [
     definition:
       'Books accepted as part of the official Bible by a religious tradition (e.g., Gospels, Epistles).',
     shape: 'rect',
-    color: '#E8F5E9',
+    color: COLORS.mintGreen,
   },
   {
     id: 'apocrypha',
@@ -29,7 +31,7 @@ export const nodes = [
     definition:
       'Books with religious or historical value not included in all biblical canons (e.g., Tobit, Maccabees).',
     shape: 'rect',
-    color: '#E8F5E9',
+    color: COLORS.mintGreen,
   },
   {
     id: 'deuterocanonical',
@@ -37,7 +39,7 @@ export const nodes = [
     definition:
       'Books included in the Catholic Old Testament but considered apocryphal by most Protestants.',
     shape: 'rect',
-    color: '#E8F5E9',
+    color: COLORS.mintGreen,
   },
   {
     id: 'pseudepigrapha',
@@ -45,31 +47,31 @@ export const nodes = [
     definition:
       'Ancient Jewish or Christian writings attributed to biblical figures but excluded from canon.',
     shape: 'rect',
-    color: '#E8F5E9',
+    color: COLORS.mintGreen,
   },
   {
     id: 'catholicism',
     label: 'Catholicism',
     definition:
       'The largest Christian branch, led by the Pope and centered in Rome.',
-    shape: 'rect',
-    color: '#B9F6CA',
+    shape: 'ellipse',
+    color: COLORS.veryLightGreen,
   },
   {
     id: 'orthodoxy',
     label: 'Eastern Orthodoxy',
     definition:
       'Christian churches primarily in Eastern Europe and the Middle East; split from Rome in 1054.',
-    shape: 'rect',
-    color: '#B9F6CA',
+    shape: 'ellipse',
+    color: COLORS.veryLightGreen,
   },
   {
     id: 'protestantism',
     label: 'Protestantism',
     definition:
       'Emerging from the Reformation, emphasizing scripture and faith alone.',
-    shape: 'rect',
-    color: '#B9F6CA',
+    shape: 'ellipse',
+    color: COLORS.veryLightGreen,
   },
   {
     id: 'denominations',
@@ -77,7 +79,7 @@ export const nodes = [
     definition:
       'Sub-branches of Protestantism, each with distinct doctrines and governance.',
     shape: 'ellipse',
-    color: '#98EE99',
+    color: COLORS.veryLightGreen,
   },
   {
     id: 'lutheran',
@@ -85,7 +87,7 @@ export const nodes = [
     definition:
       'Founded by Martin Luther; stresses justification by faith alone.',
     shape: 'rect',
-    color: '#E8F5E9',
+    color: COLORS.mintGreen,
   },
   {
     id: 'anglican',
@@ -93,7 +95,7 @@ export const nodes = [
     definition:
       'Originated from the English Reformation; blends Catholic and Protestant practices.',
     shape: 'rect',
-    color: '#E8F5E9',
+    color: COLORS.mintGreen,
   },
   {
     id: 'methodist',
@@ -101,14 +103,14 @@ export const nodes = [
     definition:
       'Focuses on sanctification and social justice; began with John Wesley.',
     shape: 'rect',
-    color: '#E8F5E9',
+    color: COLORS.mintGreen,
   },
   {
     id: 'baptist',
     label: 'Baptist',
     definition: 'Emphasizes adult baptism and congregational governance.',
     shape: 'rect',
-    color: '#E8F5E9',
+    color: COLORS.mintGreen,
   },
   {
     id: 'romanMissal',
@@ -116,7 +118,7 @@ export const nodes = [
     definition:
       'The liturgical book used for Mass in the Roman Catholic Church.',
     shape: 'rect',
-    color: '#E8F5E9',
+    color: COLORS.mintGreen,
   },
   {
     id: 'mass',
@@ -124,7 +126,7 @@ export const nodes = [
     definition:
       'The central worship and Eucharistic celebration in Catholicism.',
     shape: 'rect',
-    color: '#E8F5E9',
+    color: COLORS.mintGreen,
   },
   {
     id: 'reformation',
@@ -132,7 +134,7 @@ export const nodes = [
     definition:
       'A 16th-century movement to reform the Church, leading to Protestant branches.',
     shape: 'ellipse',
-    color: '#98EE99',
+    color: COLORS.veryLightGreen,
   },
   {
     id: 'martinLuther',
@@ -140,7 +142,7 @@ export const nodes = [
     definition:
       'German monk who sparked the Reformation with his 95 Theses in 1517.',
     shape: 'rect',
-    color: '#E8F5E9',
+    color: COLORS.mintGreen,
   },
   {
     id: 'indulgences',
@@ -156,7 +158,7 @@ export const nodes = [
     definition:
       'Governed by elders and rooted in Reformed (Calvinist) theology.',
     shape: 'rect',
-    color: '#E8F5E9',
+    color: COLORS.mintGreen,
   },
   {
     id: 'pentecostal',
@@ -164,7 +166,7 @@ export const nodes = [
     definition:
       'Focuses on direct experience with the Holy Spirit; emphasizes spiritual gifts.',
     shape: 'rect',
-    color: '#E8F5E9',
+    color: COLORS.mintGreen,
   },
   {
     id: 'nonDenom',
@@ -172,7 +174,7 @@ export const nodes = [
     definition:
       'Independent Christian churches that often emphasize local governance and contemporary worship.',
     shape: 'rect',
-    color: '#E8F5E9',
+    color: COLORS.mintGreen,
   },
   {
     id: 'restorationist',
@@ -180,7 +182,7 @@ export const nodes = [
     definition:
       'Movements from the 19th–20th century that seek to restore original Christianity.',
     shape: 'ellipse',
-    color: '#98EE99',
+    color: COLORS.veryLightGreen,
   },
   {
     id: 'lds',
@@ -188,7 +190,7 @@ export const nodes = [
     definition:
       'Founded by Joseph Smith; includes the Book of Mormon alongside the Bible.',
     shape: 'rect',
-    color: '#E8F5E9',
+    color: COLORS.mintGreen,
   },
   {
     id: 'jehovahsWitness',
@@ -196,14 +198,14 @@ export const nodes = [
     definition:
       'Reject the Trinity and emphasize evangelism and apocalyptic beliefs.',
     shape: 'rect',
-    color: '#E8F5E9',
+    color: COLORS.mintGreen,
   },
   {
     id: 'adventist',
     label: 'Seventh-day Adventist',
     definition: 'Emphasizes Saturday Sabbath, health, and end-time prophecies.',
     shape: 'rect',
-    color: '#E8F5E9',
+    color: COLORS.mintGreen,
   },
   {
     id: 'movements',
@@ -211,7 +213,7 @@ export const nodes = [
     definition:
       'Evangelical, Charismatic, Calvinist, Arminian, and other ideological traditions.',
     shape: 'diamond',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   {
     id: 'churchVariants',
@@ -219,7 +221,7 @@ export const nodes = [
     definition:
       'Examples include Southern Baptist vs. American Baptist, or various Methodist splits.',
     shape: 'diamond',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   {
     id: 'greekOrthodox',
@@ -227,7 +229,7 @@ export const nodes = [
     definition:
       'Centered in Greece and Cyprus, known for its rich liturgical tradition.',
     shape: 'rect',
-    color: '#E8F5E9',
+    color: COLORS.mintGreen,
   },
   {
     id: 'russianOrthodox',
@@ -235,14 +237,14 @@ export const nodes = [
     definition:
       'Largest Eastern Orthodox church, influential in Russia and Eastern Europe.',
     shape: 'rect',
-    color: '#E8F5E9',
+    color: COLORS.mintGreen,
   },
   {
     id: 'serbianOrthodox',
     label: 'Serbian Orthodox',
     definition: 'National church of Serbia and Serbian diaspora communities.',
     shape: 'rect',
-    color: '#E8F5E9',
+    color: COLORS.mintGreen,
   },
   {
     id: 'oca',
@@ -250,7 +252,7 @@ export const nodes = [
     definition:
       'A U.S.-based church with autocephalous status, not universally recognized.',
     shape: 'rect',
-    color: '#E8F5E9',
+    color: COLORS.mintGreen,
   },
 ]
 

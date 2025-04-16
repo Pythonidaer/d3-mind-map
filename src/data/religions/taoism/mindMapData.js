@@ -1,3 +1,5 @@
+import { COLORS } from '../../../theme/colors';
+
 export const nodes = [
   {
     id: 'root',
@@ -5,7 +7,7 @@ export const nodes = [
     definition:
       'A Chinese philosophy and religion founded around the 4th century BCE focused on harmony with the Tao (the Way).',
     shape: 'roundRect',
-    color: '#37474F',
+    color: COLORS.root,
   },
   {
     id: 'coreConcepts',
@@ -13,7 +15,7 @@ export const nodes = [
     definition:
       'Foundational principles that define Taoist philosophy and practice.',
     shape: 'ellipse',
-    color: '#98EE99',
+    color: COLORS.veryLightGreen,
   },
   {
     id: 'tao',
@@ -21,28 +23,28 @@ export const nodes = [
     definition:
       'The ineffable, natural force or way that governs the universe.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   {
     id: 'wuWei',
     label: 'Wu Wei',
     definition: 'Effortless action or non-action aligned with the Tao.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   {
     id: 'yinYang',
     label: 'Yin & Yang',
     definition: 'Opposing but complementary forces in nature and life.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   {
     id: 'texts',
     label: 'Key \n Texts',
     definition: 'Sacred writings that outline Taoist thought and ethics.',
     shape: 'ellipse',
-    color: '#98EE99',
+    color: COLORS.veryLightGreen,
   },
   {
     id: 'daoDeJing',
@@ -50,7 +52,7 @@ export const nodes = [
     definition:
       'Attributed to Laozi, this text emphasizes living in harmony with the Tao.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   {
     id: 'zhuangzi',
@@ -58,7 +60,7 @@ export const nodes = [
     definition:
       'A philosophical text with allegories that challenge rigid structures and value spontaneity.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   {
     id: 'philosophical',
@@ -66,7 +68,7 @@ export const nodes = [
     definition:
       'Focuses on metaphysics and ethics based on early Taoist texts.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   {
     id: 'religious',
@@ -74,7 +76,7 @@ export const nodes = [
     definition:
       'Developed later, includes rituals, deities, alchemy, and priesthood.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
 ]
 

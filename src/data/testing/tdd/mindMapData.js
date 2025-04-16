@@ -1,3 +1,5 @@
+import { COLORS } from '../../../theme/colors';
+
 export const nodes = [
   {
     id: "root",

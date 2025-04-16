@@ -1,12 +1,4 @@
-// src/functional/mindMapData.js
-// -- Color Sequence
-// 0. Root: 37474F
-// 1. Very light green -- #98EE99
-// 2. Mint green -- #B9F6CA
-// 3. Almost white green -- #E8F5E9
-// 4. Light red -- #FF8A80
-// 5. Lighter red -- #FFB3B3
-// 6. Very light red -- #FFE0E0
+import { COLORS } from '../../../theme/colors';
 
 export const nodes = [
     // Root node
@@ -15,8 +7,8 @@ export const nodes = [
       label: 'Declarative \n Programming \n in JavaScript',
       definition:
         'A style that focuses on describing what should be done rather than how to do it. It emphasizes clear expression of intent, often using frameworks and high‑level abstractions.',
-      shape: 'roundRect', // You can choose a shape
-      color: '#37474F', // Choose a color
+      shape: 'roundRect',
+      color: COLORS.root,
     },
     // First-level nodes (direct children of root)
     {
@@ -24,8 +16,8 @@ export const nodes = [
       label: 'Key Principles',
       definition:
         'Focus on describing the desired outcome, using implicit control flow and high‑level abstractions rather than explicit step‑by‑step instructions.',
-      shape: 'ellipse', // Choose a shape
-      color: '#98EE99', // Choose a color
+      shape: 'ellipse',
+      color: COLORS.veryLightGreen,
     },
     {
       id: 'benefits',
@@ -33,7 +25,7 @@ export const nodes = [
       definition:
         'Improved readability, maintainability, fewer side effects, and closer alignment to domain languages, making code easier to reason about.',
       shape: 'ellipse',
-      color: '#98EE99',
+      color: COLORS.veryLightGreen,
     },
     {
       id: 'cons',
@@ -41,7 +33,7 @@ export const nodes = [
       definition:
         'May incur performance overhead, offer less fine‑grained control, and can be challenging for developers unfamiliar with abstract concepts.',
       shape: 'hexagon',
-      color: '#FF8A80',
+      color: COLORS.lightRed,
     },
     {
       id: 'antipatterns',
@@ -49,7 +41,7 @@ export const nodes = [
       definition:
         'Common pitfalls include mixing imperative logic into declarative code, over‑abstraction, state synchronization issues, and ignoring performance details.',
       shape: 'hexagon',
-      color: '#FF8A80',
+      color: COLORS.lightRed,
     },
     {
       id: 'examples',
@@ -57,7 +49,7 @@ export const nodes = [
       definition:
         'Examples include using React (JSX) for UI, chaining array methods (map, filter, reduce), promise chaining, and GraphQL for data queries.',
       shape: 'ellipse',
-      color: '#98EE99',
+      color: COLORS.veryLightGreen,
     },
     // Second-level nodes for Key Principles
     {
@@ -66,7 +58,7 @@ export const nodes = [
       definition:
         'Expresses the desired outcome rather than the sequence of steps to achieve it.',
       shape: 'rect',
-      color: '#B9F6CA',
+      color: COLORS.mintGreen,
     },
     {
       id: 'implicitControl',
@@ -74,14 +66,14 @@ export const nodes = [
       definition:
         'Relies on libraries or frameworks to manage execution order (e.g., React re‑rendering based on state changes).',
       shape: 'rect',
-      color: '#B9F6CA',
+      color: COLORS.mintGreen,
     },
     {
       id: 'immutabilityStateless',
       label: 'Immutability & Statelessness',
       definition: 'Favors unchanging data and pure functions to minimize side effects.',
       shape: 'rect',
-      color: '#B9F6CA',
+      color: COLORS.mintGreen,
     },
     {
       id: 'highLevel',
@@ -89,7 +81,7 @@ export const nodes = [
       definition:
         'Uses declarative constructs such as JSX, template languages, and DSLs to express logic.',
       shape: 'rect',
-      color: '#B9F6CA',
+      color: COLORS.mintGreen,
     },
     // Second-level nodes for Benefits
     {
@@ -97,21 +89,21 @@ export const nodes = [
       label: 'Readability',
       definition: 'Code clearly communicates intent, making it easier to understand at a glance.',
       shape: 'rect',
-      color: '#B9F6CA',
+      color: COLORS.mintGreen,
     },
     {
       id: 'maintainability',
       label: 'Maintainability',
       definition: 'Changes in implementation are hidden behind high‑level declarations.',
       shape: 'rect',
-      color: '#B9F6CA',
+      color: COLORS.mintGreen,
     },
     {
       id: 'fewerSideEffects',
       label: 'Fewer Side Effects',
       definition: 'Pure functions and immutable data reduce unexpected behavior in the code.',
       shape: 'rect',
-      color: '#B9F6CA',
+      color: COLORS.mintGreen,
     },
     {
       id: 'domainAlignment',
@@ -119,7 +111,7 @@ export const nodes = [
       definition:
         'Declarative code often mirrors the domain language (e.g., HTML, GraphQL), making it intuitive for domain experts.',
       shape: 'rect',
-      color: '#B9F6CA',
+      color: COLORS.mintGreen,
     },
     // Second-level nodes for Cons
     {
@@ -128,28 +120,28 @@ export const nodes = [
       definition:
         'Abstractions may add extra processing layers, potentially reducing performance in critical paths.',
       shape: 'rect',
-      color: '#FFB3B3',
+      color: COLORS.lighterRed,
     },
     {
       id: 'lessControl',
       label: 'Less Fine‑Grained Control',
       definition: 'Developers have less control over execution details and optimizations.',
       shape: 'rect',
-      color: '#FFB3B3',
+      color: COLORS.lighterRed,
     },
     {
       id: 'learningCurve',
       label: 'Learning Curve',
       definition: 'For those used to imperative styles, shifting to declarative thinking may be challenging.',
       shape: 'rect',
-      color: '#FFB3B3',
+      color: COLORS.lighterRed,
     },
     {
       id: 'opaqueAbstractions',
       label: 'Opaque Abstractions',
       definition: 'High‑level abstractions can sometimes hide complexity, making debugging harder.',
       shape: 'rect',
-      color: '#FFB3B3',
+      color: COLORS.lighterRed,
     },
     // Second-level nodes for Anti‑Patterns
     {
@@ -157,28 +149,28 @@ export const nodes = [
       label: 'Mixing Imperative Logic',
       definition: 'Inserting imperative steps into declarative code undermines clarity and benefits.',
       shape: 'rect',
-      color: '#FFB3B3',
+      color: COLORS.lighterRed,
     },
     {
       id: 'overAbstraction',
       label: 'Over‑Abstraction',
       definition: 'Creating overly complex abstractions that obscure the intended behavior.',
       shape: 'rect',
-      color: '#FFB3B3',
+      color: COLORS.lighterRed,
     },
     {
       id: 'stateIssues',
       label: 'State Synchronization Issues',
       definition: 'Failing to properly manage state can lead to inconsistencies and bugs.',
       shape: 'rect',
-      color: '#FFB3B3',
+      color: COLORS.lighterRed,
     },
     {
       id: 'ignorePerf',
       label: 'Ignoring Performance',
       definition: 'Relying solely on declarative methods without considering performance can be problematic.',
       shape: 'rect',
-      color: '#FFB3B3',
+      color: COLORS.lighterRed,
     },
     // Second-level nodes for Examples & APIs
     {
@@ -186,28 +178,28 @@ export const nodes = [
       label: 'React & JSX',
       definition: 'Using React’s declarative component model to describe UI based on state.',
       shape: 'rect',
-      color: '#B9F6CA',
+      color: COLORS.mintGreen,
     },
     {
       id: 'arrayMethods',
       label: 'Array Methods',
       definition: 'Using .map, .filter, .reduce for data processing in a declarative style.',
       shape: 'rect',
-      color: '#B9F6CA',
+      color: COLORS.mintGreen,
     },
     {
       id: 'promiseChaining',
       label: 'Promise Chaining',
       definition: 'Chaining asynchronous actions declaratively using promises.',
       shape: 'rect',
-      color: '#B9F6CA',
+      color: COLORS.mintGreen,
     },
     {
       id: 'graphql',
       label: 'GraphQL & Templates',
       definition: 'Declaring data requirements with GraphQL or using template languages to describe UI.',
       shape: 'rect',
-      color: '#B9F6CA',
+      color: COLORS.mintGreen,
     },
   ];
   

@@ -1,3 +1,5 @@
+import { COLORS } from '../../../theme/colors';
+
 export const nodes = [
   {
     id: 'root',
@@ -5,14 +7,14 @@ export const nodes = [
     definition:
       'A Dharmic religion founded by Siddhartha Gautama in the 5th–6th century BCE, centered on the path to enlightenment.',
     shape: 'roundRect',
-    color: '#37474F',
+    color: COLORS.root,
   },
   {
     id: 'coreTeachings',
     label: 'Core \n Teachings',
     definition: 'Foundational ideas shared across most Buddhist traditions.',
     shape: 'ellipse',
-    color: '#98EE99',
+    color: COLORS.veryLightGreen,
   },
   {
     id: 'fourNobleTruths',
@@ -20,7 +22,7 @@ export const nodes = [
     definition:
       'Suffering exists, has a cause, can cease, and the path leads to cessation.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   {
     id: 'eightfoldPath',
@@ -28,7 +30,7 @@ export const nodes = [
     definition:
       'Right view, intention, speech, action, livelihood, effort, mindfulness, and concentration.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   {
     id: 'threeMarks',
@@ -36,7 +38,7 @@ export const nodes = [
     definition:
       'Impermanence (anicca), suffering (dukkha), and non-self (anatta).',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   {
     id: 'theravada',
@@ -44,7 +46,7 @@ export const nodes = [
     definition:
       '"Teaching of the Elders"—focuses on monastic life and the Pali Canon.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   {
     id: 'mahayana',
@@ -52,7 +54,7 @@ export const nodes = [
     definition:
       '"Great Vehicle"—emphasizes compassion, lay participation, and bodhisattvas.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   {
     id: 'vajrayana',
@@ -60,7 +62,7 @@ export const nodes = [
     definition:
       '"Diamond Vehicle"—Tibetan Buddhism; uses rituals, mantras, and tantra.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   {
     id: 'texts',
@@ -68,7 +70,7 @@ export const nodes = [
     definition:
       'Canonical scriptures vary by branch; often include sutras and commentaries.',
     shape: 'ellipse',
-    color: '#98EE99',
+    color: COLORS.veryLightGreen,
   },
   {
     id: 'paliCanon',
@@ -76,7 +78,7 @@ export const nodes = [
     definition:
       'The earliest and most complete Buddhist scripture, central in Theravāda.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   {
     id: 'mahayanaSutras',
@@ -84,14 +86,14 @@ export const nodes = [
     definition:
       'Texts like the Lotus Sutra and Heart Sutra, central to Mahāyāna Buddhism.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   {
     id: 'tantras',
     label: 'Tantras',
     definition: 'Ritual and esoteric texts central to Vajrayāna practices.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
 ]
 

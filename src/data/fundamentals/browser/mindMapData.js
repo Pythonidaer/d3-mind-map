@@ -1,76 +1,78 @@
+import { COLORS } from '../../../theme/colors';
+
 export const nodes = [
     {
       id: "root",
       label: "Browser \n JavaScript",
       definition: "Interaction between JavaScript and the browser environment: DOM manipulation, events, forms, APIs, and animation.",
       shape: "roundRect",
-      color: "#37474F",
+      color: COLORS.root,
     },
     {
       id: "dom",
       label: "DOM",
       definition: "The Document Object Model represents the structure of HTML as nodes accessible from JavaScript.",
       shape: "ellipse",
-      color: "#98EE99",
+      color: COLORS.veryLightGreen,
     },
     {
       id: "events",
       label: "Events",
       definition: "Actions like clicks or inputs that trigger JavaScript code through event listeners.",
       shape: "ellipse",
-      color: "#98EE99",
+      color: COLORS.veryLightGreen,
     },
     {
       id: "forms",
       label: "Forms",
       definition: "User input mechanisms including form fields, validation, and submission.",
       shape: "ellipse",
-      color: "#98EE99",
+      color: COLORS.veryLightGreen,
     },
     {
       id: "apis",
       label: "APIs",
       definition: "Browser-provided APIs for storage, geolocation, clipboard, and more.",
       shape: "ellipse",
-      color: "#98EE99",
+      color: COLORS.veryLightGreen,
     },
     {
       id: "timing",
       label: "Timing",
       definition: "APIs for scheduling execution or animation such as setTimeout and requestAnimationFrame.",
       shape: "ellipse",
-      color: "#98EE99",
+      color: COLORS.veryLightGreen,
     },
   
     // DOM Subnodes
-    { id: "selectors", label: "Selectors", definition: "Use querySelector and getElementById to select DOM elements.", shape: "rect", color: "#B9F6CA" },
-    { id: "modify", label: "Modify Content", definition: "Update text, HTML, and attributes dynamically.", shape: "rect", color: "#B9F6CA" },
-    { id: "createRemove", label: "Create/Remove", definition: "Use createElement, append, remove, etc.", shape: "rect", color: "#B9F6CA" },
-    { id: "styles", label: "Styles & Classes", definition: "Modify element classes and inline styles.", shape: "rect", color: "#B9F6CA" },
+    { id: "selectors", label: "Selectors", definition: "Use querySelector and getElementById to select DOM elements.", shape: "rect", color: COLORS.mintGreen },
+    { id: "modify", label: "Modify Content", definition: "Update text, HTML, and attributes dynamically.", shape: "rect", color: COLORS.mintGreen },
+    { id: "createRemove", label: "Create/Remove", definition: "Use createElement, append, remove, etc.", shape: "rect", color: COLORS.mintGreen },
+    { id: "styles", label: "Styles & Classes", definition: "Modify element classes and inline styles.", shape: "rect", color: COLORS.mintGreen },
   
     // Events Subnodes
-    { id: "addListener", label: "addEventListener", definition: "Attach events like click, input, etc.", shape: "rect", color: "#B9F6CA" },
-    { id: "bubbling", label: "Bubbling & Capture", definition: "Events propagate through DOM from target to root.", shape: "rect", color: "#B9F6CA" },
-    { id: "delegation", label: "Event Delegation", definition: "Listen on parent element to handle dynamic children.", shape: "rect", color: "#B9F6CA" },
-    { id: "prevent", label: "preventDefault", definition: "Prevent default browser behavior like form submission.", shape: "rect", color: "#B9F6CA" },
+    { id: "addListener", label: "addEventListener", definition: "Attach events like click, input, etc.", shape: "rect", color: COLORS.mintGreen },
+    { id: "bubbling", label: "Bubbling & Capture", definition: "Events propagate through DOM from target to root.", shape: "rect", color: COLORS.mintGreen },
+    { id: "delegation", label: "Event Delegation", definition: "Listen on parent element to handle dynamic children.", shape: "rect", color: COLORS.mintGreen },
+    { id: "prevent", label: "preventDefault", definition: "Prevent default browser behavior like form submission.", shape: "rect", color: COLORS.mintGreen },
   
     // Forms Subnodes
-    { id: "inputTypes", label: "Inputs", definition: "Input, checkbox, select, and textarea elements.", shape: "rect", color: "#B9F6CA" },
-    { id: "validation", label: "Validation", definition: "Check input validity via attributes or JS.", shape: "rect", color: "#B9F6CA" },
-    { id: "submit", label: "Submit Events", definition: "Listen for and intercept form submission.", shape: "rect", color: "#B9F6CA" },
-    { id: "formData", label: "FormData API", definition: "Serialize form inputs easily for POSTing.", shape: "rect", color: "#B9F6CA" },
+    { id: "inputTypes", label: "Inputs", definition: "Input, checkbox, select, and textarea elements.", shape: "rect", color: COLORS.mintGreen },
+    { id: "validation", label: "Validation", definition: "Check input validity via attributes or JS.", shape: "rect", color: COLORS.mintGreen },
+    { id: "submit", label: "Submit Events", definition: "Listen for and intercept form submission.", shape: "rect", color: COLORS.mintGreen },
+    { id: "formData", label: "FormData API", definition: "Serialize form inputs easily for POSTing.", shape: "rect", color: COLORS.mintGreen },
   
     // APIs Subnodes
-    { id: "storage", label: "localStorage", definition: "Persist simple data in the browser.", shape: "rect", color: "#B9F6CA" },
-    { id: "navigator", label: "Navigator", definition: "Access browser metadata like language and online status.", shape: "rect", color: "#B9F6CA" },
-    { id: "geo", label: "Geolocation", definition: "Get current location via GPS (with permission).", shape: "rect", color: "#B9F6CA" },
-    { id: "clipboard", label: "Clipboard API", definition: "Programmatically copy to or read from clipboard.", shape: "rect", color: "#B9F6CA" },
+    { id: "storage", label: "localStorage", definition: "Persist simple data in the browser.", shape: "rect", color: COLORS.mintGreen },
+    { id: "navigator", label: "Navigator", definition: "Access browser metadata like language and online status.", shape: "rect", color: COLORS.mintGreen },
+    { id: "geo", label: "Geolocation", definition: "Get current location via GPS (with permission).", shape: "rect", color: COLORS.mintGreen },
+    { id: "clipboard", label: "Clipboard API", definition: "Programmatically copy to or read from clipboard.", shape: "rect", color: COLORS.mintGreen },
   
     // Timing Subnodes
-    { id: "setTimeout", label: "setTimeout", definition: "Run code after a delay.", shape: "rect", color: "#B9F6CA" },
-    { id: "setInterval", label: "setInterval", definition: "Repeat code on a timer.", shape: "rect", color: "#B9F6CA" },
-    { id: "requestAnimationFrame", label: "requestAnimationFrame", definition: "Synchronize animation with screen refresh.", shape: "rect", color: "#B9F6CA" },
-    { id: "debounceThrottle", label: "Debounce / Throttle", definition: "Control frequency of repetitive events.", shape: "rect", color: "#B9F6CA" },
+    { id: "setTimeout", label: "setTimeout", definition: "Run code after a delay.", shape: "rect", color: COLORS.mintGreen },
+    { id: "setInterval", label: "setInterval", definition: "Repeat code on a timer.", shape: "rect", color: COLORS.mintGreen },
+    { id: "requestAnimationFrame", label: "requestAnimationFrame", definition: "Synchronize animation with screen refresh.", shape: "rect", color: COLORS.mintGreen },
+    { id: "debounceThrottle", label: "Debounce / Throttle", definition: "Control frequency of repetitive events.", shape: "rect", color: COLORS.mintGreen },
   ];
   
   export const links = [

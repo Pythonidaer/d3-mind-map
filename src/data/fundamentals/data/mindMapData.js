@@ -1,74 +1,76 @@
+import { COLORS } from '../../../theme/colors';
+
 export const nodes = [
     {
       id: "root",
       label: "JavaScript \n Data",
       definition: "Core structures and patterns for working with data in JavaScript: objects, arrays, and built-in types.",
       shape: "roundRect",
-      color: "#37474F",
+      color: COLORS.root,
     },
     {
       id: "objects",
       label: "Objects",
       definition: "Key-value data structures representing entities, supporting dynamic property access.",
       shape: "ellipse",
-      color: "#98EE99",
+      color: COLORS.veryLightGreen,
     },
     {
       id: "arrays",
       label: "Arrays",
       definition: "Ordered collections of data with built-in iteration and transformation methods.",
       shape: "ellipse",
-      color: "#98EE99",
+      color: COLORS.veryLightGreen,
     },
     {
       id: "types",
       label: "Types",
       definition: "Native classes like Date, RegExp, Set, Map, and Math utilities.",
       shape: "ellipse",
-      color: "#98EE99",
+      color: COLORS.veryLightGreen,
     },
     {
       id: "patterns",
       label: "Patterns",
       definition: "ES6 syntax for accessing, transforming, and combining data structures.",
       shape: "ellipse",
-      color: "#98EE99",
+      color: COLORS.veryLightGreen,
     },
     {
       id: "design",
       label: "Design",
       definition: "Reusable, maintainable approaches to organizing and manipulating data.",
       shape: "ellipse",
-      color: "#98EE99",
+      color: COLORS.veryLightGreen,
     },
   
     // Objects
-    { id: "literal", label: "Literal Syntax", definition: "Create an object using curly braces.", shape: "rect", color: "#B9F6CA" },
-    { id: "access", label: "Access & Modify", definition: "Dot or bracket notation to get/set properties.", shape: "rect", color: "#B9F6CA" },
-    { id: "methods", label: "Object Methods", definition: "Attach functions to objects to act as methods.", shape: "rect", color: "#B9F6CA" },
-    { id: "proto", label: "Prototype", definition: "Shared method lookup and inheritance via prototype chain.", shape: "rect", color: "#B9F6CA" },
+    { id: "literal", label: "Literal Syntax", definition: "Create an object using curly braces.", shape: "rect", color: COLORS.mintGreen },
+    { id: "access", label: "Access & Modify", definition: "Dot or bracket notation to get/set properties.", shape: "rect", color: COLORS.mintGreen },
+    { id: "methods", label: "Object Methods", definition: "Attach functions to objects to act as methods.", shape: "rect", color: COLORS.mintGreen },
+    { id: "proto", label: "Prototype", definition: "Shared method lookup and inheritance via prototype chain.", shape: "rect", color: COLORS.mintGreen },
   
     // Arrays
-    { id: "map", label: "map()", definition: "Transforms array by applying a function to each element.", shape: "rect", color: "#B9F6CA" },
-    { id: "filter", label: "filter()", definition: "Filters elements based on a condition.", shape: "rect", color: "#B9F6CA" },
-    { id: "reduce", label: "reduce()", definition: "Reduces array to a single value.", shape: "rect", color: "#B9F6CA" },
-    { id: "slice", label: "slice()", definition: "Returns a shallow copy of part of an array.", shape: "rect", color: "#B9F6CA" },
+    { id: "map", label: "map()", definition: "Transforms array by applying a function to each element.", shape: "rect", color: COLORS.mintGreen },
+    { id: "filter", label: "filter()", definition: "Filters elements based on a condition.", shape: "rect", color: COLORS.mintGreen },
+    { id: "reduce", label: "reduce()", definition: "Reduces array to a single value.", shape: "rect", color: COLORS.mintGreen },
+    { id: "slice", label: "slice()", definition: "Returns a shallow copy of part of an array.", shape: "rect", color: COLORS.mintGreen },
   
     // Types
-    { id: "date", label: "Date", definition: "Handles time and date operations.", shape: "rect", color: "#B9F6CA" },
-    { id: "math", label: "Math", definition: "Math operations like random, round, floor, pow, etc.", shape: "rect", color: "#B9F6CA" },
-    { id: "regex", label: "RegExp", definition: "Pattern matching using regular expressions.", shape: "rect", color: "#B9F6CA" },
-    { id: "setMap", label: "Set & Map", definition: "Collections with unique values and key-value pairs.", shape: "rect", color: "#B9F6CA" },
+    { id: "date", label: "Date", definition: "Handles time and date operations.", shape: "rect", color: COLORS.mintGreen },
+    { id: "math", label: "Math", definition: "Math operations like random, round, floor, pow, etc.", shape: "rect", color: COLORS.mintGreen },
+    { id: "regex", label: "RegExp", definition: "Pattern matching using regular expressions.", shape: "rect", color: COLORS.mintGreen },
+    { id: "setMap", label: "Set & Map", definition: "Collections with unique values and key-value pairs.", shape: "rect", color: COLORS.mintGreen },
   
     // Patterns
-    { id: "destructure", label: "Destructuring", definition: "Extract values from arrays/objects into variables.", shape: "rect", color: "#B9F6CA" },
-    { id: "spread", label: "Spread Operator", definition: "Expand arrays/objects into elements/properties.", shape: "rect", color: "#B9F6CA" },
-    { id: "rest", label: "Rest Parameters", definition: "Group remaining arguments into a single parameter.", shape: "rect", color: "#B9F6CA" },
+    { id: "destructure", label: "Destructuring", definition: "Extract values from arrays/objects into variables.", shape: "rect", color: COLORS.mintGreen },
+    { id: "spread", label: "Spread Operator", definition: "Expand arrays/objects into elements/properties.", shape: "rect", color: COLORS.mintGreen },
+    { id: "rest", label: "Rest Parameters", definition: "Group remaining arguments into a single parameter.", shape: "rect", color: COLORS.mintGreen },
   
     // Design
-    { id: "factory", label: "Factory Function", definition: "Function that returns a new object.", shape: "rect", color: "#B9F6CA" },
-    { id: "constructor", label: "Constructor", definition: "Function used with `new` to instantiate objects.", shape: "rect", color: "#B9F6CA" },
-    { id: "immutability", label: "Immutability", definition: "Avoiding mutation in data for safe reuse.", shape: "rect", color: "#B9F6CA" },
+    { id: "factory", label: "Factory Function", definition: "Function that returns a new object.", shape: "rect", color: COLORS.mintGreen },
+    { id: "constructor", label: "Constructor", definition: "Function used with `new` to instantiate objects.", shape: "rect", color: COLORS.mintGreen },
+    { id: "immutability", label: "Immutability", definition: "Avoiding mutation in data for safe reuse.", shape: "rect", color: COLORS.mintGreen },
   ];
   
   export const links = [
