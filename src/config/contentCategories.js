@@ -51,7 +51,7 @@ export const contentCategories = [
         id: 'tooling_and_testing',
         name: 'Tooling & Testing',
         path: 'tooling_and_testing',
-        addToNav: false,
+        addToNav: true,
       },
       // Future fundamental topics (like 'variables', 'data-types') added here
     ],

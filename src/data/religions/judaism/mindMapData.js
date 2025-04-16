@@ -1,3 +1,5 @@
+import { COLORS } from '../../../theme/colors';
+
 export const nodes = [
   {
     id: 'root',
@@ -5,7 +7,7 @@ export const nodes = [
     definition:
       'An ancient monotheistic religion rooted in the covenant between God and the people of Israel, centered on Torah and a tradition of law and ethics.',
     shape: 'roundRect',
-    color: '#37474F',
+    color: COLORS.root,
   },
   {
     id: 'orthodox',
@@ -13,7 +15,7 @@ export const nodes = [
     definition:
       'Maintains strict adherence to traditional Jewish law and ritual.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   {
     id: 'hasidic',
@@ -21,7 +23,7 @@ export const nodes = [
     definition:
       'A mystical movement within Orthodox Judaism focused on joy, prayer, and leadership by charismatic rebbes.',
     shape: 'rect',
-    color: '#E8F5E9',
+    color: COLORS.mintGreen,
   },
   {
     id: 'conservative',
@@ -29,7 +31,7 @@ export const nodes = [
     definition:
       'Seeks a middle ground between tradition and modernity, allowing for historical development of Jewish law.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   {
     id: 'reform',
@@ -37,7 +39,7 @@ export const nodes = [
     definition:
       'Emphasizes ethics and individual autonomy, often modifying traditional rituals and laws.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   {
     id: 'reconstructionist',
@@ -45,7 +47,7 @@ export const nodes = [
     definition:
       'Views Judaism as an evolving civilization and focuses on cultural identity and community practice.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   {
     id: 'coreTexts',
@@ -53,7 +55,7 @@ export const nodes = [
     definition:
       'Foundational writings guiding Jewish belief, practice, and law.',
     shape: 'ellipse',
-    color: '#98EE99',
+    color: COLORS.veryLightGreen,
   },
   {
     id: 'tanakh',
@@ -61,7 +63,7 @@ export const nodes = [
     definition:
       'The Hebrew Bible, composed of Torah (Law), Nevi’im (Prophets), and Ketuvim (Writings).',
     shape: 'rect',
-    color: '#E8F5E9',
+    color: COLORS.mintGreen,
   },
   {
     id: 'talmud',
@@ -69,14 +71,14 @@ export const nodes = [
     definition:
       'A vast compilation of rabbinic discussion on law, ethics, and tradition based on the Mishnah.',
     shape: 'rect',
-    color: '#E8F5E9',
+    color: COLORS.mintGreen,
   },
   {
     id: 'midrash',
     label: 'Midrash',
     definition: 'Interpretive stories and commentary on the Hebrew Bible.',
     shape: 'rect',
-    color: '#E8F5E9',
+    color: COLORS.mintGreen,
   },
   {
     id: 'kabbalah',
@@ -84,14 +86,14 @@ export const nodes = [
     definition:
       'Jewish mystical tradition exploring divine realities, creation, and the nature of God; rooted in the Zohar.',
     shape: 'rect',
-    color: '#E8F5E9',
+    color: COLORS.mintGreen,
   },
   {
     id: 'coreBeliefs',
     label: 'Core Beliefs',
     definition: 'Doctrines shared across most Jewish traditions.',
     shape: 'ellipse',
-    color: '#98EE99',
+    color: COLORS.veryLightGreen,
   },
   {
     id: 'monotheism',
@@ -99,7 +101,7 @@ export const nodes = [
     definition:
       'Belief in one, indivisible, and eternal God who is the creator and sustainer of the universe.',
     shape: 'rect',
-    color: '#E8F5E9',
+    color: COLORS.mintGreen,
   },
   {
     id: 'covenant',
@@ -107,7 +109,7 @@ export const nodes = [
     definition:
       'A binding agreement between God and the people of Israel, starting with Abraham and reaffirmed at Sinai.',
     shape: 'rect',
-    color: '#E8F5E9',
+    color: COLORS.mintGreen,
   },
   {
     id: 'mitzvot',
@@ -115,7 +117,7 @@ export const nodes = [
     definition:
       'Commandments or religious obligations found in the Torah (traditionally 613 in number).',
     shape: 'rect',
-    color: '#E8F5E9',
+    color: COLORS.mintGreen,
   },
   {
     id: 'halakhah',
@@ -123,7 +125,7 @@ export const nodes = [
     definition:
       'Jewish law governing daily life, ethics, ritual, and community behavior.',
     shape: 'rect',
-    color: '#E8F5E9',
+    color: COLORS.mintGreen,
   },
   {
     id: 'messiah',
@@ -131,7 +133,7 @@ export const nodes = [
     definition:
       'Belief in a future anointed one (Messiah) who will bring peace and restore Israel.',
     shape: 'rect',
-    color: '#E8F5E9',
+    color: COLORS.mintGreen,
   },
   {
     id: 'diaspora',
@@ -139,7 +141,7 @@ export const nodes = [
     definition:
       'Diverse Jewish customs and lineages shaped by geography, including Ashkenazi, Sephardi, and Mizrahi communities.',
     shape: 'ellipse',
-    color: '#98EE99',
+    color: COLORS.veryLightGreen,
   },
 ]
 

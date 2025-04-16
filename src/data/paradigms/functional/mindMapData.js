@@ -1,12 +1,4 @@
-// src/functional/mindMapData.js
-// -- Color Sequence
-// 0. Root: 37474F
-// 1. Very light green -- #98EE99
-// 2. Mint green -- #B9F6CA
-// 3. Almost white green -- #E8F5E9
-// 4. Light red -- #FF8A80
-// 5. Lighter red -- #FFB3B3
-// 6. Very light red -- #FFE0E0
+import { COLORS } from '../../../theme/colors';
 
 export const nodes = [
   // Root node
@@ -16,7 +8,7 @@ export const nodes = [
     definition:
       'A style of programming that emphasizes pure functions, immutability, and declarative code.',
     shape: 'roundRect',
-    color: '#37474F',
+    color: COLORS.root,
   },
   // First-level nodes (direct children of root)
   {
@@ -25,7 +17,7 @@ export const nodes = [
     definition:
       'Data cannot be changed once created; instead, new data is produced for modifications.',
     shape: 'ellipse',
-    color: '#98EE99',
+    color: COLORS.veryLightGreen,
   },
   {
     id: 'state',
@@ -33,7 +25,7 @@ export const nodes = [
     definition:
       'Manage state by avoiding shared state, using parameters instead of globals, and returning new state from functions.',
     shape: 'ellipse',
-    color: '#98EE99',
+    color: COLORS.veryLightGreen,
   },
   {
     id: 'functions',
@@ -41,7 +33,7 @@ export const nodes = [
     definition:
       'Functions are central to functional programming; they can be first-class, pure, higher-order, and composable.',
     shape: 'ellipse',
-    color: '#98EE99',
+    color: COLORS.veryLightGreen,
   },
   {
     id: 'antipatterns',
@@ -49,7 +41,7 @@ export const nodes = [
     definition:
       'Patterns to avoid: mutability, impure functions, and shared state can lead to bugs and maintenance issues.',
     shape: 'hexagon',
-    color: '#FF8A80',
+    color: COLORS.lightRed,
   },
   {
     id: 'benefits',
@@ -57,7 +49,7 @@ export const nodes = [
     definition:
       'Functional programming improves testability, predictability, modularity, concurrency-friendliness, and readability.',
     shape: 'ellipse',
-    color: '#98EE99',
+    color: COLORS.veryLightGreen,
   },
   // Second-level nodes for Immutability
   {
@@ -65,7 +57,7 @@ export const nodes = [
     label: 'Object.freeze',
     definition: 'Prevents modifications to an object.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   {
     id: 'objectAssign',
@@ -73,14 +65,14 @@ export const nodes = [
     definition:
       'Creates a new object by copying properties from source objects.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   {
     id: 'spreadOp',
     label: 'Spread Operator',
     definition: 'Copies elements into a new array or object.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   {
     id: 'arrayNew',
@@ -88,7 +80,7 @@ export const nodes = [
     definition:
       'Methods like map, filter, and reduce that do not mutate the original array.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   // Second-level nodes for State
   {
@@ -97,7 +89,7 @@ export const nodes = [
     definition:
       'Prevent multiple parts of your code from modifying the same state concurrently.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   {
     id: 'useParams',
@@ -105,7 +97,7 @@ export const nodes = [
     definition:
       'Pass state as parameters to functions rather than using global variables.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   {
     id: 'returnNew',
@@ -113,7 +105,7 @@ export const nodes = [
     definition:
       'Functions should return new state rather than modifying existing state.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   // Second-level nodes for Functions
   {
@@ -122,7 +114,7 @@ export const nodes = [
     definition:
       'Functions are treated as first-class citizens and can be passed around as values.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   {
     id: 'pureFunctions',
@@ -130,7 +122,7 @@ export const nodes = [
     definition:
       'Functions that produce the same output for the same input and have no side effects.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   {
     id: 'higherOrder',
@@ -138,14 +130,14 @@ export const nodes = [
     definition:
       'Functions that accept other functions as arguments or return them.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   {
     id: 'composition',
     label: 'Function Composition',
     definition: 'Combining simple functions to create more complex ones.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   // Third-level node under Pure Functions
   {
@@ -162,7 +154,7 @@ export const nodes = [
     definition:
       'Directly modifying objects or arrays leads to unpredictable behavior.',
     shape: 'rect',
-    color: '#FFB3B3',
+    color: COLORS.lighterRed,
   },
   {
     id: 'impureFunctions',
@@ -170,7 +162,7 @@ export const nodes = [
     definition:
       'Functions that produce side effects or depend on external state.',
     shape: 'rect',
-    color: '#FFB3B3',
+    color: COLORS.lighterRed,
   },
   {
     id: 'sharedState',
@@ -178,7 +170,7 @@ export const nodes = [
     definition:
       'Multiple parts of the program modifying the same state can lead to bugs.',
     shape: 'rect',
-    color: '#FFB3B3',
+    color: COLORS.lighterRed,
   },
   // Third-level nodes under Mutability
   {
@@ -186,7 +178,7 @@ export const nodes = [
     label: 'Direct Object/\nArray Mutation',
     definition: 'Changing objects or arrays in place.',
     shape: 'diamond',
-    color: '#FFE0E0',
+    color: COLORS.veryLightRed,
   },
   {
     id: 'arrayMutators',
@@ -194,7 +186,7 @@ export const nodes = [
     definition:
       'Using methods that modify the array in place (push, pop, splice, etc.).',
     shape: 'diamond',
-    color: '#FFE0E0',
+    color: COLORS.veryLightRed,
   },
   // Third-level nodes under Impure Functions
   {
@@ -203,14 +195,14 @@ export const nodes = [
     definition:
       'Functions that interact with external systems (I/O, DOM, etc.).',
     shape: 'diamond',
-    color: '#FFE0E0',
+    color: COLORS.veryLightRed,
   },
   {
     id: 'externalDependency',
     label: 'External State \n Dependency',
     definition: 'Functions that rely on or change external state.',
     shape: 'diamond',
-    color: '#FFE0E0',
+    color: COLORS.veryLightRed,
   },
   // Second-level nodes for Benefits
   {
@@ -218,14 +210,14 @@ export const nodes = [
     label: 'Testability',
     definition: 'Easier to test due to predictable outputs.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   {
     id: 'predictability',
     label: 'Predictability',
     definition: 'Outputs remain consistent given the same inputs.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   {
     id: 'modularity',
@@ -233,7 +225,7 @@ export const nodes = [
     definition:
       'Well-defined, independent modules that are easier to maintain.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   {
     id: 'concurrency',
@@ -241,14 +233,14 @@ export const nodes = [
     definition:
       'Immutable data and pure functions reduce issues in concurrent contexts.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
   {
     id: 'readability',
     label: 'Readability',
     definition: 'Clear and concise code that is easier to understand.',
     shape: 'rect',
-    color: '#B9F6CA',
+    color: COLORS.mintGreen,
   },
 ]
 
