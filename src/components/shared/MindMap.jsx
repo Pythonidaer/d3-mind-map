@@ -3,36 +3,45 @@ import { getTextDimensions, calculateShapeDimensions, applyShapeAttributes, rend
 import PropTypes from 'prop-types'
 import * as d3 from 'd3'
 import styles from './MindMap.module.css'
+import { useTheme } from '../../theme/ThemeProvider'
 
 const MindMap = ({ nodes, links }) => {
   const svgRef = useRef(null)
   const containerRef = useRef(null)
+  const { palette } = useTheme();
 
+  // Map color keys to palette values for current theme
+  // (Do NOT use this for D3 simulation, only for color updates)
+  const themedNodes = nodes.map(node => ({
+    ...node,
+    color: palette[node.color] || node.color
+  }));
+
+  // --- D3 simulation: only run when nodes/links change ---
   useEffect(() => {
-    const container = containerRef.current
-    if (!container) return
+    const container = containerRef.current;
+    if (!container) return;
 
-    const width = container.clientWidth
-    const height = container.clientHeight
+    const width = container.clientWidth;
+    const height = container.clientHeight;
 
     if (svgRef.current) {
-      // --- Pre-calculate dimensions for each node --- START
+      // Pre-calculate dimensions for each node
       nodes.forEach(d => {
         const { textWidth, textHeight } = getTextDimensions(d.label || '');
         const { shapeWidth, shapeHeight } = calculateShapeDimensions(d.shape, textWidth, textHeight);
-        d.shapeWidth = shapeWidth; // Store on the node data
-        d.shapeHeight = shapeHeight; // Store on the node data
-        d.textWidth = textWidth; // Also store text width if needed later
-        d.textHeight = textHeight; // Also store text height if needed later
+        d.shapeWidth = shapeWidth;
+        d.shapeHeight = shapeHeight;
+        d.textWidth = textWidth;
+        d.textHeight = textHeight;
       });
-      // --- Pre-calculate dimensions for each node --- END
 
       const svg = d3
         .select(svgRef.current)
         .attr('width', width)
-        .attr('height', height)
+        .attr('height', height);
 
-      const g = svg.append('g')
+      const g = svg.append('g');
 
       const simulation = d3
         .forceSimulation(nodes)
@@ -44,7 +53,7 @@ const MindMap = ({ nodes, links }) => {
             .distance(300)
         )
         .force('charge', d3.forceManyBody().strength(-400))
-        .force('center', d3.forceCenter(width / 2, height / 2))
+        .force('center', d3.forceCenter(width / 2, height / 2));
 
       const link = g
         .append('g')
@@ -54,7 +63,7 @@ const MindMap = ({ nodes, links }) => {
         .enter()
         .append('line')
         .attr('stroke', '#66BB6A')
-        .attr('stroke-width', 3)
+        .attr('stroke-width', 3);
 
       const node = g
         .append('g')
@@ -223,6 +232,19 @@ const MindMap = ({ nodes, links }) => {
       }
     }
   }, [nodes, links])
+
+  // --- Update node colors when palette changes (no simulation reset) ---
+  useEffect(() => {
+    if (!svgRef.current) return;
+    const svg = d3.select(svgRef.current);
+    svg.selectAll('.nodes g').each(function(d) {
+      // d is a node datum
+      const nodeEl = d3.select(this);
+      // Update fill color of shape (rect, ellipse, polygon, path)
+      nodeEl.selectAll('rect, ellipse, polygon, path')
+        .attr('fill', palette[d.color] || d.color);
+    });
+  }, [palette, nodes]);
 
   return (
     <main className={styles['mind-map']} ref={containerRef}>

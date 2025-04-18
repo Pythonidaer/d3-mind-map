@@ -9,8 +9,118 @@
   transition: transform 0.3s ease-in-out;
   z-index: 1000;
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
   align-items: center;
+  justify-content: flex-start;
+}
+
+.navGrid {
+  display: flex;
+  flex: 1 1 auto;
+  width: 100%;
+  align-items: center;
+}
+.leftCol {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+}
+.centerCol {
+  flex: 1 1 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 0;
+}
+.rightCol {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.themeToggleDesktop {
+  display: flex;
+  align-items: center;
+  margin-left: 2em;
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  .navGrid {
+    display: none;
+  }
+  .themeToggleDesktop {
+    display: none;
+  }
+  .mobileBar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100vw;
+    max-width: 100vw;
+    gap: 0.3em;
+    padding: 0.6em 0.7em 0.6em 0.7em;
+    background: white;
+    z-index: 1001;
+    box-sizing: border-box;
+  }
+  .categoryDropdownContainer {
+    flex: 1 1 0%;
+    display: flex;
+    align-items: center;
+    min-width: 0;
+  }
+  .rightCol {
+    display: none;
+  }
+  .themeToggleMobile {
+    display: flex !important;
+    align-items: center;
+    flex-shrink: 0;
+    margin: 0 !important;
+    min-width: 0;
+    width: auto !important;
+    vertical-align: middle;
+  }
+  .themeToggleMobile .themeToggleWrapper {
+    margin: 0;
+    min-width: 0;
+  }
+  .rightMobileGroup {
+    display: flex;
+    align-items: center;
+    gap: 0.7em;
+  }
+}
+
+@media (min-width: 769px) {
+  .themeToggleMobile {
+    display: none !important;
+  }
+}
+
+.centerNavContainer {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  min-width: 0;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.themeToggleDesktop {
+  display: flex;
+  align-items: center;
+  margin-left: 2em;
+  height: 100%;
 }
 
 .navHidden {
@@ -28,6 +138,20 @@
 .menuContainer {
   display: flex;
   align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.themeToggleDesktop {
+  display: flex;
+  align-items: center;
+  margin-left: 1.2em;
+  height: 100%;
 }
 
 /* Sleek Hamburger Icon */
@@ -41,6 +165,7 @@
   background: transparent;
   border: none;
   padding: 0;
+  flex-shrink: 0;
 }
 
 .bar {
@@ -156,6 +281,18 @@
 }
 
 /* --- NEW Category Dropdown Styles --- */
+.themeToggleDesktop {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.7em;
+}
+
+.themeToggleMobile {
+  display: none;
+  width: 100%;
+  margin: 0.7em 0 0 0;
+}
+
 .categoryDropdownContainer {
   position: relative; /* Positioning context for the absolute menu */
   display: inline-block; /* Or block, depending on layout needs */
@@ -240,6 +377,7 @@
     z-index: 1001;
     transition: transform 0.3s ease-in-out;
     transform: translateX(100%); 
+    align-items: start;
   }
 
   /* When mobile menu is active, slide it in */

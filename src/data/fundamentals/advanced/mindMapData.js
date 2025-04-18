@@ -6,68 +6,68 @@ export const nodes = [
       label: "Advanced \n JavaScript",
       definition: "Deep JavaScript concepts that power performance, architecture, maintainability, and advanced coding patterns.",
       shape: "roundRect",
-      color: COLORS.root,
+      color: 'root',
     },
     {
       id: "modules",
       label: "Modules",
       definition: "ES6 module system for organizing, importing, and exporting code across files.",
       shape: "ellipse",
-      color: COLORS.veryLightGreen,
+      color: 'veryLightGreen',
     },
     {
       id: "classes",
       label: "Classes",
       definition: "ES6 syntax for creating reusable objects and inheritance with `class`, `constructor`, and `extends`.",
       shape: "ellipse",
-      color: COLORS.veryLightGreen,
+      color: 'veryLightGreen',
     },
     {
       id: "funcs",
       label: "Functional",
       definition: "Advanced functional programming techniques: immutability, composition, currying, and pure functions.",
       shape: "ellipse",
-      color: COLORS.veryLightGreen,
+      color: 'veryLightGreen',
     },
     {
       id: "performance",
       label: "Performance",
       definition: "Optimizing execution speed, memory usage, and UI responsiveness.",
       shape: "ellipse",
-      color: COLORS.veryLightGreen,
+      color: 'veryLightGreen',
     },
     {
       id: "quality",
       label: "Quality",
       definition: "Best practices for writing maintainable, testable, and clean JavaScript.",
       shape: "ellipse",
-      color: COLORS.veryLightGreen,
+      color: 'veryLightGreen',
     },
   
     // Modules
-    { id: "importExport", label: "Import/Export", definition: "Use `import` and `export` to share functionality across files.", shape: "rect", color: COLORS.mintGreen },
-    { id: "defaultNamed", label: "Default vs Named", definition: "Default exports export one value; named exports allow multiple.", shape: "rect", color: COLORS.mintGreen },
-    { id: "dynamicImport", label: "Dynamic Imports", definition: "Load modules conditionally with `import()`.", shape: "rect", color: COLORS.mintGreen },
+    { id: "importExport", label: "Import/Export", definition: "Use `import` and `export` to share functionality across files.", shape: "rect", color: 'mintGreen' },
+    { id: "defaultNamed", label: "Default vs Named", definition: "Default exports export one value; named exports allow multiple.", shape: "rect", color: 'mintGreen' },
+    { id: "dynamicImport", label: "Dynamic Imports", definition: "Load modules conditionally with `import()`.", shape: "rect", color: 'mintGreen' },
   
     // Classes
-    { id: "constructor", label: "Constructor", definition: "Method called when a new object is instantiated from a class.", shape: "rect", color: COLORS.mintGreen },
-    { id: "inheritance", label: "Inheritance", definition: "Use `extends` and `super` to reuse behavior across classes.", shape: "rect", color: COLORS.mintGreen },
-    { id: "private", label: "Private Fields", definition: "Use `#` to mark fields as private within a class.", shape: "rect", color: COLORS.mintGreen },
+    { id: "constructor", label: "Constructor", definition: "Method called when a new object is instantiated from a class.", shape: "rect", color: 'mintGreen' },
+    { id: "inheritance", label: "Inheritance", definition: "Use `extends` and `super` to reuse behavior across classes.", shape: "rect", color: 'mintGreen' },
+    { id: "private", label: "Private Fields", definition: "Use `#` to mark fields as private within a class.", shape: "rect", color: 'mintGreen' },
   
     // Functional
-    { id: "pure", label: "Pure Functions", definition: "Always return the same result given the same input, with no side effects.", shape: "rect", color: COLORS.mintGreen },
-    { id: "compose", label: "Composition", definition: "Combine small functions to create complex behavior.", shape: "rect", color: COLORS.mintGreen },
-    { id: "currying", label: "Currying", definition: "Convert a function with multiple arguments into chained functions.", shape: "rect", color: COLORS.mintGreen },
+    { id: "pure", label: "Pure Functions", definition: "Always return the same result given the same input, with no side effects.", shape: "rect", color: 'mintGreen' },
+    { id: "compose", label: "Composition", definition: "Combine small functions to create complex behavior.", shape: "rect", color: 'mintGreen' },
+    { id: "currying", label: "Currying", definition: "Convert a function with multiple arguments into chained functions.", shape: "rect", color: 'mintGreen' },
   
     // Performance
-    { id: "memory", label: "Memory Management", definition: "Understanding how the JS engine handles allocation and GC.", shape: "rect", color: COLORS.mintGreen },
-    { id: "reflow", label: "Reflows & Repaints", definition: "Minimize expensive DOM operations.", shape: "rect", color: COLORS.mintGreen },
-    { id: "lazyLoading", label: "Lazy Loading", definition: "Load resources only when needed to improve performance.", shape: "rect", color: COLORS.mintGreen },
+    { id: "memory", label: "Memory Management", definition: "Understanding how the JS engine handles allocation and GC.", shape: "rect", color: 'mintGreen' },
+    { id: "reflow", label: "Reflows & Repaints", definition: "Minimize expensive DOM operations.", shape: "rect", color: 'mintGreen' },
+    { id: "lazyLoading", label: "Lazy Loading", definition: "Load resources only when needed to improve performance.", shape: "rect", color: 'mintGreen' },
   
     // Quality
-    { id: "cleanCode", label: "Clean Code", definition: "Readable, self-documenting code with meaningful names and structure.", shape: "rect", color: COLORS.mintGreen },
-    { id: "linting", label: "Linting", definition: "Static analysis tools like ESLint to catch issues early.", shape: "rect", color: COLORS.mintGreen },
-    { id: "defensive", label: "Defensive Coding", definition: "Write code that safely handles unexpected inputs and failures.", shape: "rect", color: COLORS.mintGreen },
+    { id: "cleanCode", label: "Clean Code", definition: "Readable, self-documenting code with meaningful names and structure.", shape: "rect", color: 'mintGreen' },
+    { id: "linting", label: "Linting", definition: "Static analysis tools like ESLint to catch issues early.", shape: "rect", color: 'mintGreen' },
+    { id: "defensive", label: "Defensive Coding", definition: "Write code that safely handles unexpected inputs and failures.", shape: "rect", color: 'mintGreen' },
   ];
   
   export const links = [

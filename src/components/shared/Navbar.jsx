@@ -1,18 +1,19 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
+import useIsMobile from '../../hooks/useIsMobile';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import styles from './Navbar.module.css';
 import { contentCategories, getNavData, findCategoryByParam } from '../../config/contentCategories.js';
+import ThemeToggle from './ThemeToggle';
 
 const Navbar = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
   const [visible, setVisible] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
+  const categoryDropdownRef = useRef(null);
   const menuRef = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
-
-  const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
-  const categoryDropdownRef = useRef(null);
 
   const navData = useMemo(() => getNavData(), []);
 
@@ -139,78 +140,149 @@ const Navbar = () => {
     };
   }, [categoryDropdownRef]);
 
+  const isMobile = useIsMobile();
   return (
     <nav className={`${styles.navbar} ${!visible ? styles.navHidden : ''}`}>
 
-      {navData.dynamic.length > 0 && (
-        <div className={styles.categoryDropdownContainer} ref={categoryDropdownRef}>
-          <button
-            type="button"
-            className={styles.categoryDropdownTrigger} 
-            onClick={toggleCategoryDropdown}
-            aria-haspopup="true"
-            aria-expanded={isCategoryDropdownOpen}
-          >
-            {selectedCategory ? selectedCategory.name : 'Select Category'} <span className={styles.dropdownArrow}>▼</span> 
-          </button>
-
-          {isCategoryDropdownOpen && (
-            <ul className={styles.categoryDropdownMenu}> 
-              {navData.dynamic.map((category) => (
-                <li key={category.id}>
-                  <button
-                    type="button"
-                    className={styles.categoryDropdownItem} 
-                    onClick={() => handleCategorySelect(category.id)}
-                  >
-                    {category.name}
-                  </button>
-                </li>
+      {/* --- THREE COLUMN FLEX LAYOUT (desktop) --- */}
+      { !isMobile && (
+        <div className={styles.navGrid}>
+          {/* Left: Brand/Dropdown */}
+          <div className={styles.leftCol}>
+            {navData.dynamic.length > 0 && (
+              <div className={styles.categoryDropdownContainer} ref={categoryDropdownRef}>
+                <button
+                  type="button"
+                  className={styles.categoryDropdownTrigger} 
+                  onClick={toggleCategoryDropdown}
+                  aria-haspopup="true"
+                  aria-expanded={isCategoryDropdownOpen}
+                >
+                  {selectedCategory ? selectedCategory.name : 'Select Category'} <span className={styles.dropdownArrow}>▼</span> 
+                </button>
+                {isCategoryDropdownOpen && (
+                  <ul className={styles.categoryDropdownMenu}> 
+                    {navData.dynamic.map((category) => (
+                      <li key={category.id}>
+                        <button
+                          type="button"
+                          className={styles.categoryDropdownItem} 
+                          onClick={() => handleCategorySelect(category.id)}
+                        >
+                          {category.name}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
+          </div>
+          {/* Center: Nav links */}
+          <div className={styles.centerCol}>
+            <div className={styles['nav-links']}>
+              {navData.static.map((page) => (
+                <NavLink
+                  key={page.id}
+                  to={page.path}
+                  className={({ isActive }) => isActive ? `${styles.link} ${styles.active}` : styles.link}
+                  onClick={handleLinkClick}
+                >
+                  <span>{page.name}</span>
+                </NavLink>
               ))}
-            </ul>
-          )}
+              {selectedCategory && selectedCategory.subcategories && selectedCategory.subcategories.map((sub) => (
+                <NavLink
+                  key={sub.id}
+                  to={sub.path}
+                  className={({ isActive }) => isActive ? `${styles.link} ${styles.active}` : styles.link}
+                  onClick={handleLinkClick}
+                >
+                  <span>{sub.name}</span>
+                </NavLink>
+              ))}
+            </div>
+          </div>
+          {/* Right: ThemeToggle (desktop only) */}
+          <div className={styles.rightCol}>
+            <div className={styles.themeToggleDesktop}><ThemeToggle /></div>
+          </div>
         </div>
       )}
 
-      <div className={styles.menuContainer}>
-        <button className={styles.hamburger} onClick={toggleMenu} aria-label="Toggle Menu">
-          <div className={`${styles.bar} ${isMenuOpen ? styles.bar1Open : ''}`}></div>
-          <div className={`${styles.bar} ${isMenuOpen ? styles.bar2Open : ''}`}></div>
-          <div className={`${styles.bar} ${isMenuOpen ? styles.bar3Open : ''}`}></div>
-        </button>
+      {/* --- MOBILE MENU --- */}
+      { isMobile && (
+        <div className={styles.mobileBar}>
+          {/* Left: Category Dropdown */}
+          <div className={styles.categoryDropdownContainer} ref={categoryDropdownRef}>
+            {navData.dynamic.length > 0 && (
+              <button
+                type="button"
+                className={styles.categoryDropdownTrigger}
+                onClick={toggleCategoryDropdown}
+                aria-haspopup="true"
+                aria-expanded={isCategoryDropdownOpen}
+              >
+                {selectedCategory ? selectedCategory.name : 'Select Category'} <span className={styles.dropdownArrow}>▼</span>
+              </button>
+            )}
+            {isCategoryDropdownOpen && (
+              <ul className={styles.categoryDropdownMenu}>
+                {navData.dynamic.map((category) => (
+                  <li key={category.id}>
+                    <button
+                      type="button"
+                      className={styles.categoryDropdownItem}
+                      onClick={() => handleCategorySelect(category.id)}
+                    >
+                      {category.name}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+          <div className={styles.rightMobileGroup}>
+            <div className={styles.themeToggleMobile}><ThemeToggle /></div>
+            <button className={styles.hamburger} onClick={toggleMenu} aria-label="Toggle Menu">
+              <div className={`${styles.bar} ${isMenuOpen ? styles.bar1Open : ''}`}></div>
+              <div className={`${styles.bar} ${isMenuOpen ? styles.bar2Open : ''}`}></div>
+              <div className={`${styles.bar} ${isMenuOpen ? styles.bar3Open : ''}`}></div>
+            </button>
+          </div>
 
-        <div
-          ref={menuRef}
-          className={`${styles['nav-links']} ${isMenuOpen ? styles.mobileMenu : ''}`}
-        >
-          <button className={styles['close-button']} onClick={toggleMenu} aria-label="Close Menu">
-            <div className={`${styles.closeLine} ${isMenuOpen ? styles.line1Active : ''}`}></div>
-            <div className={`${styles.closeLine} ${isMenuOpen ? styles.line2Active : ''}`}></div>
-          </button>
-
-          {navData.static.map((page) => (
-            <NavLink
-              key={page.id}
-              to={page.path}
-              className={({ isActive }) => isActive ? `${styles.link} ${styles.active}` : styles.link}
-              onClick={handleLinkClick}
-            >
-              <span>{page.name}</span>
-            </NavLink>
-          ))}
-
-          {selectedCategory && selectedCategory.subcategories.map((sub) => (
-            <NavLink
-              key={sub.id}
-              to={sub.path}
-              className={({ isActive }) => isActive ? `${styles.link} ${styles.active}` : styles.link}
-              onClick={handleLinkClick}
-            >
-              <span>{sub.name}</span>
-            </NavLink>
-          ))}
+          {/* Slide-out menu for nav links */}
+          <div
+            ref={menuRef}
+            className={`${styles['nav-links']} ${isMenuOpen ? styles.mobileMenu : ''}`}
+          >
+            <button className={styles['close-button']} onClick={toggleMenu} aria-label="Close Menu">
+              <div className={`${styles.closeLine} ${isMenuOpen ? styles.line1Active : ''}`}></div>
+              <div className={`${styles.closeLine} ${isMenuOpen ? styles.line2Active : ''}`}></div>
+            </button>
+            {navData.static.map((page) => (
+              <NavLink
+                key={page.id}
+                to={page.path}
+                className={({ isActive }) => isActive ? `${styles.link} ${styles.active}` : styles.link}
+                onClick={handleLinkClick}
+              >
+                <span>{page.name}</span>
+              </NavLink>
+            ))}
+            {selectedCategory && selectedCategory.subcategories && selectedCategory.subcategories.map((sub) => (
+              <NavLink
+                key={sub.id}
+                to={sub.path}
+                className={({ isActive }) => isActive ? `${styles.link} ${styles.active}` : styles.link}
+                onClick={handleLinkClick}
+              >
+                <span>{sub.name}</span>
+              </NavLink>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </nav>
   );
 };

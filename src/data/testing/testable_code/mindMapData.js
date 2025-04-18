@@ -7,91 +7,91 @@ export const nodes = [
     label: "Writing\nTestable Code",
     definition: "Designing and structuring code to make it easy to test with automated tests.",
     shape: "roundRect",
-    color: COLORS.root
+    color: 'root'
   },
   {
     id: "principles",
     label: "Principles",
     definition: "Key design principles that improve testability.",
     shape: "ellipse",
-    color: COLORS.veryLightGreen
+    color: 'veryLightGreen'
   },
   {
     id: "singleResponsibility",
     label: "Single Responsibility",
     definition: "Each module or function should do one thing. This simplifies testing by isolating behavior.",
     shape: "rect",
-    color: COLORS.mintGreen
+    color: 'mintGreen'
   },
   {
     id: "looseCoupling",
     label: "Loose Coupling",
     definition: "Minimize dependencies between components. Use interfaces or DI to test components independently.",
     shape: "rect",
-    color: COLORS.mintGreen
+    color: 'mintGreen'
   },
   {
     id: "highCohesion",
     label: "High Cohesion",
     definition: "Keep related logic together. Focused modules make setup and assertions easier in tests.",
     shape: "rect",
-    color: COLORS.mintGreen
+    color: 'mintGreen'
   },
   {
     id: "pureFunctions",
     label: "Pure Functions",
     definition: "Write side-effect-free logic when possible. These are easiest to test — inputs in, outputs out.",
     shape: "rect",
-    color: COLORS.mintGreen
+    color: 'mintGreen'
   },
   {
     id: "dependencyInjection",
     label: "Dependency Injection",
     definition: "Pass dependencies instead of instantiating them. Enables mocking or stubbing in tests.",
     shape: "rect",
-    color: COLORS.mintGreen
+    color: 'mintGreen'
   },
   {
     id: "strategies",
     label: "Strategies",
     definition: "Techniques and patterns to achieve testable code.",
     shape: "ellipse",
-    color: COLORS.veryLightGreen
+    color: 'veryLightGreen'
   },
   {
     id: "ioc",
     label: "Inversion of Control",
     definition: "Let higher-level code control lower-level logic (e.g., provide a logger, not instantiate one).",
     shape: "rect",
-    color: COLORS.mintGreen
+    color: 'mintGreen'
   },
   {
     id: "avoidGlobal",
     label: "Avoid Global State",
     definition: "Global state makes test isolation hard. Prefer local or injected state.",
     shape: "rect",
-    color: COLORS.mintGreen
+    color: 'mintGreen'
   },
   {
     id: "interfaces",
     label: "Use Interfaces / Abstraction",
     definition: "Depend on abstractions so real implementations can be swapped with mocks.",
     shape: "rect",
-    color: COLORS.mintGreen
+    color: 'mintGreen'
   },
   {
     id: "modular",
     label: "Modularize Code",
     definition: "Split operations into small functions or modules that are easier to isolate and test.",
     shape: "rect",
-    color: COLORS.mintGreen
+    color: 'mintGreen'
   },
   {
     id: "sideEffects",
     label: "Controlled Side Effects",
     definition: "Encapsulate I/O or network logic in thin layers. Keep business logic pure.",
     shape: "rect",
-    color: COLORS.mintGreen
+    color: 'mintGreen'
   },
   {
     id: "antiPatterns",
@@ -140,42 +140,42 @@ export const nodes = [
     label: "Best Practices",
     definition: "Practical tips for writing testable code.",
     shape: "ellipse",
-    color: COLORS.veryLightGreen
+    color: 'veryLightGreen'
   },
   {
     id: "favorComposition",
     label: "Favor Composition over Inheritance",
     definition: "Composition allows replacing collaborators easily. Inheritance often increases test friction.",
     shape: "rect",
-    color: COLORS.mintGreen
+    color: 'mintGreen'
   },
   {
     id: "seams",
     label: "Seams for Testing",
     definition: "Design code to allow behavior injection (e.g., wrap Date.now in a function you can override).",
     shape: "rect",
-    color: COLORS.mintGreen
+    color: 'mintGreen'
   },
   {
     id: "testFeedback",
     label: "Use Test Feedback",
     definition: "If something is hard to test, take it as a code smell and refactor.",
     shape: "rect",
-    color: COLORS.mintGreen
+    color: 'mintGreen'
   },
   {
     id: "layeredArch",
     label: "Example: Layered Architecture",
     definition: "Split code into UI, service, and data layers. Each can be tested independently.",
     shape: "rect",
-    color: COLORS.mintGreen
+    color: 'mintGreen'
   },
   {
     id: "tooling",
     label: "Tooling Help",
     definition: "Tools like linters, TypeScript, and DI frameworks can help enforce testable code.",
     shape: "rect",
-    color: COLORS.mintGreen
+    color: 'mintGreen'
   }
 ];
 

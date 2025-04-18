@@ -1,0 +1,132 @@
+.themeToggleWrapper {
+  position: relative;
+  display: inline-block;
+  margin-left: 0.75rem;
+}
+
+@media (max-width: 768px) {
+  .themeToggleWrapper {
+    margin: 0 !important;
+    min-width: 0;
+  }
+  .themeToggleMobile {
+    display: flex !important;
+    align-items: center;
+    flex-shrink: 0;
+    margin: 0;
+    min-width: 0;
+    width: auto !important;
+    vertical-align: middle;
+  }
+  .themeButton {
+    padding: 0.25em 0.3em 0.25em 0.3em;
+    min-width: 0;
+    min-height: 0;
+  }
+  .themeDropdown {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    top: 120%;
+    margin-top: 0.3em;
+    min-width: 135px;
+    max-width: 90vw;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+    z-index: 1200;
+  }
+}
+.themeButton {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  padding: 0.35em 0.7em 0.35em 0.5em;
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+.themeButton[aria-expanded="true"],
+.themeButton:focus {
+  outline: 2px solid #6cf;
+  background: rgba(100,100,100,0.13);
+}
+.themeButtonLabel {
+  font-weight: 600;
+  font-size: 1.1em;
+  margin-left: 0.1em;
+}
+.themeDropdown {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  min-width: 170px;
+  max-width: 95vw;
+  background: var(--dropdown-bg, #232323);
+  color: var(--dropdown-fg, #eaeaea);
+  border-radius: 10px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.16);
+  padding: 0.5em 0;
+  z-index: 1000;
+  margin-top: 0.2em;
+}
+
+@media (min-width: 769px) {
+  .themeToggleWrapper {
+    /* Ensure dropdown stays in viewport */
+    position: relative;
+  }
+  .themeDropdown {
+    right: 0;
+    left: auto;
+    /* If dropdown would overflow right, align it to the right of the button */
+    transform: translateX(0);
+  }
+}
+
+.themeOption {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  width: 100%;
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  padding: 0.7em 1.1em;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.13s;
+}
+.themeOption.selected,
+.themeOption[aria-current="true"] {
+  background: rgba(120,120,120,0.21);
+  outline: 2px solid #6cf;
+}
+.themeOption:hover:not(.selected) {
+  background: rgba(120,120,120,0.13);
+}
+.themeOptionIcon {
+  display: flex;
+  align-items: center;
+  font-size: 1.2em;
+}
+@media (max-width: 800px) {
+  .themeToggleWrapper {
+    width: 100%;
+    display: block;
+    margin: 0.7em 0 0 0;
+  }
+  .themeDropdown {
+    left: 0;
+    right: auto;
+    min-width: 160px;
+  }
+  .themeButton {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
