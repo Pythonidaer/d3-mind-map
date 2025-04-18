@@ -3,36 +3,45 @@ import { getTextDimensions, calculateShapeDimensions, applyShapeAttributes, rend
 import PropTypes from 'prop-types'
 import * as d3 from 'd3'
 import styles from './MindMap.module.css'
+import { useTheme } from '../../theme/ThemeProvider'
 
 const MindMap = ({ nodes, links }) => {
   const svgRef = useRef(null)
   const containerRef = useRef(null)
+  const { palette } = useTheme();
 
+  // Map color keys to palette values for current theme
+  // (Do NOT use this for D3 simulation, only for color updates)
+  const themedNodes = nodes.map(node => ({
+    ...node,
+    color: palette[node.color] || node.color
+  }));
+
+  // --- D3 simulation: only run when nodes/links change ---
   useEffect(() => {
-    const container = containerRef.current
-    if (!container) return
+    const container = containerRef.current;
+    if (!container) return;
 
-    const width = container.clientWidth
-    const height = container.clientHeight
+    const width = container.clientWidth;
+    const height = container.clientHeight;
 
     if (svgRef.current) {
-      // --- Pre-calculate dimensions for each node --- START
+      // Pre-calculate dimensions for each node
       nodes.forEach(d => {
         const { textWidth, textHeight } = getTextDimensions(d.label || '');
         const { shapeWidth, shapeHeight } = calculateShapeDimensions(d.shape, textWidth, textHeight);
-        d.shapeWidth = shapeWidth; // Store on the node data
-        d.shapeHeight = shapeHeight; // Store on the node data
-        d.textWidth = textWidth; // Also store text width if needed later
-        d.textHeight = textHeight; // Also store text height if needed later
+        d.shapeWidth = shapeWidth;
+        d.shapeHeight = shapeHeight;
+        d.textWidth = textWidth;
+        d.textHeight = textHeight;
       });
-      // --- Pre-calculate dimensions for each node --- END
 
       const svg = d3
         .select(svgRef.current)
         .attr('width', width)
-        .attr('height', height)
+        .attr('height', height);
 
-      const g = svg.append('g')
+      const g = svg.append('g');
 
       const simulation = d3
         .forceSimulation(nodes)
@@ -41,10 +50,10 @@ const MindMap = ({ nodes, links }) => {
           d3
             .forceLink(links)
             .id((d) => d.id)
-            .distance(300)
+            .distance(270)
         )
         .force('charge', d3.forceManyBody().strength(-400))
-        .force('center', d3.forceCenter(width / 2, height / 2))
+        .force('center', d3.forceCenter(width / 2, height / 2));
 
       const link = g
         .append('g')
@@ -54,7 +63,7 @@ const MindMap = ({ nodes, links }) => {
         .enter()
         .append('line')
         .attr('stroke', '#66BB6A')
-        .attr('stroke-width', 3)
+        .attr('stroke-width', 3);
 
       const node = g
         .append('g')
@@ -110,19 +119,40 @@ const MindMap = ({ nodes, links }) => {
       });
 
       // Create a tooltip using absolute positioning so it scrolls with the page
-      const tooltip = d3
+      // Get theme-aware colors for tooltip
+     const bodyStyles = window.getComputedStyle(document.body);
+     const tooltipBg = bodyStyles.getPropertyValue('--main-bg')?.trim() || 'white';
+     const tooltipFg = bodyStyles.getPropertyValue('--main-fg')?.trim() || '#232323';
+     const tooltipBorder = bodyStyles.getPropertyValue('--navbar-bg')?.trim() === '#18191a' ? '#555' : '#ccc';
+     const tooltip = d3
         .select('body')
         .append('div')
+        .attr('id', 'mindmap-tooltip')
         .style('position', 'absolute')
         .style('padding', '6px')
-        .style('background', 'white')
-        .style('border', '1px solid #ccc')
+        .style('background', tooltipBg)
+        .style('color', tooltipFg)
+        .style('border', `1px solid ${tooltipBorder}`)
         .style('border-radius', '4px')
         .style('pointer-events', 'none')
         .style('opacity', 0)
         .style('max-width', '300px')
         .style('max-height', '200px')
-        .style('overflow-y', 'auto')
+        .style('overflow-y', 'auto');
+
+      // Observe theme changes and update tooltip styles
+      const updateTooltipTheme = () => {
+        const styles = window.getComputedStyle(document.body);
+        tooltip
+          .style('background', styles.getPropertyValue('--main-bg')?.trim() || 'white')
+          .style('color', styles.getPropertyValue('--main-fg')?.trim() || '#232323')
+          .style('border', `1px solid ${styles.getPropertyValue('--navbar-bg')?.trim() === '#18191a' ? '#555' : '#ccc'}`);
+      };
+      const observer = new MutationObserver(updateTooltipTheme);
+      observer.observe(document.body, { attributes: true, attributeFilter: ['data-theme'] });
+      // Clean up observer on effect cleanup
+      if (typeof cleanupFns !== 'undefined') cleanupFns.push(() => observer.disconnect());
+
 
       // Hide the tooltip when the user scrolls
       const hideTooltip = () => {
@@ -223,6 +253,19 @@ const MindMap = ({ nodes, links }) => {
       }
     }
   }, [nodes, links])
+
+  // --- Update node colors when palette changes (no simulation reset) ---
+  useEffect(() => {
+    if (!svgRef.current) return;
+    const svg = d3.select(svgRef.current);
+    svg.selectAll('.nodes g').each(function(d) {
+      // d is a node datum
+      const nodeEl = d3.select(this);
+      // Update fill color of shape (rect, ellipse, polygon, path)
+      nodeEl.selectAll('rect, ellipse, polygon, path')
+        .attr('fill', palette[d.color] || d.color);
+    });
+  }, [palette, nodes]);
 
   return (
     <main className={styles['mind-map']} ref={containerRef}>

@@ -8,4 +8,31 @@
 
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background: var(--main-bg, #fff);
+  color: var(--main-fg, #18191a);
 }
+
+:root {
+  --loader-primary: #98EE99;
+  --loader-accent: #FF8A80;
+  --navbar-bg: white;
+  --navbar-fg: #232323;
+  --navbar-link: #232323;
+  --navbar-icon: #232323;
+  --main-bg: #fff;
+  --main-fg: #18191a;
+}
+
+
+[data-theme="dark"] {
+  --loader-primary: #c4b5fd;
+  --loader-accent: #fde047;
+  --navbar-bg: #18191a;
+  --navbar-fg: #f1f1f1;
+  --navbar-link: #ffffff;
+  --navbar-icon: #fff;
+  --main-bg: #18191a;
+  --main-fg: #fff;
+}
+
+

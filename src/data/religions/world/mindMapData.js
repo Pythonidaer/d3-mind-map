@@ -7,14 +7,14 @@ export const nodes = [
     definition:
       'Major global religions, their branches, sacred texts, beliefs, and regional impact.',
     shape: 'roundRect',
-    color: COLORS.root,
+    color: 'root',
   },
   {
     id: 'abrahamic',
     label: 'Abrahamic \n Faiths',
     definition: 'Monotheistic religions tracing spiritual ancestry to Abraham.',
     shape: 'ellipse',
-    color: COLORS.veryLightGreen,
+    color: 'nodePositive1',
   },
   {
     id: 'dharmic',
@@ -22,7 +22,7 @@ export const nodes = [
     definition:
       'Religions originating in India, focused on dharma, karma, and rebirth.',
     shape: 'ellipse',
-    color: COLORS.veryLightGreen,
+    color: 'nodePositive1',
   },
   {
     id: 'taoic',
@@ -30,14 +30,14 @@ export const nodes = [
     definition:
       'East Asian traditions emphasizing harmony with nature and social order.',
     shape: 'ellipse',
-    color: COLORS.veryLightGreen,
+    color: 'nodePositive1',
   },
   {
     id: 'indigenous',
     label: 'Indigenous \n Traditions',
     definition: 'Spiritual systems rooted in ancestral, land-based practices.',
     shape: 'ellipse',
-    color: COLORS.veryLightGreen,
+    color: 'nodePositive1',
   },
   {
     id: 'newMovements',
@@ -45,7 +45,7 @@ export const nodes = [
     definition:
       'Modern religions or spiritual systems that emerged in the last two centuries.',
     shape: 'ellipse',
-    color: COLORS.veryLightGreen,
+    color: 'nodePositive1',
   },
   {
     id: 'paganism',
@@ -53,7 +53,7 @@ export const nodes = [
     definition:
       'An umbrella for ancient polytheistic and earth-centered religions predating Abrahamic traditions.',
     shape: 'ellipse',
-    color: COLORS.veryLightGreen,
+    color: 'nodePositive1',
   },
   // Abrahamic
   {
@@ -62,7 +62,7 @@ export const nodes = [
     definition:
       'Centered on the life, teachings, and resurrection of Jesus Christ.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'islam',
@@ -70,7 +70,7 @@ export const nodes = [
     definition:
       'Monotheistic faith founded on the revelations to the Prophet Muhammad.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'judaism',
@@ -78,7 +78,7 @@ export const nodes = [
     definition:
       'The oldest Abrahamic faith, based on covenant and Torah observance.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'bahai',
@@ -86,7 +86,7 @@ export const nodes = [
     definition:
       'Teaches unity of all religions and prophets, founded by Baháʼu’lláh in 19th-century Persia.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   // Dharmic
   {
@@ -95,7 +95,7 @@ export const nodes = [
     definition:
       'A pluralistic religion of dharma, karma, and moksha rooted in Indian tradition.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'buddhism',
@@ -103,7 +103,7 @@ export const nodes = [
     definition:
       'Founded by Siddhartha Gautama; teaches the path to enlightenment through the Four Noble Truths.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'jainism',
@@ -111,7 +111,7 @@ export const nodes = [
     definition:
       'Emphasizes non-violence and liberation of the soul through self-discipline.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'sikhism',
@@ -119,7 +119,7 @@ export const nodes = [
     definition:
       'Monotheistic faith founded by Guru Nanak, promoting service, equality, and devotion.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   // Taoic
   {
@@ -128,7 +128,7 @@ export const nodes = [
     definition:
       'Chinese philosophy and religion focused on harmony with the Tao.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'confucianism',
@@ -136,7 +136,7 @@ export const nodes = [
     definition:
       'Ethical and social philosophy based on the teachings of Confucius.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'shinto',
@@ -144,7 +144,7 @@ export const nodes = [
     definition:
       'Native Japanese spirituality centered on kami (spirits) and ancestral rituals.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   // Indigenous
   {
@@ -153,7 +153,7 @@ export const nodes = [
     definition:
       'Diverse spiritual traditions rooted in community, ancestors, and nature worship.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'nativeAmerican',
@@ -161,7 +161,7 @@ export const nodes = [
     definition:
       'Spiritual practices of Indigenous tribes focusing on nature, spirits, and ceremonies.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   // Paganism (Ancient + Modern)
   {
@@ -170,7 +170,7 @@ export const nodes = [
     definition:
       'Historical polytheistic religions including Greek, Roman, Norse, Egyptian, and Mesopotamian.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'wicca',
@@ -178,7 +178,7 @@ export const nodes = [
     definition:
       'Nature-based Pagan religion involving witchcraft, dual deities, and seasonal festivals.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'druidry',
@@ -186,7 +186,7 @@ export const nodes = [
     definition:
       'Modern spiritual path inspired by ancient Celtic traditions, revering nature and wisdom.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'heathenry',
@@ -194,7 +194,7 @@ export const nodes = [
     definition:
       'Reconstructionist path honoring Norse and Germanic gods like Odin and Thor.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'scientology',
@@ -202,7 +202,7 @@ export const nodes = [
     definition:
       'Modern movement focused on spiritual awareness and self-knowledge through auditing.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
 ]
 

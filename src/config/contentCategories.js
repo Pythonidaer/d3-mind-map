@@ -150,7 +150,7 @@ export const contentCategories = [
   },
   {
     id: 'js-react-interview',
-    name: 'JS & React Interview',
+    name: 'Interview Prep',
     baseRoute: '/js-react-interview',
     dataPath: 'js-react-interview',
     addToNav: true,

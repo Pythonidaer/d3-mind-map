@@ -7,14 +7,14 @@ export const nodes = [
     definition:
       'An ancient Indian religion characterized by diverse philosophies, rituals, and deities, with concepts like dharma, karma, and moksha at its core.',
     shape: 'roundRect',
-    color: COLORS.root,
+    color: 'root',
   },
   {
     id: 'coreConcepts',
     label: 'Core Concepts',
     definition: 'Foundational beliefs shared across most Hindu traditions.',
     shape: 'ellipse',
-    color: COLORS.veryLightGreen,
+    color: 'nodePositive1',
   },
   {
     id: 'dharma',
@@ -22,7 +22,7 @@ export const nodes = [
     definition:
       'Moral duty, righteousness, and ethical living according to one’s role in society.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'karma',
@@ -30,7 +30,7 @@ export const nodes = [
     definition:
       'The law of cause and effect; actions influence future outcomes.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'moksha',
@@ -38,7 +38,7 @@ export const nodes = [
     definition:
       'Liberation from the cycle of rebirth (samsara); ultimate spiritual goal.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'atman',
@@ -46,7 +46,7 @@ export const nodes = [
     definition:
       'The eternal self or soul that is ultimately identical with Brahman.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'brahman',
@@ -54,7 +54,7 @@ export const nodes = [
     definition:
       'The ultimate, unchanging reality and source of all that exists.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'schools',
@@ -62,7 +62,7 @@ export const nodes = [
     definition:
       'Six orthodox schools (darshanas) offering distinct metaphysical frameworks.',
     shape: 'ellipse',
-    color: COLORS.veryLightGreen,
+    color: 'nodePositive1',
   },
   {
     id: 'nyaya',
@@ -70,14 +70,14 @@ export const nodes = [
     definition:
       'Logic and epistemology; focuses on reasoning and sources of knowledge.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'vaisheshika',
     label: 'Vaisheshika',
     definition: 'Atomistic theory of matter and metaphysics.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'samkhya',
@@ -85,7 +85,7 @@ export const nodes = [
     definition:
       'Dualist school distinguishing consciousness (Purusha) and matter (Prakriti).',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'yoga',
@@ -93,21 +93,21 @@ export const nodes = [
     definition:
       'Discipline of mind and body to attain liberation; closely linked to Samkhya.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'mimamsa',
     label: 'Mimamsa',
     definition: 'Focuses on ritual interpretation of the Vedas and duties.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'vedanta',
     label: 'Vedanta',
     definition: 'Explores the end of the Vedas; emphasizes unity with Brahman.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'texts',
@@ -115,7 +115,7 @@ export const nodes = [
     definition:
       'Canonical scriptures ranging from ancient hymns to philosophical epics.',
     shape: 'ellipse',
-    color: COLORS.veryLightGreen,
+    color: 'nodePositive1',
   },
   {
     id: 'vedas',
@@ -123,7 +123,7 @@ export const nodes = [
     definition:
       'The oldest and most authoritative scriptures, consisting of four main collections.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'upanishads',
@@ -131,7 +131,7 @@ export const nodes = [
     definition:
       'Philosophical teachings exploring the nature of reality and self.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'mahabharata',
@@ -139,7 +139,7 @@ export const nodes = [
     definition:
       'Epic poem that includes the Bhagavad Gita; explores dharma in complex scenarios.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'ramayana',
@@ -147,7 +147,7 @@ export const nodes = [
     definition:
       'Epic recounting the life of Prince Rama, ideal dharma, and devotion.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'puranas',
@@ -155,7 +155,7 @@ export const nodes = [
     definition:
       'Narratives of gods, cosmology, and moral lessons used in devotional worship.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
 ]
 

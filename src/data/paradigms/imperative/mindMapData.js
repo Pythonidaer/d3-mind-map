@@ -17,7 +17,7 @@ export const nodes = [
       definition:
         'A style where you explicitly define every step and state change, controlling exactly how tasks are executed.',
       shape: 'roundRect',
-      color: COLORS.root,
+      color: 'root',
     },
     // First-level nodes (direct children of root)
     {
@@ -26,7 +26,7 @@ export const nodes = [
       definition:
         'Focuses on explicit instructions, mutable state, and precise control over program flow and data changes.',
       shape: 'ellipse',
-      color: COLORS.veryLightGreen, // 1st-level (off root),
+      color: 'nodePositive1', // 1st-level (off root),
     },
     {
       id: 'benefits',
@@ -34,7 +34,7 @@ export const nodes = [
       definition:
         'Provides precise control, easy step‑by‑step debugging, and a familiar, transparent mapping to how computers execute instructions.',
       shape: 'ellipse',
-      color: COLORS.veryLightGreen, // 1st-level (off root),
+      color: 'nodePositive1', // 1st-level (off root),
     },
     {
       id: 'cons',
@@ -42,7 +42,7 @@ export const nodes = [
       definition:
         'Can become verbose, complex, and error‑prone due to heavy mutation and intricate control flows.',
       shape: 'hexagon',
-      color: COLORS.lightRed, // 1st-level (off root)
+      color: 'nodeNegative1', // 1st-level (off root)
     },
     {
       id: 'antipatterns',
@@ -50,7 +50,7 @@ export const nodes = [
       definition:
         'Pitfalls include spaghetti code, excessive mutability, tight coupling, repetitive code, and ignoring return values.',
       shape: 'hexagon',
-      color: COLORS.lightRed, // 1st-level (off root)
+      color: 'nodeNegative1', // 1st-level (off root)
     },
     {
       id: 'examples',
@@ -58,7 +58,7 @@ export const nodes = [
       definition:
         'Includes explicit loops, in‑place array methods, direct DOM manipulation, async/await control, and low‑level binary operations.',
       shape: 'ellipse',
-      color: COLORS.veryLightGreen, // 1st-level (off root),
+      color: 'nodePositive1', // 1st-level (off root),
     },
     // Second-level nodes for Key Principles
     {
@@ -66,28 +66,28 @@ export const nodes = [
       label: 'Explicit Instructions',
       definition: 'Each operation is clearly stated in sequence; nothing is left implicit.',
       shape: 'rect',
-      color: COLORS.mintGreen, // 2nd-level (off veryLightGreen),
+      color: 'nodePositive2', // 2nd-level (off nodePositive1),
     },
     {
       id: 'mutableState',
       label: 'Mutable State',
       definition: 'Variables and data structures are changed in place to reflect progress.',
       shape: 'rect',
-      color: COLORS.mintGreen, // 2nd-level (off veryLightGreen),
+      color: 'nodePositive2', // 2nd-level (off nodePositive1),
     },
     {
       id: 'sequencing',
       label: 'Sequencing & Order',
       definition: 'The order of commands is critical as each step directly affects subsequent operations.',
       shape: 'rect',
-      color: COLORS.mintGreen, // 2nd-level (off veryLightGreen),
+      color: 'nodePositive2', // 2nd-level (off nodePositive1),
     },
     {
       id: 'proceduralOOP',
       label: 'Procedural/OOP Inclusion',
       definition: 'Imperative style underlies both procedural and OOP approaches by detailing how operations occur.',
       shape: 'rect',
-      color: COLORS.mintGreen, // 2nd-level (off veryLightGreen),
+      color: 'nodePositive2', // 2nd-level (off nodePositive1),
     },
     // Second-level nodes for Benefits
     {
@@ -95,28 +95,28 @@ export const nodes = [
       label: 'Precise Control',
       definition: 'Allows fine‑tuning of performance and exact behavior through detailed commands.',
       shape: 'rect',
-      color: COLORS.mintGreen, // 2nd-level (off veryLightGreen),
+      color: 'nodePositive2', // 2nd-level (off nodePositive1),
     },
     {
       id: 'stepwiseDebugging',
       label: 'Step‑by‑Step Debugging',
       definition: 'Straightforward execution order makes it easier to trace how state changes over time.',
       shape: 'rect',
-      color: COLORS.mintGreen, // 2nd-level (off veryLightGreen),
+      color: 'nodePositive2', // 2nd-level (off nodePositive1),
     },
     {
       id: 'familiarity',
       label: 'Familiarity',
       definition: 'Matches the natural “do this, then that” way many programmers initially learn to code.',
       shape: 'rect',
-      color: COLORS.mintGreen, // 2nd-level (off veryLightGreen),
+      color: 'nodePositive2', // 2nd-level (off nodePositive1),
     },
     {
       id: 'transparency',
       label: 'Transparency',
       definition: 'State and operations are explicit, making the underlying process clear.',
       shape: 'rect',
-      color: COLORS.mintGreen, // 2nd-level (off veryLightGreen),
+      color: 'nodePositive2', // 2nd-level (off nodePositive1),
     },
     // Second-level nodes for Cons
     {
@@ -124,28 +124,28 @@ export const nodes = [
       label: 'Verbosity & Complexity',
       definition: 'The need to detail every step can lead to large amounts of boilerplate code.',
       shape: 'rect',
-      color: COLORS.lighterRed, // 2nd-level (off lightRed),
+      color: 'nodeNegative2', // 2nd-level (off nodeNegative1),
     },
     {
       id: 'scalabilityChallenges',
       label: 'Scalability Challenges',
       definition: 'Complex, tightly coupled code can become difficult to maintain as the application grows.',
       shape: 'rect',
-      color: COLORS.lighterRed, // 2nd-level (off lightRed),
+      color: 'nodeNegative2', // 2nd-level (off nodeNegative1),
     },
     {
       id: 'sideEffectBugs',
       label: 'Side‑Effect Bugs',
       definition: 'Frequent mutation increases the chance of unintended interactions and bugs.',
       shape: 'rect',
-      color: COLORS.lighterRed, // 2nd-level (off lightRed),
+      color: 'nodeNegative2', // 2nd-level (off nodeNegative1),
     },
     {
       id: 'repetitiveCode',
       label: 'Repetitive Code',
       definition: 'Without abstraction, similar operations are repeated, making maintenance harder.',
       shape: 'rect',
-      color: COLORS.lighterRed, // 2nd-level (off lightRed),
+      color: 'nodeNegative2', // 2nd-level (off nodeNegative1),
     },
     // Second-level nodes for Anti‑Patterns
     {
@@ -153,28 +153,28 @@ export const nodes = [
       label: 'Spaghetti Code',
       definition: 'Unstructured, nested control flows that are hard to follow and debug.',
       shape: 'rect',
-      color: COLORS.lighterRed, // 2nd-level (off lightRed),
+      color: 'nodeNegative2', // 2nd-level (off nodeNegative1),
     },
     {
       id: 'excessiveMutability',
       label: 'Excessive Mutability',
       definition: 'Over‑reliance on in‑place modifications leads to hidden bugs and unpredictable behavior.',
       shape: 'rect',
-      color: COLORS.lighterRed, // 2nd-level (off lightRed),
+      color: 'nodeNegative2', // 2nd-level (off nodeNegative1),
     },
     {
       id: 'tightCoupling',
       label: 'Tight Coupling',
       definition: 'Components become interdependent, making isolated changes difficult.',
       shape: 'rect',
-      color: COLORS.lighterRed, // 2nd-level (off lightRed),
+      color: 'nodeNegative2', // 2nd-level (off nodeNegative1),
     },
     {
       id: 'ignoredReturns',
       label: 'Ignoring Return Values',
       definition: 'Failing to check function outputs can cause errors to propagate unnoticed.',
       shape: 'rect',
-      color: COLORS.lighterRed, // 2nd-level (off lightRed),
+      color: 'nodeNegative2', // 2nd-level (off nodeNegative1),
     },
     // Second-level nodes for Examples & APIs
     {
@@ -182,28 +182,28 @@ export const nodes = [
       label: 'Explicit Loops',
       definition: 'Using for/while loops and direct variable assignments to control flow.',
       shape: 'rect',
-      color: COLORS.mintGreen, // 2nd-level (off veryLightGreen),
+      color: 'nodePositive2', // 2nd-level (off nodePositive1),
     },
     {
       id: 'inPlaceMethods',
       label: 'In‑Place Array Methods',
       definition: 'Methods like .sort(), .push(), and .splice() that modify arrays directly.',
       shape: 'rect',
-      color: COLORS.mintGreen, // 2nd-level (off veryLightGreen),
+      color: 'nodePositive2', // 2nd-level (off nodePositive1),
     },
     {
       id: 'domImperative',
       label: 'Direct DOM API',
       definition: 'Using native DOM methods (e.g., element.setAttribute, appendChild) to manipulate the document.',
       shape: 'rect',
-      color: COLORS.mintGreen, // 2nd-level (off veryLightGreen),
+      color: 'nodePositive2', // 2nd-level (off nodePositive1),
     },
     {
       id: 'asyncAwait',
       label: 'async/await',
       definition: 'Writing asynchronous code in a step‑by‑step manner that waits for each operation.',
       shape: 'rect',
-      color: COLORS.mintGreen, // 2nd-level (off veryLightGreen),
+      color: 'nodePositive2', // 2nd-level (off nodePositive1),
     },
   ];
   

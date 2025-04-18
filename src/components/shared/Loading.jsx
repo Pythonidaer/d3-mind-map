@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styles from './Loading.module.css'
+// Loader colors are now theme-based and set via CSS variables (see Loading.module.css and theme/colors.js)
+
 
 const Loading = ({ message = 'Loading...' }) => {
   return (

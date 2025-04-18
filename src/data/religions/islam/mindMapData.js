@@ -7,7 +7,7 @@ export const nodes = [
     definition:
       'A monotheistic Abrahamic religion centered on the belief in one God (Allah) and the prophethood of Muhammad.',
     shape: 'roundRect',
-    color: COLORS.root,
+    color: 'root',
   },
   {
     id: 'sunni',
@@ -15,7 +15,7 @@ export const nodes = [
     definition:
       'The largest branch of Islam, emphasizing consensus and the authority of the four rightly guided caliphs.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'rashidun',
@@ -23,7 +23,7 @@ export const nodes = [
     definition:
       'The first four caliphs after Muhammad, viewed as exemplary leaders by Sunnis.',
     shape: 'ellipse',
-    color: COLORS.veryLightGreen,
+    color: 'nodePositive1',
   },
   {
     id: 'abuBakr',
@@ -31,21 +31,21 @@ export const nodes = [
     definition:
       'The first caliph; close companion and father-in-law of Muhammad.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'umar',
     label: 'Umar',
     definition: 'The second caliph; expanded the Islamic empire significantly.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'uthman',
     label: 'Uthman',
     definition: 'The third caliph; compiled the Qur’an into a single book.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'ali',
@@ -53,7 +53,7 @@ export const nodes = [
     definition:
       'The fourth caliph and cousin/son-in-law of Muhammad; also central to Shia Islam.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'shia',
@@ -61,7 +61,7 @@ export const nodes = [
     definition:
       'Believes leadership should have stayed within the Prophet’s family, particularly through Ali.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'ibadi',
@@ -69,7 +69,7 @@ export const nodes = [
     definition:
       'A minority sect found mostly in Oman; distinct from Sunni and Shia in leadership and theology.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'sunniSchools',
@@ -77,7 +77,7 @@ export const nodes = [
     definition:
       'Different schools of Islamic jurisprudence within Sunni Islam.',
     shape: 'ellipse',
-    color: COLORS.veryLightGreen,
+    color: 'nodePositive1',
   },
   {
     id: 'hanafi',
@@ -85,7 +85,7 @@ export const nodes = [
     definition:
       'The most widely followed Sunni school, known for its flexibility and use of reason.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'maliki',
@@ -93,7 +93,7 @@ export const nodes = [
     definition:
       'Predominant in North and West Africa; emphasizes practices of Medina.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'shafii',
@@ -101,7 +101,7 @@ export const nodes = [
     definition:
       'Known for strict methodology and widespread in Southeast Asia.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'hanbali',
@@ -109,7 +109,7 @@ export const nodes = [
     definition:
       'The most conservative school; foundational to Salafism and Wahhabism.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'quran',
@@ -117,7 +117,7 @@ export const nodes = [
     definition:
       'The holy book of Islam, believed to be the literal word of God as revealed to Muhammad.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'hadith',
@@ -125,14 +125,14 @@ export const nodes = [
     definition:
       'Collections of sayings and actions of the Prophet Muhammad, used to guide Islamic practice.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'fivePillars',
     label: 'Five Pillars',
     definition: 'The five core practices required of all Muslims.',
     shape: 'ellipse',
-    color: COLORS.veryLightGreen,
+    color: 'nodePositive1',
   },
   {
     id: 'shahada',
@@ -140,28 +140,28 @@ export const nodes = [
     definition:
       'Declaration of faith — “There is no god but Allah, and Muhammad is the messenger of Allah.”',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'salat',
     label: 'Salat',
     definition: 'Ritual prayer performed five times a day.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'zakat',
     label: 'Zakat',
     definition: 'Obligatory charity to aid the poor and purify wealth.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'sawm',
     label: 'Sawm',
     definition: 'Fasting during the month of Ramadan.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
   {
     id: 'hajj',
@@ -169,7 +169,7 @@ export const nodes = [
     definition:
       'Pilgrimage to Mecca, required once in a lifetime for those able.',
     shape: 'rect',
-    color: COLORS.mintGreen,
+    color: 'nodePositive2',
   },
 ]
 
