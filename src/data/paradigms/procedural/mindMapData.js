@@ -27,7 +27,7 @@ export const nodes = [
       definition:
         'Focus on linear, sequential steps using functions and control structures to manipulate shared state.',
       shape: 'ellipse',
-      color: 'veryLightGreen', // 1st-level (off root)
+      color: 'nodePositive1', // 1st-level (off root)
     },
     {
       id: 'benefits',
@@ -35,7 +35,7 @@ export const nodes = [
       definition:
         'Simple, straightforward code for small tasks with clear execution order and transparent state changes.',
       shape: 'ellipse',
-      color: 'veryLightGreen', // 1st-level (off root)
+      color: 'nodePositive1', // 1st-level (off root)
     },
     {
       id: 'cons',
@@ -43,7 +43,7 @@ export const nodes = [
       definition:
         'Can lead to spaghetti code, difficulty scaling, and high risk of bugs due to mutable shared state.',
       shape: 'hexagon',
-      color: 'lightRed', // 1st-level (off root)
+      color: 'nodeNegative1', // 1st-level (off root)
     },
     {
       id: 'antipatterns',
@@ -51,7 +51,7 @@ export const nodes = [
       definition:
         'Pitfalls include excessive global variables, god functions, and tight coupling of code due to implicit ordering.',
       shape: 'hexagon',
-      color: 'lightRed', // 1st-level (off root)
+      color: 'nodeNegative1', // 1st-level (off root)
     },
     {
       id: 'examples',
@@ -59,7 +59,7 @@ export const nodes = [
       definition:
         'Includes use of loops, conditionals, and direct DOM manipulation, as well as algorithm implementations in plain JavaScript.',
       shape: 'ellipse',
-      color: 'veryLightGreen', // 1st-level (off root)
+      color: 'nodePositive1', // 1st-level (off root)
     },
     // Second-level nodes for Key Principles
     {
@@ -67,14 +67,14 @@ export const nodes = [
       label: 'Step‑by‑Step Instructions',
       definition: 'Explicitly defines each action the computer must take in order.',
       shape: 'rect',
-      color: 'mintGreen', // 2nd-level (off veryLightGreen)
+      color: 'nodePositive2', // 2nd-level (off nodePositive1)
     },
     {
       id: 'procedures',
       label: 'Procedures (Functions)',
       definition: 'Organizes code into functions that perform specific tasks.',
       shape: 'rect',
-      color: 'mintGreen', // 2nd-level (off veryLightGreen)
+      color: 'nodePositive2', // 2nd-level (off nodePositive1)
     },
     {
       id: 'sharedState',
@@ -82,14 +82,14 @@ export const nodes = [
       definition:
         'Uses variables that are modified by multiple procedures, often as global or higher‑scope variables.',
       shape: 'rect',
-      color: 'mintGreen', // 2nd-level (off veryLightGreen)
+      color: 'nodePositive2', // 2nd-level (off nodePositive1)
     },
     {
       id: 'structured',
       label: 'Structured Programming',
       definition: 'Relies on loops, conditionals, and structured control flows instead of arbitrary jumps.',
       shape: 'rect',
-      color: 'mintGreen', // 2nd-level (off veryLightGreen)
+      color: 'nodePositive2', // 2nd-level (off nodePositive1)
     },
     // Second-level nodes for Benefits
     {
@@ -97,14 +97,14 @@ export const nodes = [
       label: 'Simplicity',
       definition: 'Ideal for small programs and quick scripting tasks with a clear, sequential flow.',
       shape: 'rect',
-      color: 'mintGreen', // 2nd-level (off veryLightGreen)
+      color: 'nodePositive2', // 2nd-level (off nodePositive1)
     },
     {
       id: 'debugging',
       label: 'Easy Debugging',
       definition: 'Straight‑forward execution order makes tracing state changes simpler.',
       shape: 'rect',
-      color: 'mintGreen', // 2nd-level (off veryLightGreen)
+      color: 'nodePositive2', // 2nd-level (off nodePositive1)
     },
     {
       id: 'lowOverhead',
@@ -112,14 +112,14 @@ export const nodes = [
       definition:
         'Minimal abstraction means the code does exactly what is written, often with less memory or performance overhead.',
       shape: 'rect',
-      color: 'mintGreen', // 2nd-level (off veryLightGreen)
+      color: 'nodePositive2', // 2nd-level (off nodePositive1)
     },
     {
       id: 'scripting',
       label: 'Scripting & Automation',
       definition: 'Well suited for one‑off scripts and automation tasks where a quick solution is needed.',
       shape: 'rect',
-      color: 'mintGreen', // 2nd-level (off veryLightGreen)
+      color: 'nodePositive2', // 2nd-level (off nodePositive1)
     },
     // Second-level nodes for Cons
     {
@@ -127,21 +127,21 @@ export const nodes = [
       label: 'Poor Scalability',
       definition: 'Code can become unmanageable and error‑prone as programs grow larger.',
       shape: 'rect',
-      color: 'lighterRed', // 2nd-level (off lightRed)
+      color: 'nodeNegative2', // 2nd-level (off nodeNegative1)
     },
     {
       id: 'maintenance',
       label: 'Maintenance Difficulties',
       definition: 'Lack of modularity can lead to tightly coupled code that is hard to modify.',
       shape: 'rect',
-      color: 'lighterRed', // 2nd-level (off lightRed)
+      color: 'nodeNegative2', // 2nd-level (off nodeNegative1)
     },
     {
       id: 'bugRisk',
       label: 'High Bug Risk',
       definition: 'Frequent mutation of shared state increases the chance of unintended side effects and bugs.',
       shape: 'rect',
-      color: 'lighterRed', // 2nd-level (off lightRed)
+      color: 'nodeNegative2', // 2nd-level (off nodeNegative1)
     },
     {
       id: 'reusability',
@@ -149,7 +149,7 @@ export const nodes = [
       definition:
         'Procedures are often context‑dependent, making them harder to reuse across different parts of an application.',
       shape: 'rect',
-      color: 'lighterRed', // 2nd-level (off lightRed)
+      color: 'nodeNegative2', // 2nd-level (off nodeNegative1)
     },
     // Second-level nodes for Anti‑Patterns
     {
@@ -157,14 +157,14 @@ export const nodes = [
       label: 'Excessive Global Variables',
       definition: 'Overuse of global state can lead to unpredictable interactions and bugs.',
       shape: 'rect',
-      color: 'lighterRed', // 2nd-level (off lightRed)
+      color: 'nodeNegative2', // 2nd-level (off nodeNegative1)
     },
     {
       id: 'godFunction',
       label: 'God Function',
       definition: 'One massive function that does too much, making it hard to debug and maintain.',
       shape: 'rect',
-      color: 'lighterRed', // 2nd-level (off lightRed)
+      color: 'nodeNegative2', // 2nd-level (off nodeNegative1)
     },
     {
       id: 'orderDependency',
@@ -172,7 +172,7 @@ export const nodes = [
       definition:
         'Code relying too much on the specific sequence of operations, causing fragility if the order changes.',
       shape: 'rect',
-      color: 'lighterRed', // 2nd-level (off lightRed)
+      color: 'nodeNegative2', // 2nd-level (off nodeNegative1)
     },
     // Second-level nodes for Examples & APIs
     {
@@ -180,28 +180,28 @@ export const nodes = [
       label: 'Loops & Conditionals',
       definition: 'Using for/while loops, if/else, and switch statements to control program flow.',
       shape: 'rect',
-      color: 'mintGreen', // 2nd-level (off veryLightGreen)
+      color: 'nodePositive2', // 2nd-level (off nodePositive1)
     },
     {
       id: 'domProcedural',
       label: 'Direct DOM Manipulation',
       definition: 'Manipulating DOM elements via methods like document.createElement and element.appendChild.',
       shape: 'rect',
-      color: 'mintGreen', // 2nd-level (off veryLightGreen)
+      color: 'nodePositive2', // 2nd-level (off nodePositive1)
     },
     {
       id: 'algorithmic',
       label: 'Algorithm Implementations',
       definition: 'Procedural solutions to algorithms (e.g., sorting, searching) written explicitly.',
       shape: 'rect',
-      color: 'mintGreen', // 2nd-level (off veryLightGreen)
+      color: 'nodePositive2', // 2nd-level (off nodePositive1)
     },
     {
       id: 'nodeScripts',
       label: 'Node.js Scripting',
       definition: 'Using Node.js for writing small, linear scripts that perform file or network operations.',
       shape: 'rect',
-      color: 'mintGreen', // 2nd-level (off veryLightGreen)
+      color: 'nodePositive2', // 2nd-level (off nodePositive1)
     },
   ];
   

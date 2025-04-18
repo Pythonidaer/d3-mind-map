@@ -13,28 +13,28 @@ export const nodes = [
       label: "Extension",
       definition: "You can add new behavior without altering existing code.",
       shape: "ellipse",
-      color: 'veryLightGreen',
+      color: 'nodePositive1',
     },
     {
       id: "modification",
       label: "Avoid Modification",
       definition: "Existing code remains untouched, reducing risk of bugs.",
       shape: "rect",
-      color: 'mintGreen',
+      color: 'nodePositive2',
     },
     {
       id: "strategies",
       label: "Common Strategies",
       definition: "Use interfaces, abstract classes, or dependency injection to allow extension.",
       shape: "rect",
-      color: 'mintGreen',
+      color: 'nodePositive2',
     },
     {
       id: "examples",
       label: "Examples",
       definition: "Instead of modifying a payment processor, add new classes for PayPal or Stripe.",
       shape: "rect",
-      color: 'mintGreen',
+      color: 'nodePositive2',
     },
   ];
   

@@ -13,28 +13,28 @@ export const nodes = [
       label: "Abstractions First",
       definition: "Code to interfaces or abstract classes instead of concrete implementations.",
       shape: "ellipse",
-      color: 'veryLightGreen',
+      color: 'nodePositive1',
     },
     {
       id: "highLow",
       label: "High vs Low-Level",
       definition: "High-level policy shouldn't be bound to low-level details like file systems or databases.",
       shape: "rect",
-      color: 'mintGreen',
+      color: 'nodePositive2',
     },
     {
       id: "injection",
       label: "Dependency Injection",
       definition: "Pass dependencies via constructors, factories, or frameworks instead of creating them directly.",
       shape: "rect",
-      color: 'mintGreen',
+      color: 'nodePositive2',
     },
     {
       id: "example",
       label: "Example",
       definition: "A service class shouldn’t directly instantiate a MySQL class—it should rely on a `DatabaseInterface`.",
       shape: "rect",
-      color: 'mintGreen',
+      color: 'nodePositive2',
     },
   ];
   

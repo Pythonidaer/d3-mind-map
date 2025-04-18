@@ -5,9 +5,9 @@
   }
   
   .codeTitle {
-    color: #333; /* Use a dark gray color for the title */
-    font-size: 1.2rem; /* Adjust font size */
-    font-weight: bold; /* Make the title bold */
+    color: var(--main-fg, #333); /* Use theme foreground for the title */
+    font-size: 1.2rem;
+    font-weight: bold;
   }
   
   .codeBlock {
@@ -18,14 +18,24 @@
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
-    background-color: #555;
-    color: white;
+    background-color: var(--main-fg, #555);
+    color: var(--main-bg, #fff);
     border: none;
-    padding: 0.25rem 0.5rem;
+    padding: 0.32rem 0.7rem;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.15s, color 0.15s;
+  }
+  
+  @media (max-width: 600px) {
+    .copyButton {
+      padding: 0.45rem 1rem;
+      font-size: 1.15rem;
+    }
   }
   
   .copyButton:hover {
-    background-color: #777;
+    background-color: var(--main-fg, #777);
+    color: var(--main-bg, #fff);
   }

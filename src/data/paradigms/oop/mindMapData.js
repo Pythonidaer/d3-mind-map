@@ -17,7 +17,7 @@ export const nodes = [
       definition:
         'Core concepts include encapsulation, inheritance, polymorphism, abstraction, and use of classes/prototypes to structure code.',
       shape: 'ellipse',
-      color: 'veryLightGreen',
+      color: 'nodePositive1',
     },
     {
       id: 'benefits',
@@ -25,7 +25,7 @@ export const nodes = [
       definition:
         'OOP enables intuitive modeling, modularity, reusability, and maintainability by bundling state and behavior into objects.',
       shape: 'ellipse',
-      color: 'veryLightGreen',
+      color: 'nodePositive1',
     },
     {
       id: 'cons',
@@ -33,7 +33,7 @@ export const nodes = [
       definition:
         'OOP can be verbose for simple tasks, prone to tight coupling, and sometimes less performant or harder to debug if misused.',
       shape: 'hexagon',
-      color: 'lightRed',
+      color: 'nodeNegative1',
     },
     {
       id: 'antipatterns',
@@ -41,7 +41,7 @@ export const nodes = [
       definition:
         'Common pitfalls include god objects, excessive inheritance, misusing "this", overusing global singletons, and modifying built‑in prototypes.',
       shape: 'hexagon',
-      color: 'lightRed',
+      color: 'nodeNegative1',
     },
     {
       id: 'examples',
@@ -49,7 +49,7 @@ export const nodes = [
       definition:
         'JavaScript‑specific examples include ES6 classes, prototypal inheritance, closure‑based modules, and OOP‑based frameworks.',
       shape: 'ellipse',
-      color: 'veryLightGreen',
+      color: 'nodePositive1',
     },
     // Second-level nodes for Key Principles
     {
@@ -58,7 +58,7 @@ export const nodes = [
       definition:
         'Bundling data with methods; exposing a public interface while hiding internal details.',
       shape: 'rect',
-      color: 'mintGreen',
+      color: 'nodePositive2',
     },
     {
       id: 'inheritance',
@@ -66,7 +66,7 @@ export const nodes = [
       definition:
         'Creating new classes or objects by extending existing ones to promote code reuse.',
       shape: 'rect',
-      color: 'mintGreen',
+      color: 'nodePositive2',
     },
     {
       id: 'polymorphism',
@@ -74,14 +74,14 @@ export const nodes = [
       definition:
         'Allowing objects of different types to be used interchangeably via a common interface.',
       shape: 'rect',
-      color: 'mintGreen',
+      color: 'nodePositive2',
     },
     {
       id: 'abstraction',
       label: 'Abstraction',
       definition: 'Hiding complex implementation details behind simpler interfaces.',
       shape: 'rect',
-      color: 'mintGreen',
+      color: 'nodePositive2',
     },
     {
       id: 'classesPrototypes',
@@ -89,7 +89,7 @@ export const nodes = [
       definition:
         'Using ES6 classes for syntactic sugar over JavaScript’s prototypal inheritance model.',
       shape: 'rect',
-      color: 'mintGreen',
+      color: 'nodePositive2',
     },
     // Third-level node under Inheritance
     {
@@ -98,7 +98,7 @@ export const nodes = [
       definition:
         'Leveraging JavaScript’s prototype-based inheritance for dynamic object extension.',
       shape: 'diamond',
-      color: 'almostWhiteGreen',
+      color: 'nodePositive3',
     },
     // Second-level nodes for Benefits
     {
@@ -106,7 +106,7 @@ export const nodes = [
       label: 'Intuitive Modeling',
       definition: 'Models real‑world entities naturally through objects and classes.',
       shape: 'rect',
-      color: 'mintGreen',
+      color: 'nodePositive2',
     },
     {
       id: 'modularity',
@@ -114,7 +114,7 @@ export const nodes = [
       definition:
         'Encapsulation and inheritance allow code to be organized into discrete, reusable units.',
       shape: 'rect',
-      color: 'mintGreen',
+      color: 'nodePositive2',
     },
     {
       id: 'maintainability',
@@ -122,14 +122,14 @@ export const nodes = [
       definition:
         'Changes to an object’s internals do not affect external code as long as its interface remains consistent.',
       shape: 'rect',
-      color: 'mintGreen',
+      color: 'nodePositive2',
     },
     {
       id: 'codeOrganization',
       label: 'Code Organization',
       definition: 'Classes and objects help break down complex systems into manageable components.',
       shape: 'rect',
-      color: 'mintGreen',
+      color: 'nodePositive2',
     },
     // Second-level nodes for Cons
     {
@@ -137,28 +137,28 @@ export const nodes = [
       label: 'Verbosity/Complexity',
       definition: 'For small tasks, the overhead of defining classes and objects can be overkill.',
       shape: 'rect',
-      color: 'lighterRed',
+      color: 'nodeNegative2',
     },
     {
       id: 'tightCoupling',
       label: 'Tight Coupling',
       definition: 'Inheritance can create strong dependencies between classes, making changes fragile.',
       shape: 'rect',
-      color: 'lighterRed',
+      color: 'nodeNegative2',
     },
     {
       id: 'performanceOverhead',
       label: 'Performance Overhead',
       definition: 'Dynamic dispatch and object creation may incur extra performance costs.',
       shape: 'rect',
-      color: 'lighterRed',
+      color: 'nodeNegative2',
     },
     {
       id: 'learningCurve',
       label: 'Learning Curve & Misuse',
       definition: 'Misunderstanding prototypes or “this” can lead to bugs and misuse of the paradigm.',
       shape: 'rect',
-      color: 'lighterRed',
+      color: 'nodeNegative2',
     },
     // Second-level nodes for Anti‑Patterns
     {
@@ -166,28 +166,28 @@ export const nodes = [
       label: 'God Objects',
       definition: 'Objects that take on too many responsibilities, reducing clarity and maintainability.',
       shape: 'rect',
-      color: 'lighterRed',
+      color: 'nodeNegative2',
     },
     {
       id: 'excessiveInheritance',
       label: 'Excessive Inheritance',
       definition: 'Deep inheritance hierarchies can lead to brittle, hard‑to‑maintain code.',
       shape: 'rect',
-      color: 'lighterRed',
+      color: 'nodeNegative2',
     },
     {
       id: 'misusingThis',
       label: 'Misusing "this"',
       definition: 'Losing the correct context in methods can lead to unexpected behavior.',
       shape: 'rect',
-      color: 'lighterRed',
+      color: 'nodeNegative2',
     },
     {
       id: 'globalState',
       label: 'Global State/Singletons',
       definition: 'Overuse of global objects or singletons undermines encapsulation and increases coupling.',
       shape: 'rect',
-      color: 'lighterRed',
+      color: 'nodeNegative2',
     },
     {
       id: 'modifyingPrototypes',
@@ -195,7 +195,7 @@ export const nodes = [
       definition:
         'Changing built‑in prototypes can cause conflicts and unexpected behavior across the application.',
       shape: 'rect',
-      color: 'lighterRed',
+      color: 'nodeNegative2',
     },
     // Second-level nodes for Examples & APIs
     {
@@ -204,7 +204,7 @@ export const nodes = [
       definition:
         'Modern syntax for defining classes and inheritance (using "class", "constructor", "extends", "super").',
       shape: 'rect',
-      color: 'mintGreen',
+      color: 'nodePositive2',
     },
     {
       id: 'prototypalInheritance',
@@ -212,14 +212,14 @@ export const nodes = [
       definition:
         'Directly linking objects via prototypes using Object.create() or function constructors.',
       shape: 'rect',
-      color: 'mintGreen',
+      color: 'nodePositive2',
     },
     {
       id: 'closuresModules',
       label: 'Encapsulation via Closures',
       definition: 'Module pattern using closures to hide private data while exposing a public API.',
       shape: 'rect',
-      color: 'mintGreen',
+      color: 'nodePositive2',
     },
     {
       id: 'frameworksOOP',
@@ -227,7 +227,7 @@ export const nodes = [
       definition:
         'OOP is integral in frameworks like Angular or in libraries such as TypeScript for structured, class‑based coding.',
       shape: 'rect',
-      color: 'mintGreen',
+      color: 'nodePositive2',
     },
   ];
   

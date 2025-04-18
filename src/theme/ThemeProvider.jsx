@@ -50,6 +50,12 @@ export const ThemeProvider = ({ children }) => {
     [theme, palette, resolvedTheme]
   );
 
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      document.body.setAttribute('data-theme', resolvedTheme);
+    }
+  }, [resolvedTheme]);
+
   return (
     <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );

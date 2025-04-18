@@ -13,28 +13,28 @@ export const nodes = [
       label: "Substitution",
       definition: "You should be able to replace a base class with a subclass without breaking the program.",
       shape: "ellipse",
-      color: 'veryLightGreen',
+      color: 'nodePositive1',
     },
     {
       id: "contract",
       label: "Behavioral Contracts",
       definition: "Subclasses must honor the expected behavior and contracts of the parent class.",
       shape: "rect",
-      color: 'mintGreen',
+      color: 'nodePositive2',
     },
     {
       id: "violations",
       label: "Common Violations",
       definition: "Overriding methods to throw errors or break assumptions about return values.",
       shape: "rect",
-      color: 'mintGreen',
+      color: 'nodePositive2',
     },
     {
       id: "example",
       label: "Example",
       definition: "`Rectangle` and `Square` where overriding setters can break expected geometry behavior.",
       shape: "rect",
-      color: 'mintGreen',
+      color: 'nodePositive2',
     },
   ];
   

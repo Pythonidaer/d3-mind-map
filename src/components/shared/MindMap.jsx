@@ -50,7 +50,7 @@ const MindMap = ({ nodes, links }) => {
           d3
             .forceLink(links)
             .id((d) => d.id)
-            .distance(300)
+            .distance(270)
         )
         .force('charge', d3.forceManyBody().strength(-400))
         .force('center', d3.forceCenter(width / 2, height / 2));
@@ -119,19 +119,40 @@ const MindMap = ({ nodes, links }) => {
       });
 
       // Create a tooltip using absolute positioning so it scrolls with the page
-      const tooltip = d3
+      // Get theme-aware colors for tooltip
+     const bodyStyles = window.getComputedStyle(document.body);
+     const tooltipBg = bodyStyles.getPropertyValue('--main-bg')?.trim() || 'white';
+     const tooltipFg = bodyStyles.getPropertyValue('--main-fg')?.trim() || '#232323';
+     const tooltipBorder = bodyStyles.getPropertyValue('--navbar-bg')?.trim() === '#18191a' ? '#555' : '#ccc';
+     const tooltip = d3
         .select('body')
         .append('div')
+        .attr('id', 'mindmap-tooltip')
         .style('position', 'absolute')
         .style('padding', '6px')
-        .style('background', 'white')
-        .style('border', '1px solid #ccc')
+        .style('background', tooltipBg)
+        .style('color', tooltipFg)
+        .style('border', `1px solid ${tooltipBorder}`)
         .style('border-radius', '4px')
         .style('pointer-events', 'none')
         .style('opacity', 0)
         .style('max-width', '300px')
         .style('max-height', '200px')
-        .style('overflow-y', 'auto')
+        .style('overflow-y', 'auto');
+
+      // Observe theme changes and update tooltip styles
+      const updateTooltipTheme = () => {
+        const styles = window.getComputedStyle(document.body);
+        tooltip
+          .style('background', styles.getPropertyValue('--main-bg')?.trim() || 'white')
+          .style('color', styles.getPropertyValue('--main-fg')?.trim() || '#232323')
+          .style('border', `1px solid ${styles.getPropertyValue('--navbar-bg')?.trim() === '#18191a' ? '#555' : '#ccc'}`);
+      };
+      const observer = new MutationObserver(updateTooltipTheme);
+      observer.observe(document.body, { attributes: true, attributeFilter: ['data-theme'] });
+      // Clean up observer on effect cleanup
+      if (typeof cleanupFns !== 'undefined') cleanupFns.push(() => observer.disconnect());
+
 
       // Hide the tooltip when the user scrolls
       const hideTooltip = () => {

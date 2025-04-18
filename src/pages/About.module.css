@@ -2,6 +2,8 @@
   padding: 2rem;
   max-width: 800px;
   margin: 0 auto;
+  background: var(--main-bg, #fff);
+  color: var(--main-fg, #18191a);
 }
 
 .aboutContainer h1 {
@@ -29,17 +31,27 @@
 .aboutContainer li {
   padding: 1rem;
   margin-bottom: 1rem;
-  background-color: #f8f9fa;
+  background-color: var(--about-li-bg, #f8f9fa);
+  color: var(--main-fg, #18191a);
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
+:global([data-theme="dark"]) .aboutContainer li {
+  --about-li-bg: #23272b;
+}
+
 
 .aboutContainer li strong {
   display: block;
-  color: #2c3e50;
+  color: var(--about-li-strong, #2c3e50);
   margin-bottom: 0.5rem;
   font-size: 1.1rem;
+  font-weight: 700;
 }
+:global([data-theme="dark"]) .aboutContainer li {
+  --about-li-strong: #e6e6fa;
+}
+
 
 @media (max-width: 768px) {
   .aboutContainer {

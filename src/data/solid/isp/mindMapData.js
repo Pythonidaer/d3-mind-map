@@ -13,28 +13,28 @@ export const nodes = [
       label: "Segregation",
       definition: "Split large interfaces into smaller, more specific ones.",
       shape: "ellipse",
-      color: 'veryLightGreen',
+      color: 'nodePositive1',
     },
     {
       id: "fatInterfaces",
       label: "Fat Interfaces",
       definition: "Interfaces that contain many methods not relevant to all implementers.",
       shape: "rect",
-      color: 'mintGreen',
+      color: 'nodePositive2',
     },
     {
       id: "splitInterfaces",
       label: "Split Interfaces",
       definition: "Create focused contracts like `IPrinter`, `IScanner`, etc. instead of one large `IMachine`.",
       shape: "rect",
-      color: 'mintGreen',
+      color: 'nodePositive2',
     },
     {
       id: "example",
       label: "Example",
       definition: "A class that only prints shouldn't be forced to implement scanning or faxing.",
       shape: "rect",
-      color: 'mintGreen',
+      color: 'nodePositive2',
     },
   ];
   

@@ -17,7 +17,7 @@ export const nodes = [
     label: 'Key Traits',
     definition: 'Characteristics of unit tests: isolated, fast, focused.',
     shape: 'ellipse',
-    color: 'veryLightGreen',
+    color: 'nodePositive1',
   },
   {
     id: 'isolated',
@@ -25,7 +25,7 @@ export const nodes = [
     definition:
       'Runs code with no external effects (use mocks/stubs for DB, network, etc.).',
     shape: 'rect',
-    color: 'mintGreen',
+    color: 'nodePositive2',
   },
   {
     id: 'fast',
@@ -33,7 +33,7 @@ export const nodes = [
     definition:
       'Tests complete quickly (milliseconds), enabling rapid feedback.',
     shape: 'rect',
-    color: 'mintGreen',
+    color: 'nodePositive2',
   },
   {
     id: 'smallScope',
@@ -41,21 +41,21 @@ export const nodes = [
     definition:
       'Each test targets a single function or class (smallest testable unit).',
     shape: 'rect',
-    color: 'mintGreen',
+    color: 'nodePositive2',
   },
   {
     id: 'benefits',
     label: 'Benefits',
     definition: 'Why write unit tests.',
     shape: 'ellipse',
-    color: 'veryLightGreen',
+    color: 'nodePositive1',
   },
   {
     id: 'earlyBugs',
     label: 'Early Bug Detection',
     definition: 'Catches bugs early in development before they spread.',
     shape: 'rect',
-    color: 'mintGreen',
+    color: 'nodePositive2',
   },
   {
     id: 'betterDesign',
@@ -63,14 +63,14 @@ export const nodes = [
     definition:
       "Encourages simpler, single-responsibility code that's easier to test.",
     shape: 'rect',
-    color: 'mintGreen',
+    color: 'nodePositive2',
   },
   {
     id: 'debugging',
     label: 'Simplifies Debugging',
     definition: 'Failures pinpoint the specific unit causing an issue.',
     shape: 'rect',
-    color: 'mintGreen',
+    color: 'nodePositive2',
   },
   {
     id: 'docs',
@@ -78,14 +78,14 @@ export const nodes = [
     definition:
       'Tests serve as living examples of how functions should behave.',
     shape: 'rect',
-    color: 'mintGreen',
+    color: 'nodePositive2',
   },
   {
     id: 'challenges',
     label: 'Challenges',
     definition: 'Limitations and drawbacks of unit tests.',
     shape: 'ellipse',
-    color: 'veryLightGreen',
+    color: 'nodePositive1',
   },
   {
     id: 'limitedScope',
@@ -93,42 +93,42 @@ export const nodes = [
     definition:
       'Cannot catch issues arising from interactions between components.',
     shape: 'rect',
-    color: 'mintGreen',
+    color: 'nodePositive2',
   },
   {
     id: 'maintenance',
     label: 'Maintenance Overhead',
     definition: 'Tests must be updated alongside code changes (extra work).',
     shape: 'rect',
-    color: 'mintGreen',
+    color: 'nodePositive2',
   },
   {
     id: 'falseConfidence',
     label: 'False Confidence',
     definition: 'All units can pass while the integrated system still fails.',
     shape: 'rect',
-    color: 'mintGreen',
+    color: 'nodePositive2',
   },
   {
     id: 'hardToTest',
     label: 'Hard-to-Test Code',
     definition: 'GUI or tightly coupled code may be difficult to unit test.',
     shape: 'rect',
-    color: 'mintGreen',
+    color: 'nodePositive2',
   },
   {
     id: 'bestPractices',
     label: 'Best Practices',
     definition: 'Tips for effective unit tests.',
     shape: 'ellipse',
-    color: 'veryLightGreen',
+    color: 'nodePositive1',
   },
   {
     id: 'singleBehavior',
     label: 'One Behavior per Test',
     definition: 'Each test should verify one logical outcome or scenario.',
     shape: 'rect',
-    color: 'mintGreen',
+    color: 'nodePositive2',
   },
   {
     id: 'naming',
@@ -136,14 +136,14 @@ export const nodes = [
     definition:
       'Name tests descriptively to reveal intent (e.g., method_whenCondition_expectedResult).',
     shape: 'rect',
-    color: 'mintGreen',
+    color: 'nodePositive2',
   },
   {
     id: 'testDoubles',
     label: 'Use Test Doubles Wisely',
     definition: 'Use mocks/stubs only when needed to isolate the unit.',
     shape: 'rect',
-    color: 'mintGreen',
+    color: 'nodePositive2',
   },
   {
     id: 'independent',
@@ -151,14 +151,14 @@ export const nodes = [
     definition:
       'Keep tests quick and not reliant on global state or execution order.',
     shape: 'rect',
-    color: 'mintGreen',
+    color: 'nodePositive2',
   },
   {
     id: 'antiPatterns',
     label: 'Anti-Patterns',
     definition: 'Common mistakes in unit testing.',
     shape: 'hexagon',
-    color: 'lightRed',
+    color: 'nodeNegative1',
   },
   {
     id: 'overMocking',
@@ -166,7 +166,7 @@ export const nodes = [
     definition:
       'Relying too much on mocks such that tests no longer reflect real usage.',
     shape: 'diamond',
-    color: 'lighterRed',
+    color: 'nodeNegative2',
   },
   {
     id: 'implDetails',
@@ -174,14 +174,14 @@ export const nodes = [
     definition:
       'Asserting internal behavior instead of outputs makes tests fragile during refactoring.',
     shape: 'diamond',
-    color: 'lighterRed',
+    color: 'nodeNegative2',
   },
   {
     id: 'skippedTests',
     label: 'Ignoring \n Unit Tests',
     definition: 'Skipping writing or running unit tests defeats their purpose.',
     shape: 'diamond',
-    color: 'lighterRed',
+    color: 'nodeNegative2',
   },
 ]
 

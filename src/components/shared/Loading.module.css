@@ -24,32 +24,32 @@
 .circle1 {
   width: min(250px, 70vw);
   height: min(250px, 70vw);
-  border-top-color: rgb(152, 238, 153);
-  border-right-color: rgb(152, 238, 153);
+  border-top-color: var(--loader-primary, #98EE99);
+  border-right-color: var(--loader-primary, #98EE99);
   animation-delay: -0.15s;
 }
 
 .circle2 {
   width: min(200px, 56vw);
   height: min(200px, 56vw);
-  border-top-color: rgb(255, 138, 128);
-  border-right-color: rgb(255, 138, 128);
+  border-top-color: var(--loader-accent, #FF8A80);
+  border-right-color: var(--loader-accent, #FF8A80);
   animation-delay: -0.3s;
 }
 
 .circle3 {
   width: min(150px, 42vw);
   height: min(150px, 42vw);
-  border-top-color: rgb(152, 238, 153);
-  border-right-color: rgb(152, 238, 153);
+  border-top-color: var(--loader-primary, #98EE99);
+  border-right-color: var(--loader-primary, #98EE99);
   animation-delay: -0.45s;
 }
 
 .circle4 {
   width: min(100px, 28vw);
   height: min(100px, 28vw);
-  border-top-color: rgb(255, 138, 128);
-  border-right-color: rgb(255, 138, 128);
+  border-top-color: var(--loader-accent, #FF8A80);
+  border-right-color: var(--loader-accent, #FF8A80);
   animation-delay: -0.6s;
 }
 

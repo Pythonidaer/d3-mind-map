@@ -13,28 +13,28 @@ export const nodes = [
       label: "Responsibility",
       definition: "Focus each class or module on one well-defined task.",
       shape: "ellipse",
-      color: 'veryLightGreen',
+      color: 'nodePositive1',
     },
     {
       id: "reasonsToChange",
       label: "Reasons to Change",
       definition: "A single responsibility implies a single reason for a class to change.",
       shape: "rect",
-      color: 'mintGreen',
+      color: 'nodePositive2',
     },
     {
       id: "exampleSplit",
       label: "Example Split",
       definition: "Separate validation, data access, and UI rendering into distinct modules.",
       shape: "rect",
-      color: 'mintGreen',
+      color: 'nodePositive2',
     },
     {
       id: "benefits",
       label: "Benefits",
       definition: "Improves readability, testability, and reduces ripple effects when requirements change.",
       shape: "rect",
-      color: 'mintGreen',
+      color: 'nodePositive2',
     },
   ];
   
