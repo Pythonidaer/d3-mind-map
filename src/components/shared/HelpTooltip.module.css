@@ -1,0 +1,132 @@
+.helpButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  z-index: 900; /* Below navbar (navbar uses z-index: 1000) */
+  cursor: pointer;
+  padding: 0;
+  border-radius: 0;
+  transition: background 0.15s;
+  box-shadow: none;
+  width: 48px;
+  height: 48px;
+}
+
+.helpButton:focus, .helpButton:hover {
+  background: rgba(120,120,120,0.13);
+  outline: 2px solid #6cf;
+}
+.questionIcon {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 30, 40, 0.38);
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.25s;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.modalContent {
+  background: var(--main-bg, #fff);
+  color: var(--main-fg, #232323);
+  border-radius: 18px;
+  box-shadow: 0 8px 36px 0 rgba(30,30,60,0.22), 0 2px 8px 0 rgba(0,0,0,0.10);
+  padding: 1.5rem 1.7rem 1.2rem 1.7rem;
+  max-width: 98vw;
+  min-width: 320px;
+  width: 520px;
+  font-size: 1.13rem;
+  position: relative;
+  border: 8px solid #fff;
+}
+:global([data-theme="dark"]) .modalContent {
+  background: #18191a;
+  color: #fff;
+  border: 8px solid #fff;
+}
+.modalContent h2 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 1.1rem;
+  letter-spacing: -0.01em;
+}
+.modalContent ul {
+  margin-bottom: 1.2rem;
+  list-style: none;
+  padding-left: 0;
+}
+.modalContent li {
+  margin-bottom: 0.7em;
+  line-height: 1.7;
+  font-size: 1.08em;
+  padding-left: 1.2em;
+}
+.modalContent strong {
+  font-weight: 700;
+}
+.closeButton {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  font-size: 2.3rem;
+  color: var(--main-fg, #232323);
+  cursor: pointer;
+  z-index: 1;
+  padding: 0.5rem;
+  border-radius: 7px;
+  font-weight: 900;
+  line-height: 1;
+}
+.closeButton:hover, .closeButton:focus {
+  background: rgba(120,120,120,0.13);
+  outline: 2px solid #6cf;
+}
+
+@media (max-width: 600px) {
+  .modalContent {
+    padding: 1.2rem 0.7rem 1.2rem 0.7rem;
+    width: auto;
+    min-width: 0;
+    margin-left: 1.2rem;
+    margin-right: 1.2rem;
+    box-sizing: border-box;
+    padding: 1.5rem 0.7rem 1.5rem 0.7rem;
+    width: 98vw;
+    min-width: 0;
+  }
+  .modalContent h2 {
+    font-size: 1.13rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: left;
+    display: block;
+  }
+  .modalContent li {
+    font-size: 0.97em;
+  }
+  .closeButton {
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0;
+    font-size: 2.5rem;
+  }
+  .helpButton {
+    top: 0.6rem;
+    right: 0.6rem;
+  }
+}

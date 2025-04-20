@@ -277,7 +277,6 @@
 /* Active link style - target the span for color change and the span's ::after for underline */
 .active span {
   font-weight: bold;
-  color: #5e6264; /* Active link text color */
 }
 :global([data-theme="dark"]) .active span {
   color: #fff;
