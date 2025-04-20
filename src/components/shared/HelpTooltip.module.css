@@ -50,12 +50,12 @@
   width: 520px;
   font-size: 1.13rem;
   position: relative;
-  border: 8px solid #fff;
+  border: 2px solid #fff;
 }
 :global([data-theme="dark"]) .modalContent {
   background: #18191a;
   color: #fff;
-  border: 8px solid #fff;
+  border: 2px solid #fff;
 }
 .modalContent h2 {
   font-size: 1.6rem;
