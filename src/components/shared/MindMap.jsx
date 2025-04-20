@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import * as d3 from 'd3'
 import styles from './MindMap.module.css'
 import { useTheme } from '../../theme/ThemeProvider'
+import HelpTooltip from './HelpTooltip'
 
 const MindMap = ({ nodes, links }) => {
   const svgRef = useRef(null)
@@ -268,8 +269,9 @@ const MindMap = ({ nodes, links }) => {
   }, [palette, nodes]);
 
   return (
-    <main className={styles['mind-map']} ref={containerRef}>
-      <svg ref={svgRef}></svg>
+    <main className={styles['mind-map']} ref={containerRef} style={{ position: 'relative' }}>
+      <svg ref={svgRef} style={{ width: '100%', height: '100%' }}></svg>
+      <HelpTooltip />
     </main>
   )
 }

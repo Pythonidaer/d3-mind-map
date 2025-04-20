@@ -14,7 +14,6 @@
 
 .mind-map svg {
   height: inherit;
-  background-color: var(--main-bg, #fff);
 }
 
 @media (max-width: 768px) {
