@@ -3,16 +3,30 @@
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: var(--navbar-bg, white);
-  color: var(--navbar-fg, #232323);
-  padding: 1rem;
+  background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+  color: #fff;
+  padding: 0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out;
+  transition: background 0.3s, transform 0.3s;
   z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+
+:global([data-theme="dark"]) .navbar {
+  background: linear-gradient(90deg, #18122b 0%, #3b1976 40%, #a78bfa 100%);
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+
+
+.navMainRow {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
+  width: 100%;
+  padding: 1rem;
 }
 
 :global([data-theme="dark"]) {
@@ -25,17 +39,34 @@
 
 
 .mobileBar {
-  background-color: var(--navbar-bg, white);
-  color: var(--navbar-fg, #232323);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+  color: #fff !important;
 }
 
-.nav-links, .mobileMenu {
-  background-color: var(--navbar-bg, white);
-  color: var(--navbar-fg, #232323);
+:global([data-theme="dark"]) .mobileBar {
+  background: linear-gradient(90deg, #18122b 0%, #3b1976 40%, #a78bfa 100%);
+  color: #fff;
 }
+
+
+.nav-links {
+  background: none;
+  color: inherit;
+}
+
+.mobileMenu {
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+  color: #fff;
+}
+
+:global([data-theme="dark"]) .mobileMenu {
+  background: linear-gradient(90deg, #18122b 0%, #3b1976 40%, #a78bfa 100%);
+  color: #fff;
+}
+
 
 .nav-links a {
-  color: var(--navbar-link, #232323);
+  color: #fff;
   text-decoration: none;
   transition: color 0.2s;
 }
@@ -43,7 +74,7 @@
 .nav-links a:active,
 .nav-links a:focus,
 .nav-links a:hover {
-  color: #0057ff;
+  color: #fff;
 }
 
 :global([data-theme="dark"]) .nav-links a:active,
@@ -207,13 +238,27 @@
   border: none;
   padding: 0;
   flex-shrink: 0;
+  color: #fff;
+}
+
+:global([data-theme="dark"]) .hamburger {
+  color: #fff;
+}
+
+.mobileBar .hamburger {
+  color: #fff;
 }
 
 .bar {
   width: 100%;
   height: 2px;
-  background-color: var(--navbar-icon, #232323);
+  background-color: var(--navbar-icon, #fff);
   transition: 0.3s ease;
+}
+
+.mobileBar .bar,
+.mobileMenu .bar {
+  background-color: #fff !important;
 }
 
 .bar1Open {
@@ -245,8 +290,8 @@
 .link span {
   display: inline-block; /* Allows positioning relative to the span */
   position: relative;
-  color: var(--navbar-link, #232323);
   padding-bottom: 5px; /* Add some space for the underline */
+  color: #fff;
 }
 
 /* Underline pseudo-element targeting the span */
@@ -257,13 +302,13 @@
   left: 0;
   width: 0;
   height: 2px;
-  background-color: #5e6264; /* Active/hover color - adjust as needed */
+  background-color: #fff;
   transition: width 0.3s ease-out; /* Animation for the underline */
 }
 
 /* Hover effect - target the span for color change and the span's ::after for underline */
 .link:hover span {
-  color: #5e6264; /* Change text color on hover */
+  color: #fff;
 }
 :global([data-theme="dark"]) .link:hover span {
   color: #fff;
@@ -277,6 +322,7 @@
 /* Active link style - target the span for color change and the span's ::after for underline */
 .active span {
   font-weight: bold;
+  color: #fff;
 }
 :global([data-theme="dark"]) .active span {
   color: #fff;
@@ -302,15 +348,17 @@
   color: var(--navbar-icon, #232323);
 }
 
+
 .closeLine {
   position: absolute;
   width: 100%;
   height: 2px;
-  background-color: var(--navbar-icon, #232323);
+  background-color: #fff !important;
   top: 50%;
   transform: translateY(-50%);
   transition: 0.3s ease;
 }
+
 
 .closeLine:first-child {
   transform: rotate(45deg);
@@ -363,6 +411,8 @@
   display: flex; /* Align text and arrow */
   align-items: center;
 }
+
+
 
 .categoryDropdownTrigger:hover {
   background-color: #4a5568; /* Match .brand hover */

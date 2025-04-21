@@ -4,6 +4,7 @@ import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import styles from './Navbar.module.css';
 import { contentCategories, getNavData, findCategoryByParam } from '../../config/contentCategories.js';
 import ThemeToggle from './ThemeToggle';
+import SubNav from './SubNav';
 
 const Navbar = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
@@ -37,10 +38,10 @@ const Navbar = () => {
     const initialParam = getCategoryParamFromPath(initialPath); 
     if (initialParam) {
       const initialCategory = findCategoryByParam(initialParam); 
-      const categoryFromNavData = navData.dynamic.find(cat => cat.id === initialCategory?.id);
-      if (categoryFromNavData) return categoryFromNavData; 
+      if (initialCategory) return initialCategory;
     }
-    return navData.defaultCategory; 
+    // Default to first category in contentCategories if not found
+    return contentCategories[0];
   });
 
   useEffect(() => {
@@ -73,28 +74,17 @@ const Navbar = () => {
   useEffect(() => {
     const currentPath = location.pathname;
     const categoryParam = getCategoryParamFromPath(currentPath); 
-
     const currentSelectedIdInState = selectedCategory?.id; 
     let categoryToSelect = null;
-
     if (categoryParam) {
       const categoryFromUrl = findCategoryByParam(categoryParam);
       if (categoryFromUrl && categoryFromUrl.id !== currentSelectedIdInState) {
-        categoryToSelect = navData.dynamic.find(cat => cat.id === categoryFromUrl.id) || navData.defaultCategory;
+        categoryToSelect = categoryFromUrl;
       }
-    } else {
-      // We are NOT on a content page (e.g., /about, /)
-      // DO NOTHING here - let the state retain its previous value when navigating TO a non-content page.
-      // The state will only reset to default if the page is initially loaded/refreshed
-      // on a non-content page (handled by useState initializer).
-      // Example: Navigate /fundamental/syntax -> /about : Dropdown stays on Fundamentals
-      //          Refresh /about : Dropdown resets to Paradigms (by useState)
     }
-
     if (categoryToSelect) { 
-        setSelectedCategory(categoryToSelect);
+      setSelectedCategory(categoryToSelect);
     }
-    
   }, [location.pathname]); 
 
   const toggleCategoryDropdown = () => {
@@ -102,22 +92,23 @@ const Navbar = () => {
   };
 
   const handleCategorySelect = (categoryId) => {
-    const newSelectedCategory = navData.dynamic.find(cat => cat.id === categoryId);
-    if (newSelectedCategory) {
-      setSelectedCategory(newSelectedCategory);
-      // Navigate to the first subcategory of the selected category
-      if (newSelectedCategory.subcategories && newSelectedCategory.subcategories.length > 0) {
-        const firstSubcategoryPath = newSelectedCategory.subcategories[0].path;
-        navigate(firstSubcategoryPath);
-      } else {
-        // Fallback if category has no subcategories (edge case)
-        // Navigate to a base path or handle differently if needed
-        console.warn("Selected category has no subcategories to navigate to.");
-        // Example: navigate based on baseRoute if available (requires adding baseRoute to navData)
-      }
+  // Always use contentCategories for the canonical data
+  const newSelectedCategory = contentCategories.find(cat => cat.id === categoryId);
+  if (newSelectedCategory) {
+    setSelectedCategory(newSelectedCategory);
+    if (newSelectedCategory.subcategories && newSelectedCategory.subcategories.length > 0) {
+      const firstSubcategoryPath = newSelectedCategory.subcategories[0].path;
+      const target = `${newSelectedCategory.baseRoute}/${firstSubcategoryPath}`;
+      console.log("Navigating to:", target);
+      navigate(target);
+    } else {
+      console.warn("Selected category has no subcategories to navigate to.");
     }
-    setIsCategoryDropdownOpen(false); // Close dropdown after selection
-  };
+  }
+  setIsCategoryDropdownOpen(false);
+};
+
+
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -141,46 +132,127 @@ const Navbar = () => {
   }, [categoryDropdownRef]);
 
   const isMobile = useIsMobile();
+  // Filter subcategories for subnav
+  const subNavSubcategories = selectedCategory?.subcategories?.filter(
+    (sub) => sub.addToSubNav
+  ) || [];
+
   return (
     <nav className={`${styles.navbar} ${!visible ? styles.navHidden : ''}`}>
-
-      {/* --- THREE COLUMN FLEX LAYOUT (desktop) --- */}
-      { !isMobile && (
-        <div className={styles.navGrid}>
-          {/* Left: Brand/Dropdown */}
-          <div className={styles.leftCol}>
-            {navData.dynamic.length > 0 && (
-              <div className={styles.categoryDropdownContainer} ref={categoryDropdownRef}>
+      <div>
+        { !isMobile ? (
+          <div className={styles.navMainRow}>
+            <div className={styles.navGrid}>
+              {/* Left: Brand/Dropdown */}
+              <div className={styles.leftCol}>
+                {contentCategories.length > 0 && (
+                  <div className={styles.categoryDropdownContainer} ref={categoryDropdownRef}>
+                    <button
+                      type="button"
+                      className={styles.categoryDropdownTrigger} 
+                      onClick={toggleCategoryDropdown}
+                      aria-haspopup="true"
+                      aria-expanded={isCategoryDropdownOpen}
+                    >
+                      {selectedCategory ? selectedCategory.name : 'Select Category'} <span className={styles.dropdownArrow}>▼</span> 
+                    </button>
+                    {isCategoryDropdownOpen && (
+                      <ul className={styles.categoryDropdownMenu}> 
+                        {contentCategories.map((category) => (
+                          <li key={category.id}>
+                            <button
+                              type="button"
+                              className={styles.categoryDropdownItem}
+                              onClick={() => handleCategorySelect(category.id)}
+                            >
+                              {category.name}
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                )} 
+              </div>
+              {/* Center: Nav links */}
+              <div className={styles.centerCol}>
+                <div className={styles['nav-links']}>
+                  {navData.static.map((page) => (
+                    <NavLink
+                      key={page.id}
+                      to={page.path}
+                      className={({ isActive }) => isActive ? `${styles.link} ${styles.active}` : styles.link}
+                      onClick={handleLinkClick}
+                    >
+                      <span>{page.name}</span>
+                    </NavLink>
+                  ))}
+                  {selectedCategory && selectedCategory.subcategories && selectedCategory.subcategories.filter(sub => sub.addToNav).map((sub) => (
+                    <NavLink
+                      key={sub.id}
+                      to={`${selectedCategory.baseRoute}/${sub.path}`}
+                      className={({ isActive }) => isActive ? `${styles.link} ${styles.active}` : styles.link}
+                      onClick={handleLinkClick}
+                    >
+                      <span>{sub.name}</span>
+                    </NavLink>
+                  ))}
+                </div>
+              </div>
+              {/* Right: ThemeToggle (desktop only) */}
+              <div className={styles.rightCol}>
+                <div className={styles.themeToggleDesktop}><ThemeToggle /></div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className={styles.mobileBar}>
+            {/* Left: Category Dropdown */}
+            <div className={styles.categoryDropdownContainer} ref={categoryDropdownRef}>
+              {contentCategories.length > 0 && (
                 <button
                   type="button"
-                  className={styles.categoryDropdownTrigger} 
+                  className={styles.categoryDropdownTrigger}
                   onClick={toggleCategoryDropdown}
                   aria-haspopup="true"
                   aria-expanded={isCategoryDropdownOpen}
                 >
-                  {selectedCategory ? selectedCategory.name : 'Select Category'} <span className={styles.dropdownArrow}>▼</span> 
+                  {selectedCategory ? selectedCategory.name : 'Select Category'} <span className={styles.dropdownArrow}>▼</span>
                 </button>
-                {isCategoryDropdownOpen && (
-                  <ul className={styles.categoryDropdownMenu}> 
-                    {navData.dynamic.map((category) => (
-                      <li key={category.id}>
-                        <button
-                          type="button"
-                          className={styles.categoryDropdownItem} 
-                          onClick={() => handleCategorySelect(category.id)}
-                        >
-                          {category.name}
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            )}
-          </div>
-          {/* Center: Nav links */}
-          <div className={styles.centerCol}>
-            <div className={styles['nav-links']}>
+              )}
+              {isCategoryDropdownOpen && (
+                <ul className={styles.categoryDropdownMenu}>
+                  {contentCategories.map((category) => (
+                    <li key={category.id}>
+                      <button
+                        type="button"
+                        className={styles.categoryDropdownItem}
+                        onClick={() => handleCategorySelect(category.id)}
+                      >
+                        {category.name}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <div className={styles.rightMobileGroup}>
+              <div className={styles.themeToggleMobile}><ThemeToggle /></div>
+              <button className={styles.hamburger} onClick={toggleMenu} aria-label="Toggle Menu">
+                <div className={`${styles.bar} ${isMenuOpen ? styles.bar1Open : ''}`}></div>
+                <div className={`${styles.bar} ${isMenuOpen ? styles.bar2Open : ''}`}></div>
+                <div className={`${styles.bar} ${isMenuOpen ? styles.bar3Open : ''}`}></div>
+              </button>
+            </div>
+            {/* Slide-out menu for nav links */}
+            <div
+              ref={menuRef}
+              className={`${styles['nav-links']} ${isMenuOpen ? styles.mobileMenu : ''}`}
+            >
+              <button className={styles['close-button']} onClick={toggleMenu} aria-label="Close Menu">
+                <div className={`${styles.closeLine} ${isMenuOpen ? styles.line1Active : ''}`}></div>
+                <div className={`${styles.closeLine} ${isMenuOpen ? styles.line2Active : ''}`}></div>
+              </button>
               {navData.static.map((page) => (
                 <NavLink
                   key={page.id}
@@ -194,7 +266,7 @@ const Navbar = () => {
               {selectedCategory && selectedCategory.subcategories && selectedCategory.subcategories.map((sub) => (
                 <NavLink
                   key={sub.id}
-                  to={sub.path}
+                  to={`${selectedCategory.baseRoute}/${sub.path}`}
                   className={({ isActive }) => isActive ? `${styles.link} ${styles.active}` : styles.link}
                   onClick={handleLinkClick}
                 >
@@ -203,88 +275,15 @@ const Navbar = () => {
               ))}
             </div>
           </div>
-          {/* Right: ThemeToggle (desktop only) */}
-          <div className={styles.rightCol}>
-            <div className={styles.themeToggleDesktop}><ThemeToggle /></div>
-          </div>
-        </div>
-      )}
-
-      {/* --- MOBILE MENU --- */}
-      { isMobile && (
-        <div className={styles.mobileBar}>
-          {/* Left: Category Dropdown */}
-          <div className={styles.categoryDropdownContainer} ref={categoryDropdownRef}>
-            {navData.dynamic.length > 0 && (
-              <button
-                type="button"
-                className={styles.categoryDropdownTrigger}
-                onClick={toggleCategoryDropdown}
-                aria-haspopup="true"
-                aria-expanded={isCategoryDropdownOpen}
-              >
-                {selectedCategory ? selectedCategory.name : 'Select Category'} <span className={styles.dropdownArrow}>▼</span>
-              </button>
-            )}
-            {isCategoryDropdownOpen && (
-              <ul className={styles.categoryDropdownMenu}>
-                {navData.dynamic.map((category) => (
-                  <li key={category.id}>
-                    <button
-                      type="button"
-                      className={styles.categoryDropdownItem}
-                      onClick={() => handleCategorySelect(category.id)}
-                    >
-                      {category.name}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-          <div className={styles.rightMobileGroup}>
-            <div className={styles.themeToggleMobile}><ThemeToggle /></div>
-            <button className={styles.hamburger} onClick={toggleMenu} aria-label="Toggle Menu">
-              <div className={`${styles.bar} ${isMenuOpen ? styles.bar1Open : ''}`}></div>
-              <div className={`${styles.bar} ${isMenuOpen ? styles.bar2Open : ''}`}></div>
-              <div className={`${styles.bar} ${isMenuOpen ? styles.bar3Open : ''}`}></div>
-            </button>
-          </div>
-
-          {/* Slide-out menu for nav links */}
-          <div
-            ref={menuRef}
-            className={`${styles['nav-links']} ${isMenuOpen ? styles.mobileMenu : ''}`}
-          >
-            <button className={styles['close-button']} onClick={toggleMenu} aria-label="Close Menu">
-              <div className={`${styles.closeLine} ${isMenuOpen ? styles.line1Active : ''}`}></div>
-              <div className={`${styles.closeLine} ${isMenuOpen ? styles.line2Active : ''}`}></div>
-            </button>
-            {navData.static.map((page) => (
-              <NavLink
-                key={page.id}
-                to={page.path}
-                className={({ isActive }) => isActive ? `${styles.link} ${styles.active}` : styles.link}
-                onClick={handleLinkClick}
-              >
-                <span>{page.name}</span>
-              </NavLink>
-            ))}
-            {selectedCategory && selectedCategory.subcategories && selectedCategory.subcategories.map((sub) => (
-              <NavLink
-                key={sub.id}
-                to={sub.path}
-                className={({ isActive }) => isActive ? `${styles.link} ${styles.active}` : styles.link}
-                onClick={handleLinkClick}
-              >
-                <span>{sub.name}</span>
-              </NavLink>
-            ))}
-          </div>
-        </div>
-      )}
+        )}
+        {!isMobile && subNavSubcategories.length > 0 && (
+          <SubNav
+            subcategories={subNavSubcategories}
+            baseRoute={selectedCategory?.baseRoute || ''}
+          />
+        )}
+      </div>
     </nav>
   );
 };
-
 export default Navbar;

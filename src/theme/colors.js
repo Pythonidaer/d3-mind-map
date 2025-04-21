@@ -30,12 +30,18 @@ nodeNegative3: '#f3f4f6', // gray-100
 */
 export const lightTheme = {
   root: '#37474F',
-  nodePositive1: '#98EE99',
-  nodePositive2: '#B9F6CA',
-  nodePositive3: '#E8F5E9',
-  nodeNegative1: '#FF8A80',
-  nodeNegative2: '#FFB3B3',
-  nodeNegative3: '#FFE0E0',
+  // nodePositive1: '#98EE99',
+  // nodePositive2: '#B9F6CA',
+  // nodePositive3: '#E8F5E9',
+  // nodeNegative1: '#FF8A80',
+  // nodeNegative2: '#FFB3B3',
+  // nodeNegative3: '#FFE0E0',
+  nodePositive1: '#00d4ff',   // Bright Cyan (navbar gradient end)
+  nodePositive2: '#38bdf8',   // Sky Blue (harmonious with gradient)
+  nodePositive3: '#e0f7fa',   // Light Cyan (background/highlight)
+  nodeNegative1: '#ee0979',   // Vivid Magenta (contrasts with blue)
+  nodeNegative2: '#ff6a88',   // Pinkish Coral
+  nodeNegative3: '#fce4ec', 
   // Add more as needed
 };
 /*
