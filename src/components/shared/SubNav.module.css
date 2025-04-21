@@ -114,6 +114,5 @@
 }
 
 :global([data-theme="dark"]) .active {
-  border-bottom: 2px solid #fff;
   color: #fff;
 }
