@@ -13,8 +13,10 @@ body {
 }
 
 :root {
-  --loader-primary: #98EE99;
-  --loader-accent: #FF8A80;
+  /* --loader-primary: #98EE99;
+  --loader-accent: #FF8A80; */
+  --loader-primary: #00d4ff;
+  --loader-accent: #ee0979;
   --navbar-bg: white;
   --navbar-fg: #232323;
   --navbar-link: #232323;
