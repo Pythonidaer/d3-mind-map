@@ -22,20 +22,20 @@ export const contentCategories = [
         addToNav: true,
         addToSubNav: false
       },
-      { id: 'oop', name: 'Object-Oriented', path: 'oop', addToNav: true, addToSubNav: false },
+      { id: 'oop', name: 'Object-Oriented', path: 'oop', addToNav: false, addToSubNav: true },
       {
         id: 'procedural',
         name: 'Procedural',
         path: 'procedural',
-        addToNav: true,
-        addToSubNav: false
+        addToNav: false,
+        addToSubNav: true
       },
       {
         id: 'imperative',
         name: 'Imperative',
         path: 'imperative',
-        addToNav: true,
-        addToSubNav: false
+        addToNav: false,
+        addToSubNav: true
       },
     ],
   },
