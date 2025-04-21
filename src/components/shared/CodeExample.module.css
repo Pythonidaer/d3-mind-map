@@ -13,6 +13,10 @@
   .codeBlock {
     position: relative;
   }
+
+  .codeBlock pre {
+    /* padding: 0 !important; */
+  }
   
   .copyButton {
     position: absolute;

@@ -17,73 +17,64 @@ const coreArticleData = {
     codeExamples: [
       {
         title: "Variable Declarations",
-        code: `
-          var x = 1;     // Function-scoped
-          let y = 2;     // Block-scoped
-          const z = 3;   // Block-scoped and constant
-  
-          console.log(x, y, z);
-        `,
+        code: `var x = 1;     // Function-scoped
+let y = 2;     // Block-scoped
+const z = 3;   // Block-scoped and constant
+
+console.log(x, y, z);
+`,
       },
       {
         title: "Control Flow Example",
-        code: `
-          const score = 85;
-  
-          if (score >= 90) {
-            console.log("A");
-          } else if (score >= 80) {
-            console.log("B");
-          } else {
-            console.log("Needs Improvement");
-          }
-        `,
+        code: `const score = 85;
+
+if (score >= 90) {
+  console.log("A");
+} else if (score >= 80) {
+  console.log("B");
+} else {
+  console.log("Needs Improvement");
+}`,
       },
       {
         title: "Function Declaration vs Arrow Function",
-        code: `
-          function greet(name) {
-            return "Hello, " + name;
-          }
-  
-          const greetArrow = (name) => \`Hello, \${name}\`;
-  
-          console.log(greet("Alice"));
-          console.log(greetArrow("Bob"));
-        `,
+        code: `function greet(name) {
+  return "Hello, " + name;
+}
+
+const greetArrow = (name) => \`Hello, \${name}\`;
+
+console.log(greet("Alice"));
+console.log(greetArrow("Bob"));`,
       },
       {
         title: "Lexical Scope and Closure",
-        code: `
-          function outer() {
-            const message = "Scoped!";
-            return function inner() {
-              console.log(message); // 'Scoped!' via closure
-            };
-          }
-  
-          const myClosure = outer();
-          myClosure();
-        `,
+        code: `function outer() {
+  const message = "Scoped!";
+  return function inner() {
+    console.log(message); // 'Scoped!' via closure
+  };
+}
+
+const myClosure = outer();
+myClosure();`,
       },
       {
         title: "Understanding 'this'",
-        code: `
-          const user = {
-            name: "Alice",
-            greet() {
-              console.log("Hi, I'm " + this.name);
-            },
-          };
-  
-          user.greet(); // "Hi, I'm Alice"
-  
-          const greet = user.greet;
-          greet(); // 'this' is undefined or window in non-strict mode
-  
-          const boundGreet = user.greet.bind(user);
-          boundGreet(); // "Hi, I'm Alice"
-        `,
+        code: `const user = {
+  name: "Alice",
+  greet() {
+    console.log("Hi, I'm " + this.name);
+  },
+};
+
+user.greet(); // "Hi, I'm Alice"
+
+const greet = user.greet;
+greet(); // 'this' is undefined or window in non-strict mode
+
+const boundGreet = user.greet.bind(user);
+boundGreet(); // "Hi, I'm Alice"`,
       },
     ],
     benefits: {
