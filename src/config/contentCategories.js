@@ -49,14 +49,14 @@ export const contentCategories = [
       { id: 'core', name: 'Core', path: 'core', addToNav: true, addToSubNav: false },
       { id: 'data', name: 'Data', path: 'data', addToNav: true, addToSubNav: false },
       { id: 'browser', name: 'Browser', path: 'browser', addToNav: true, addToSubNav: false },
-      { id: 'async', name: 'Async', path: 'async', addToNav: true, addToSubNav: false },
-      { id: 'advanced', name: 'Advanced', path: 'advanced', addToNav: true, addToSubNav: false },
+      { id: 'async', name: 'Async', path: 'async', addToNav: false, addToSubNav: true },
+      { id: 'advanced', name: 'Advanced', path: 'advanced', addToNav: false, addToSubNav: true },
       {
         id: 'tooling_and_testing',
         name: 'Tooling & Testing',
         path: 'tooling_and_testing',
-        addToNav: true,
-        addToSubNav: false
+        addToNav: false,
+        addToSubNav: true
       },
       // Future fundamental topics (like 'variables', 'data-types') added here
     ],
