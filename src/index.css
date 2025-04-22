@@ -8,12 +8,8 @@
 
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+  background: var(--main-bg, #fff);
   color: var(--main-fg, #18191a);
-}
-
-[data-theme="dark"] body {
-  background: linear-gradient(90deg, #18122b 0%, #3b1976 40%, #a78bfa 100%);
 }
 
 :root {
