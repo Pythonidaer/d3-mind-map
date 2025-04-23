@@ -11,6 +11,8 @@
     "bundlesize": "bundlesize --config src/config/bundlesize.config.json",
     "analyze-src": "node analyze-src-sizes.js",
     "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:ui:cov": "vitest --ui --coverage",
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
@@ -29,6 +31,7 @@
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react": "^4.3.4",
     "@vitest/coverage-v8": "^3.1.2",
+    "@vitest/ui": "^3.1.2",
     "bundlesize": "^0.18.2",
     "eslint": "^9.21.0",
     "eslint-plugin-react-hooks": "^5.1.0",

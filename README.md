@@ -4,12 +4,6 @@ Mind Maps is a project that originally started out as a visualized, high-level o
 
 This project uses React and Vite.
 
-## Note to self
-- Line 23 in MindMap, within the node.forEach - I removed this:
-
-        console.log(`Node ${d.id} ('${d.label}'): text=(${textWidth}, ${textHeight}), shape=(${shapeWidth}, ${shapeHeight})`);
-
-
 ## Available Scripts
 
 In the project directory, you can run:
@@ -30,62 +24,67 @@ You will also see any lint errors in the console.
 
 Builds the app for production to the `dist` folder.
 
+### `npm run test:ui:cov`
+
+Opens up `http://localhost:51204/__vitest__/#/`for a Vitest dev server that provides a beautiful UI to view and interact with tests and coverage.
+
 ## Adding New Content
 
 The application is designed to be extensible. Follow these steps to add new content categories (like "SOLID Principles") or new subcategories (like "Variables" under "Fundamentals"):
 
 ### 1. Update Configuration (`src/config/contentCategories.js`)
 
-*   **Open:** `src/config/contentCategories.js`
-*   **Locate:** The `contentCategories` array.
-*   **To Add a New Category:**
-    *   Add a new object to the `contentCategories` array.
-    *   **Required Fields:**
-        *   `id`: A unique lowercase identifier (e.g., `'solid'`). Used internally and for CSS potentially.
-        *   `name`: The display name for the category dropdown (e.g., `'SOLID Principles'`).
-        *   `baseRoute`: The first part of the URL path (e.g., `'/solid'`). MUST start with `/` and be unique.
-        *   `dataPath`: The folder name within `src/data/` where this category's subcategory data resides (e.g., `'solid'`). Must match the folder name you create in Step 2.
-        *   `addToNav`: `true` if you want this category to appear in the main dropdown, `false` otherwise. (Content for `false` categories is still accessible via direct URL).
-        *   `subcategories`: An array of objects, one for each subcategory.
-*   **To Add a New Subcategory (to an existing Category):**
-    *   Find the correct category object within `contentCategories`.
-    *   Add a new object to its `subcategories` array.
-    *   **Required Fields:**
-        *   `id`: A unique lowercase identifier within the category (e.g., `'variables'`). Used internally.
-        *   `name`: The display name for the subcategory link in the Navbar (e.g., `'Variables'`).
-        *   `route`: The second part of the URL path (e.g., `'variables'`). Appended to the category's `baseRoute`. MUST be unique within the category.
-        *   `dataPath`: The folder name within the category's `dataPath` folder where this subcategory's data resides (e.g., `'variables'`). Must match the folder name you create in Step 2.
-        *   `addToNav`: `true` if you want this subcategory link to appear in the Navbar when its parent category is selected, `false` otherwise. (Content for `false` subcategories is still accessible via direct URL).
+- **Open:** `src/config/contentCategories.js`
+- **Locate:** The `contentCategories` array.
+- **To Add a New Category:**
+  - Add a new object to the `contentCategories` array.
+  - **Required Fields:**
+    - `id`: A unique lowercase identifier (e.g., `'solid'`). Used internally and for CSS potentially.
+    - `name`: The display name for the category dropdown (e.g., `'SOLID Principles'`).
+    - `baseRoute`: The first part of the URL path (e.g., `'/solid'`). MUST start with `/` and be unique.
+    - `dataPath`: The folder name within `src/data/` where this category's subcategory data resides (e.g., `'solid'`). Must match the folder name you create in Step 2.
+    - `addToNav`: `true` if you want this category to appear in the main dropdown, `false` otherwise. (Content for `false` categories is still accessible via direct URL).
+    - `subcategories`: An array of objects, one for each subcategory.
+- **To Add a New Subcategory (to an existing Category):**
+  - Find the correct category object within `contentCategories`.
+  - Add a new object to its `subcategories` array.
+  - **Required Fields:**
+    - `id`: A unique lowercase identifier within the category (e.g., `'variables'`). Used internally.
+    - `name`: The display name for the subcategory link in the Navbar (e.g., `'Variables'`).
+    - `route`: The second part of the URL path (e.g., `'variables'`). Appended to the category's `baseRoute`. MUST be unique within the category.
+    - `dataPath`: The folder name within the category's `dataPath` folder where this subcategory's data resides (e.g., `'variables'`). Must match the folder name you create in Step 2.
+    - `addToNav`: `true` if you want this subcategory link to appear in the Navbar when its parent category is selected, `false` otherwise. (Content for `false` subcategories is still accessible via direct URL).
 
 ### 2. Create Data Folder and Files (`src/data/`)
 
-*   Based on the `dataPath` values you defined in `contentCategories.js`, create the necessary folder structure within `src/data/`.
-*   **Example:** For a new category `'solid'` (`dataPath: 'solid'`) with a subcategory `'single-responsibility'` (`dataPath: 'single-responsibility'`), you would create:
-    ```
-    src/
-    └── data/
-        ├── fundamentals/
-        │   └── syntax/
-        │       ├── articleData.js
-        │       └── mindMapData.js
-        └── solid/  <-- New category folder (matches category dataPath)
-            └── single-responsibility/ <-- New subcategory folder (matches subcategory dataPath)
-                ├── articleData.js      <-- Create this file
-                └── mindMapData.js      <-- Create this file
-    ```
-*   **Populate Data Files:**
-    *   `mindMapData.js`: Must export a default object with `nodes` (array) and `links` (array) properties, following the D3 format used in existing files.
-    *   `articleData.js`: Must export a default object containing the structured content expected by the `Article.jsx` component (e.g., `title`, `introduction`, `sections`, `codeExamples`, `conclusion`, etc., matching the structure of existing files).
+- Based on the `dataPath` values you defined in `contentCategories.js`, create the necessary folder structure within `src/data/`.
+- **Example:** For a new category `'solid'` (`dataPath: 'solid'`) with a subcategory `'single-responsibility'` (`dataPath: 'single-responsibility'`), you would create:
+  ```
+  src/
+  └── data/
+      ├── fundamentals/
+      │   └── syntax/
+      │       ├── articleData.js
+      │       └── mindMapData.js
+      └── solid/  <-- New category folder (matches category dataPath)
+          └── single-responsibility/ <-- New subcategory folder (matches subcategory dataPath)
+              ├── articleData.js      <-- Create this file
+              └── mindMapData.js      <-- Create this file
+  ```
+- **Populate Data Files:**
+  - `mindMapData.js`: Must export a default object with `nodes` (array) and `links` (array) properties, following the D3 format used in existing files.
+  - `articleData.js`: Must export a default object containing the structured content expected by the `Article.jsx` component (e.g., `title`, `introduction`, `sections`, `codeExamples`, `conclusion`, etc., matching the structure of existing files).
 
 ### 3. Verify
 
-*   Run the development server (`npm run dev`).
-*   Check if the new category appears in the dropdown (if `addToNav: true`).
-*   Select the new category/subcategory and check if the Navbar links update.
-*   Navigate to the new content page (e.g., `/solid/single-responsibility`).
-*   Verify that the Mind Map and Article content load correctly without errors.
-*   Test navigation to and from the new content, and page refreshes.
-*   Test categories/subcategories with `addToNav: false` by navigating directly via the URL. Ensure the correct parent category still displays in the Navbar dropdown.
+- Run the development server (`npm run dev`).
+- Check if the new category appears in the dropdown (if `addToNav: true`).
+- Check if the new category appears in the subnav dropdown (if `addToSubNav: true`).
+- Select the new category/subcategory and check if the Navbar links update.
+- Navigate to the new content page (e.g., `/solid/single-responsibility`).
+- Verify that the Mind Map and Article content load correctly without errors.
+- Test navigation to and from the new content, and page refreshes.
+- Test categories/subcategories with `addToNav: false` by navigating directly via the URL. Ensure the correct parent category still displays in the Navbar dropdown.
 
 That's it! No changes should be needed in the React components themselves (`App.jsx`, `Paradigm.jsx`, `Navbar.jsx`) as they are designed to read the configuration dynamically.
 
@@ -97,8 +96,8 @@ As the number of subcategories grows, especially within a single main category l
 
 **Potential UI Concepts:**
 
-*   **Grid View:** A visually appealing grid of cards or links, each representing a subcategory.
-*   **Scrolling Menu:** A horizontal, infinitely scrolling menu (similar to a stock ticker) displaying subcategory links.
+- **Grid View:** A visually appealing grid of cards or links, each representing a subcategory.
+- **Scrolling Menu:** A horizontal, infinitely scrolling menu (similar to a stock ticker) displaying subcategory links.
 
 **Requirements & Implementation Notes:**
 
@@ -111,7 +110,7 @@ As the number of subcategories grows, especially within a single main category l
 
 This enhancement will leverage the existing configuration structure in `src/config/contentCategories.js`, ensuring that all defined content, regardless of its `addToNav` status, remains discoverable.
 
-*(Other future ideas can be added here)*
+_(Other future ideas can be added here)_
 
 ## Analyzing Complexity
 
@@ -123,7 +122,7 @@ Keeping track of bundle size is crucial for web performance. This project uses s
 
 ### Analyzing Source File Sizes (`analyze-src`)
 
-This uses a custom script (`analyze-src-sizes.js`) leveraging the `filesize` package to recursively list the size of each `.js` and `.jsx` file within the `src` directory. This is helpful for identifying large source files *before* they get bundled.
+This uses a custom script (`analyze-src-sizes.js`) leveraging the `filesize` package to recursively list the size of each `.js` and `.jsx` file within the `src` directory. This is helpful for identifying large source files _before_ they get bundled.
 
 **Command:**
 
@@ -141,7 +140,7 @@ This tool (`bundlesize`) checks the size of the generated production build asset
 npm test
 ```
 
-*(Note: This requires running `npm run build` first to generate the `dist` directory.)*
+_(Note: This requires running `npm run build` first to generate the `dist` directory.)_
 
 ### Visualizing Production Bundle (`vite-bundle-visualizer`)
 
@@ -149,7 +148,7 @@ This tool generates an interactive treemap visualization of the contents of your
 
 **Command:**
 
-Run this *after* building the project (`npm run build`):
+Run this _after_ building the project (`npm run build`):
 
 ```bash
 npx vite-bundle-visualizer
