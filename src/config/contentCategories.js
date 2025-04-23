@@ -77,8 +77,8 @@ export const contentCategories = [
         id: 'async',
         name: 'Async',
         path: 'async',
-        addToNav: false,
-        addToSubNav: true,
+        addToNav: true,
+        addToSubNav: false,
       },
       {
         id: 'advanced',
@@ -152,6 +152,78 @@ export const contentCategories = [
         path: 'anti_patterns',
         addToNav: true,
         addToSubNav: false,
+      },
+    ],
+  },
+  {
+    id: 'css_design_systems',
+    name: 'CSS Design Systems',
+    baseRoute: '/css_design_systems',
+    dataPath: 'css_design_systems',
+    addToNav: true,
+    subcategories: [
+      {
+        id: 'css_fundamentals',
+        name: 'Fundamentals',
+        path: 'css_fundamentals',
+        addToNav: true,
+        addToSubNav: false
+      },
+      {
+        id: 'core_principles',
+        name: 'Core Principles',
+        path: 'core_principles',
+        addToNav: true,
+        addToSubNav: false
+      },
+      {
+        id: 'typography',
+        name: 'Typography',
+        path: 'typography',
+        addToNav: true,
+        addToSubNav: false
+      },
+      {
+        id: 'layout',
+        name: 'Layout',
+        path: 'layout',
+        addToNav: true,
+        addToSubNav: false
+      },
+      {
+        id: 'color',
+        name: 'Color',
+        path: 'color',
+        addToNav: true,
+        addToSubNav: false
+      },
+      {
+        id: 'responsiveness',
+        name: 'Responsiveness',
+        path: 'responsiveness',
+        addToNav: true,
+        addToSubNav: false
+      },
+      {
+        id: 'components',
+        name: 'Reusable Components',
+        path: 'components',
+        addToNav: false,
+        addToSubNav: true
+      },
+      {
+        id: 'libraries',
+        name: 'CSS Libraries',
+        path: 'libraries',
+        addToNav: false,
+        addToSubNav: true
+      },
+      {
+        id: 'maintenance',
+        name: 'Maintenance & Governance',
+        path: 'maintenance',
+        addToNav: false,
+        addToSubNav: true
       },
     ],
   },
