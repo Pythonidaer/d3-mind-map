@@ -26,8 +26,8 @@ export const contentCategories = [
         id: 'oop',
         name: 'Object-Oriented',
         path: 'oop',
-        addToNav: false,
-        addToSubNav: true,
+        addToNav: true,
+        addToSubNav: false,
       },
       {
         id: 'procedural',
@@ -173,8 +173,8 @@ export const contentCategories = [
         id: 'core_principles',
         name: 'Core Principles',
         path: 'core_principles',
-        addToNav: true,
-        addToSubNav: false
+        addToNav: false,
+        addToSubNav: true
       },
       {
         id: 'typography',
