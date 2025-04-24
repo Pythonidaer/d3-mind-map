@@ -2,6 +2,78 @@
 
 export const contentCategories = [
   {
+    id: 'cognitive_learning',
+    name: 'Cognitive Learning Systems',
+    baseRoute: '/cognitive_learning',
+    dataPath: 'cognitive_learning',
+    addToNav: true,
+    subcategories: [
+      {
+        id: 'abstraction_model',
+        name: '4-Level Abstraction Model',
+        path: 'abstraction_model',
+        addToNav: true,
+        addToSubNav: false,
+      },
+      {
+        id: 'memory_strategies',
+        name: 'Memory Strategies',
+        path: 'memory_strategies',
+        addToNav: true,
+        addToSubNav: false,
+      },
+      {
+        id: 'rapid_learning',
+        name: 'Rapid Skill Acquisition',
+        path: 'rapid_learning',
+        addToNav: true,
+        addToSubNav: false,
+      },
+      {
+        id: 'performance_memorization',
+        name: 'Performance Memorization',
+        path: 'performance_memorization',
+        addToNav: true,
+        addToSubNav: false,
+      },
+      {
+        id: 'learning_tools',
+        name: 'Tools',
+        path: 'learning_tools',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'study_schedules',
+        name: 'Study Schedule Optimization',
+        path: 'study_schedules',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'instructional_models',
+        name: 'Instructional Models',
+        path: 'instructional_models',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'evidence_strategies',
+        name: 'Evidence-Based Strategies',
+        path: 'evidence_strategies',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'visual_frameworks',
+        name: 'Visualization & UX for Learning',
+        path: 'visual_frameworks',
+        addToNav: false,
+        addToSubNav: true,
+      },
+    ],
+  },
+  {
     id: 'fundamentals',
     name: 'JavaScript (JS)',
     baseRoute: '/fundamental', // Distinct base route for this category
