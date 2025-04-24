@@ -157,7 +157,7 @@ export const contentCategories = [
   },
   {
     id: 'css_design_systems',
-    name: 'CSS Design Systems',
+    name: 'CSS Design',
     baseRoute: '/css_design_systems',
     dataPath: 'css_design_systems',
     addToNav: true,
@@ -167,63 +167,63 @@ export const contentCategories = [
         name: 'Fundamentals',
         path: 'css_fundamentals',
         addToNav: true,
-        addToSubNav: false
+        addToSubNav: false,
       },
       {
         id: 'core_principles',
         name: 'Core Principles',
         path: 'core_principles',
         addToNav: false,
-        addToSubNav: true
+        addToSubNav: true,
       },
       {
         id: 'typography',
         name: 'Typography',
         path: 'typography',
         addToNav: true,
-        addToSubNav: false
+        addToSubNav: false,
       },
       {
         id: 'layout',
         name: 'Layout',
         path: 'layout',
         addToNav: true,
-        addToSubNav: false
+        addToSubNav: false,
       },
       {
         id: 'color',
         name: 'Color',
         path: 'color',
         addToNav: true,
-        addToSubNav: false
+        addToSubNav: false,
       },
       {
         id: 'responsiveness',
         name: 'Responsiveness',
         path: 'responsiveness',
         addToNav: true,
-        addToSubNav: false
+        addToSubNav: false,
       },
       {
         id: 'components',
         name: 'Reusable Components',
         path: 'components',
         addToNav: false,
-        addToSubNav: true
+        addToSubNav: true,
       },
       {
         id: 'libraries',
         name: 'CSS Libraries',
         path: 'libraries',
         addToNav: false,
-        addToSubNav: true
+        addToSubNav: true,
       },
       {
         id: 'maintenance',
         name: 'Maintenance & Governance',
         path: 'maintenance',
         addToNav: false,
-        addToSubNav: true
+        addToSubNav: true,
       },
     ],
   },
@@ -387,6 +387,78 @@ export const contentCategories = [
   //     },
   //   ],
   // },
+  {
+    id: 'javascript_frameworks',
+    name: 'JS Frameworks',
+    baseRoute: '/javascript_frameworks',
+    dataPath: 'javascript_frameworks',
+    addToNav: true,
+    subcategories: [
+      {
+        id: 'introduction_landscape',
+        name: 'Introduction',
+        path: 'introduction_landscape',
+        addToNav: true,
+        addToSubNav: false,
+      },
+      {
+        id: 'core_concepts',
+        name: 'Core Concepts',
+        path: 'core_concepts',
+        addToNav: true,
+        addToSubNav: false,
+      },
+      {
+        id: 'popular_frameworks',
+        name: 'Popular Frameworks',
+        path: 'popular_frameworks',
+        addToNav: true,
+        addToSubNav: false,
+      },
+      {
+        id: 'emerging_meta_frameworks',
+        name: 'Meta-Frameworks',
+        path: 'emerging_meta_frameworks',
+        addToNav: true,
+        addToSubNav: false,
+      },
+      {
+        id: 'architecture_paradigms',
+        name: 'Architecture & Paradigms',
+        path: 'architecture_paradigms',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'comparison_tradeoffs',
+        name: 'Trade-Offs',
+        path: 'comparison_tradeoffs',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'frameworks_vs_libraries',
+        name: 'Frameworks vs. Libraries',
+        path: 'frameworks_vs_libraries',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'creation_distribution',
+        name: 'Creating & Distributing',
+        path: 'creation_distribution',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'use_cases_applications',
+        name: 'Use Cases & Applications',
+        path: 'use_cases_applications',
+        addToNav: false,
+        addToSubNav: true,
+      },
+    ],
+  },
   {
     id: 'js-react-interview',
     name: 'Interview Prep',
