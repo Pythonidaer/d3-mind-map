@@ -3,7 +3,7 @@
 export const contentCategories = [
   {
     id: 'cognitive_learning',
-    name: 'Cognitive Learning Systems',
+    name: 'Cognitive Systems',
     baseRoute: '/cognitive_learning',
     dataPath: 'cognitive_learning',
     addToNav: true,
@@ -31,7 +31,7 @@ export const contentCategories = [
       },
       {
         id: 'performance_memorization',
-        name: 'Performance Memorization',
+        name: 'Memorization',
         path: 'performance_memorization',
         addToNav: true,
         addToSubNav: false,
@@ -45,7 +45,7 @@ export const contentCategories = [
       },
       {
         id: 'study_schedules',
-        name: 'Study Schedule Optimization',
+        name: 'Study Schedule',
         path: 'study_schedules',
         addToNav: false,
         addToSubNav: true,
@@ -66,7 +66,7 @@ export const contentCategories = [
       },
       {
         id: 'visual_frameworks',
-        name: 'Visualization & UX for Learning',
+        name: 'Visualization & UX',
         path: 'visual_frameworks',
         addToNav: false,
         addToSubNav: true,
