@@ -641,6 +641,71 @@ export const contentCategories = [
       },
     ],
   },
+  {
+    id: 'web_rendering_techniques',
+    name: 'Rendering Techniques',
+    baseRoute: '/web_rendering_techniques',
+    dataPath: 'web_rendering_techniques',
+    addToNav: true,
+    subcategories: [
+      {
+        id: 'server_side_rendering',
+        name: 'SSR',
+        path: 'server_side_rendering',
+        addToNav: true,
+        addToSubNav: false,
+      },
+      {
+        id: 'static_site_generation',
+        name: 'SSG',
+        path: 'static_site_generation',
+        addToNav: true,
+        addToSubNav: false,
+      },
+      {
+        id: 'client_side_rendering',
+        name: 'CSR',
+        path: 'client_side_rendering',
+        addToNav: true,
+        addToSubNav: false,
+      },
+      {
+        id: 'incremental_static_regeneration',
+        name: 'ISR',
+        path: 'incremental_static_regeneration',
+        addToNav: true,
+        addToSubNav: false,
+      },
+      {
+        id: 'hydration',
+        name: 'Hydration',
+        path: 'hydration',
+        addToNav: true,
+        addToSubNav: false,
+      },
+      {
+        id: 'streaming_rendering',
+        name: 'Streaming Rendering',
+        path: 'streaming_rendering',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'edge_rendering',
+        name: 'Edge Rendering',
+        path: 'edge_rendering',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'hybrid_rendering',
+        name: 'Hybrid Rendering',
+        path: 'hybrid_rendering',
+        addToNav: false,
+        addToSubNav: true,
+      },
+    ],
+  },
   // Add future categories  here following the same structure
 ]
 
