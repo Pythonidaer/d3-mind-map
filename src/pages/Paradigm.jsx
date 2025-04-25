@@ -43,7 +43,7 @@ const Paradigm = () => {
 
         const [mindMapModule, articleModule] = await Promise.all([
           mindMapFiles[mindMapPath](),
-          articleFiles[articlePath]()
+          articleFiles[articlePath](),
         ])
 
         if (!mindMapModule || !mindMapModule.nodes || !mindMapModule.links) {
@@ -86,7 +86,7 @@ const Paradigm = () => {
         <Suspense fallback={<Loading />}>
           {mindMapData?.nodes && articleData && (
             <>
-              <h1 className={styles.title}>{pageTitle}</h1>
+              {/* <h1 className={styles.title}>{pageTitle}</h1> */}
               <MindMap nodes={mindMapData.nodes} links={mindMapData.links} />
               <Article article={articleData} />
             </>
