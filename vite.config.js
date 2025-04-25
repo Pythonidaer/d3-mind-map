@@ -11,6 +11,8 @@ export default defineConfig({
       manifest: {
         name: 'Mind Map Method',
         short_name: 'MindMap',
+        description:
+          'The Mind Map Method is a dynamic platform for creating interactive mind maps and comprehensive learning resources. Build, visualize, and share knowledge through customizable mind maps and detailed articles. Perfect for visual learners.',
         start_url: '/',
         display: 'standalone',
         background_color: '#ffffff',
@@ -18,6 +20,20 @@ export default defineConfig({
         icons: [
           { src: 'icons/icon-192.png', sizes: '192x192', type: 'image/png' },
           { src: 'icons/icon-512.png', sizes: '512x512', type: 'image/png' },
+        ],
+        screenshots: [
+          {
+            src: 'screenshots/desktop-1280x720.png',
+            sizes: '1280x720',
+            type: 'image/png',
+            form_factor: 'wide',
+          },
+          {
+            src: 'screenshots/mobile-375x667.png',
+            sizes: '375x667',
+            type: 'image/png',
+            // no form_factor here → covers mobile
+          },
         ],
       },
     }),
