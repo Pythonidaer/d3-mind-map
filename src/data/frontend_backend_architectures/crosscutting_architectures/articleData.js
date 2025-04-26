@@ -1,131 +1,141 @@
 const articleData = {
-    introduction: `Cross-cutting architectures span across both frontend and backend systems. They define patterns for communication, deployment, and integration that ensure consistency, scalability, and flexibility across the entire stack. This guide explains major cross-cutting architectures with real-world examples and code snippets.`,
+    introduction: `Crosscutting architectures focus on patterns that blend frontend and backend concerns or orchestrate interactions across multiple systems. These architectures are crucial for enabling seamless communication, composing systems from different services, and building scalable full-stack solutions. This guide explores crosscutting architecture patterns in detail, grouped into API strategies, fullstack patterns, and integration/composition techniques.`,
   
     keyPrinciples: [
-      'Decoupling: Minimizing tight coupling between frontend and backend.',
-      'Scalability: Ensuring both frontend and backend can scale independently.',
-      'Consistency: Applying unified communication standards across the stack.',
-      'Performance Optimization: Reducing latency and unnecessary data transfers.',
-      'Developer Experience: Simplifying collaboration across frontend and backend teams.',
+      'Prioritize clear, efficient, and flexible communication between services.',
+      'Design for composability: systems should integrate new services easily.',
+      'Ensure frontend and backend separation is pragmatic, not dogmatic.',
+      'Treat APIs as first-class products with versioning and documentation.',
+      'Favor loose coupling between frontend and backend layers.',
     ],
   
     benefits: {
-      title: 'Benefits of Cross-Cutting Architectures',
+      title: 'Benefits of Crosscutting Architectures',
       content: [
-        'Improved scalability and resilience.',
-        'Easier onboarding across different teams.',
-        'Better user experiences through optimized communication.',
-        'Faster deployments and independent scaling.',
-        'Cleaner separation of responsibilities.',
+        'Improved flexibility to swap or upgrade backend and frontend technologies.',
+        'More scalable and maintainable full-stack systems.',
+        'Better developer experience through clear API contracts.',
+        'Faster composition of new applications by reusing services and APIs.',
+        'Ability to deliver consistent omnichannel experiences (web, mobile, IoT).',
       ],
     },
   
     cons: {
-      title: 'Challenges of Cross-Cutting Architectures',
+      title: 'Challenges of Crosscutting Architectures',
       content: [
-        'Requires careful coordination across frontend and backend.',
-        'Can introduce extra complexity in small projects.',
-        'Potential performance penalties if not designed carefully.',
+        'Increased complexity in managing distributed systems.',
+        'Coordination overhead between teams owning different layers.',
+        'Potential for performance bottlenecks if APIs are not optimized.',
+        'Security risks if API exposure is not properly governed.',
       ],
     },
   
     antiPatterns: {
-      title: 'Common Anti-Patterns in Cross-Cutting Architectures',
+      title: 'Common Crosscutting Anti-Patterns',
       content: [
-        'Duplicating logic across frontend and backend.',
-        'Creating overly chatty APIs with unnecessary network requests.',
-        'Hard-coding backend service URLs directly into frontend apps.',
-        'Skipping versioning for APIs, leading to breaking changes.',
+        'Over-fetching or under-fetching data due to poorly designed APIs.',
+        'Tight coupling between specific frontend and backend components.',
+        'Duplicating business logic across frontend and backend layers.',
+        'Building monolithic gateways that become single points of failure.',
+      ],
+    },
+  
+    apiCommunication: {
+      title: 'API and Communication Patterns',
+      content: [
+        '**RESTful API Architecture**: RESTful APIs expose resources over standard HTTP methods (GET, POST, PUT, DELETE). They are easy to reason about but can lead to over-fetching or under-fetching in complex scenarios.',
+        '**GraphQL Architecture**: GraphQL allows clients to specify exactly the data they need, reducing over-fetching. It centralizes query logic and makes APIs more flexible, but requires strict governance to avoid performance issues.',
+        '**Federated GraphQL Architecture**: Federation allows multiple GraphQL services owned by different teams to compose into a single graph. This promotes service ownership and scalability while offering clients a unified API.',
+        '**API Gateway Architecture**: An API Gateway acts as a single entry point to route requests, handle authentication, manage rate limiting, and transform data between clients and backend services.',
+        '**Multi-Backend Federation**: Combines different protocols like REST, GraphQL, and gRPC behind a unified abstraction layer, allowing frontend applications to interact with diverse backends seamlessly.',
+      ],
+    },
+  
+    fullstackPatterns: {
+      title: 'Frontend-Leaning Full Stack Patterns',
+      content: [
+        '**Isomorphic Apps**: In isomorphic or universal apps (e.g., Next.js), code can run on both the server and the client. This enables server-side rendering for SEO and performance while maintaining rich client interactivity.',
+        '**Backend-on-Frontend (BOF)**: In BOF architectures, frontend applications query APIs directly without an intermediate server. This simplifies architecture but requires careful security and performance handling.',
+        '**Headless CMS Architecture**: Content is managed in CMS systems (e.g., Contentful, Strapi) and accessed via APIs by frontend apps. This decouples content management from presentation and enables omnichannel delivery.',
+      ],
+    },
+  
+    integrationAndComposition: {
+      title: 'Integration and Composition Patterns',
+      content: [
+        '**Composable Architecture**: Applications are composed from reusable SaaS services, APIs, microservices, and frontend components. This enables rapid development and flexible evolution of digital experiences.',
+        '**Multi-Tenant Architecture**: A single backend instance serves multiple tenants (customers), either with shared databases or isolated resources per tenant. This approach optimizes resource usage and simplifies deployment.',
+        '**Event-Driven Architecture**: Services communicate asynchronously by emitting and responding to events. This decouples producers and consumers, improves scalability, and enables more reactive, flexible system designs.',
       ],
     },
   
     codeExamples: [
       {
-        title: 'Backend-for-Frontend (BFF) with Express',
-        code: `const express = require('express');
-  const app = express();
-  
-  // API tailored for frontend
-  app.get('/api/homepage', (req, res) => {
-    res.json({ message: 'Homepage content optimized for frontend!' });
-  });
-  
-  app.listen(4000, () => console.log('BFF running on port 4000'));
-        `,
-      },
-      {
-        title: 'GraphQL Query Example',
-        code: `query GetUsers {
-    users {
-      id
-      name
-    }
-  }
-        `,
-      },
-      {
-        title: 'JAMstack Static Site Deployment Example',
-        code: `// In Next.js using Static Generation
-  export async function getStaticProps() {
-    const res = await fetch('https://api.example.com/posts');
-    const posts = await res.json();
-  
-    return {
-      props: { posts },
-    };
-  }
-  
-  export default function Blog({ posts }) {
-    return posts.map(post => <div key={post.id}>{post.title}</div>);
-  }
-        `,
-      },
-      {
-        title: 'Micro Frontend (Module Federation Basic Setup)',
-        code: `// webpack.config.js for Host
-  const { ModuleFederationPlugin } = require('webpack').container;
-  
-  module.exports = {
-    plugins: [
-      new ModuleFederationPlugin({
-        name: 'host',
-        remotes: {
-          app1: 'app1@http://localhost:3001/remoteEntry.js',
-        },
-      }),
-    ],
-  };
-        `,
-      },
-      {
-        title: 'Event-Driven Integration with Node EventEmitter',
-        code: `const EventEmitter = require('events');
-  const eventBus = new EventEmitter();
-  
-  // Emit event
-  eventBus.emit('userCreated', { id: 1, name: 'Alice' });
-  
-  // Listen for event
-  eventBus.on('userCreated', (user) => {
-    console.log('New user created:', user);
-  });
-        `,
-      },
-      {
-        title: 'Basic REST API Endpoint with Express',
+        title: 'Basic REST API Example (Express.js)',
         code: `const express = require('express');
   const app = express();
   
   app.get('/api/products', (req, res) => {
-    res.json([{ id: 1, name: 'Product A' }]);
+    res.json([{ id: 1, name: 'Laptop' }]);
   });
   
-  app.listen(3000, () => console.log('REST API server running'));
-        `,
+  app.listen(3000);`
       },
+      {
+        title: 'Simple GraphQL Server (Apollo)',
+        code: `const { ApolloServer, gql } = require('apollo-server');
+
+const typeDefs = gql\`
+  type Query {
+    hello: String
+  }
+\`;
+
+const resolvers = {
+  Query: {
+    hello: () => 'Hello World!'
+  }
+};
+
+const server = new ApolloServer({ typeDefs, resolvers });
+server.listen();`
+      },
+      {
+        title: 'Event-Driven Publisher Example (Node.js)',
+        code: `const EventEmitter = require('events');
+  const eventBus = new EventEmitter();
+  
+  eventBus.on('userCreated', (user) => {
+    console.log('Send welcome email to', user.email);
+  });
+  
+  // Somewhere in your app
+  const user = { id: 1, email: 'test@example.com' };
+  eventBus.emit('userCreated', user);`
+      },
+      {
+        title: 'Isomorphic Data Fetching (Next.js)',
+        code: `export async function getServerSideProps() {
+    const res = await fetch('https://api.example.com/products');
+    const products = await res.json();
+    return { props: { products } };
+  }
+  
+  export default function Products({ products }) {
+    return products.map(p => <div key={p.id}>{p.name}</div>);
+  }`
+      },
+      {
+        title: 'Headless CMS Fetch Example',
+        code: `async function fetchContent() {
+    const res = await fetch('https://cms.example.com/api/posts');
+    const posts = await res.json();
+    return posts;
+  }`
+      }
     ],
   
-    conclusion: `Cross-cutting architectures unify the way frontend and backend systems communicate, scale, and integrate. By mastering these architectural patterns, developers can build full-stack applications that are modular, resilient, and efficient across every layer. Applying these principles consistently ensures better system design and happier users.`
+    conclusion: `Crosscutting architectures enable modern applications to evolve flexibly, integrate powerful APIs and services, and deliver rich full-stack experiences. Mastery of these patterns unlocks scalable, modular, and resilient system designs suited for today's multi-platform digital landscape.`
   };
   
   export default articleData;

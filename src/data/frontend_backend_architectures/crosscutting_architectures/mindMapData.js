@@ -3,104 +3,72 @@ import { COLORS } from '../../../theme/colors';
 export const nodes = [
   {
     id: 'root',
-    label: 'Cross-Cutting Architectures',
+    label: 'Crosscutting Architectures',
     shape: 'roundRect',
     color: 'root',
-    definition: 'Architectural patterns that apply across both frontend and backend systems, influencing communication, structure, and scalability.',
+    definition: 'Architectures that blend frontend and backend concerns or orchestrate system-wide interaction across services.',
   },
 
   // Node 2 categories
   {
-    id: 'communication_patterns',
-    label: 'Communication\nPatterns',
+    id: 'api_communication',
+    label: 'API &\nCommunication',
     shape: 'ellipse',
     color: 'nodePositive1',
-    definition: 'Architectures focusing on how different parts of the system communicate and synchronize.',
+    definition: 'Architectures focused on how clients and services exchange data.',
     parent: 'root',
   },
   {
-    id: 'deployment_patterns',
-    label: 'Deployment\nPatterns',
+    id: 'fullstack_patterns',
+    label: 'Frontend-Leaning\nFull Stack',
     shape: 'ellipse',
     color: 'nodePositive1',
-    definition: 'Architectures focusing on how applications are packaged, built, and delivered.',
+    definition: 'Architectures where frontend and backend boundaries blur, often sharing logic.',
     parent: 'root',
   },
   {
-    id: 'integration_patterns',
-    label: 'Integration\nPatterns',
+    id: 'integration_and_composition',
+    label: 'Integration &\nComposition',
     shape: 'ellipse',
     color: 'nodePositive1',
-    definition: 'Architectures that define standardized ways to integrate components across the full stack.',
+    definition: 'Patterns focused on integrating multiple systems and composing experiences from multiple sources.',
     parent: 'root',
   },
 
-  // Node 3 under Communication Patterns
-  {
-    id: 'bff_crosscut',
-    label: 'Backend-for-Frontend\n(BFF)',
-    shape: 'rect',
-    color: 'nodePositive2',
-    definition: 'Custom API gateways or service layers built to match frontend needs closely.',
-    parent: 'communication_patterns',
-  },
-  {
-    id: 'graphql',
-    label: 'GraphQL\nAPIs',
-    shape: 'rect',
-    color: 'nodePositive2',
-    definition: 'Flexible APIs enabling clients to specify exactly what data they need.',
-    parent: 'communication_patterns',
-  },
+  // Node 3 under API & Communication
+  { id: 'rest_api', label: 'RESTful API Architecture', shape: 'rect', color: 'nodePositive2', definition: 'Data is exposed and manipulated via HTTP verbs (GET, POST, PUT, DELETE).', parent: 'api_communication' },
+  { id: 'graphql', label: 'GraphQL Architecture', shape: 'rect', color: 'nodePositive2', definition: 'Clients specify precisely the data they need, reducing over-fetching.', parent: 'api_communication' },
+  { id: 'federated_graphql', label: 'Federated GraphQL Architecture', shape: 'rect', color: 'nodePositive2', definition: 'Multiple GraphQL services form a unified graph, allowing independent service ownership.', parent: 'api_communication' },
+  { id: 'api_gateway', label: 'API Gateway Architecture', shape: 'rect', color: 'nodePositive2', definition: 'Centralized entry point that routes requests to appropriate backend services.', parent: 'api_communication' },
+  { id: 'multi_backend_federation', label: 'Multi-Backend Federation', shape: 'rect', color: 'nodePositive2', definition: 'Combining REST, GraphQL, and gRPC under a unified access layer.', parent: 'api_communication' },
 
-  // Node 3 under Deployment Patterns
-  {
-    id: 'jamstack_crosscut',
-    label: 'JAMstack',
-    shape: 'rect',
-    color: 'nodePositive2',
-    definition: 'Pre-rendering static content and serving via CDN with dynamic capabilities added through APIs.',
-    parent: 'deployment_patterns',
-  },
-  {
-    id: 'micro_frontends_crosscut',
-    label: 'Micro Frontends',
-    shape: 'rect',
-    color: 'nodePositive2',
-    definition: 'Breaking frontend into independently deployable pieces often coordinated with backend services.',
-    parent: 'deployment_patterns',
-  },
+  // Node 3 under Frontend-Leaning Full Stack
+  { id: 'isomorphic_apps', label: 'Isomorphic Apps', shape: 'rect', color: 'nodePositive2', definition: 'Applications where the same codebase runs on both server and client.', parent: 'fullstack_patterns' },
+  { id: 'backend_on_frontend', label: 'Backend-on-Frontend (BOF)', shape: 'rect', color: 'nodePositive2', definition: 'Frontend applications directly query backend APIs without a traditional server.', parent: 'fullstack_patterns' },
+  { id: 'headless_cms', label: 'Headless CMS Architecture', shape: 'rect', color: 'nodePositive2', definition: 'Frontend apps consume content from CMS systems via APIs, decoupling content management from rendering.', parent: 'fullstack_patterns' },
 
-  // Node 3 under Integration Patterns
-  {
-    id: 'event_driven_crosscut',
-    label: 'Event-Driven\nIntegration',
-    shape: 'rect',
-    color: 'nodePositive2',
-    definition: 'Using events to decouple systems and trigger actions across frontend and backend asynchronously.',
-    parent: 'integration_patterns',
-  },
-  {
-    id: 'rest_apis_crosscut',
-    label: 'REST APIs\n(Full Stack)',
-    shape: 'rect',
-    color: 'nodePositive2',
-    definition: 'Classic client-server communication model using standard HTTP methods (GET, POST, PUT, DELETE).',
-    parent: 'integration_patterns',
-  },
+  // Node 3 under Integration & Composition
+  { id: 'composable_architecture', label: 'Composable Architecture', shape: 'rect', color: 'nodePositive2', definition: 'Systems built by composing SaaS, APIs, microservices, and frontend components.', parent: 'integration_and_composition' },
+  { id: 'multi_tenant', label: 'Multi-Tenant Architecture', shape: 'rect', color: 'nodePositive2', definition: 'A single backend serves multiple customers (tenants) with isolated or shared resources.', parent: 'integration_and_composition' },
+  { id: 'event_driven', label: 'Event-Driven Architecture', shape: 'rect', color: 'nodePositive2', definition: 'Systems react to and process events asynchronously, enabling decoupled communication.', parent: 'integration_and_composition' },
 ];
 
 export const links = [
-  { source: 'root', target: 'communication_patterns' },
-  { source: 'root', target: 'deployment_patterns' },
-  { source: 'root', target: 'integration_patterns' },
+  { source: 'root', target: 'api_communication' },
+  { source: 'root', target: 'fullstack_patterns' },
+  { source: 'root', target: 'integration_and_composition' },
 
-  { source: 'communication_patterns', target: 'bff_crosscut' },
-  { source: 'communication_patterns', target: 'graphql' },
+  { source: 'api_communication', target: 'rest_api' },
+  { source: 'api_communication', target: 'graphql' },
+  { source: 'api_communication', target: 'federated_graphql' },
+  { source: 'api_communication', target: 'api_gateway' },
+  { source: 'api_communication', target: 'multi_backend_federation' },
 
-  { source: 'deployment_patterns', target: 'jamstack_crosscut' },
-  { source: 'deployment_patterns', target: 'micro_frontends_crosscut' },
+  { source: 'fullstack_patterns', target: 'isomorphic_apps' },
+  { source: 'fullstack_patterns', target: 'backend_on_frontend' },
+  { source: 'fullstack_patterns', target: 'headless_cms' },
 
-  { source: 'integration_patterns', target: 'event_driven_crosscut' },
-  { source: 'integration_patterns', target: 'rest_apis_crosscut' },
+  { source: 'integration_and_composition', target: 'composable_architecture' },
+  { source: 'integration_and_composition', target: 'multi_tenant' },
+  { source: 'integration_and_composition', target: 'event_driven' },
 ];

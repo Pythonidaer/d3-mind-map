@@ -634,24 +634,24 @@ export const contentCategories = [
     subcategories: [
       {
         id: 'frontend_architectures',
-        name: 'Frontend Architectures',
+        name: 'Frontend',
         path: 'frontend_architectures',
         addToNav: true,
         addToSubNav: false,
       },
       {
         id: 'backend_architectures',
-        name: 'Backend Architectures',
+        name: 'Backend',
         path: 'backend_architectures',
         addToNav: true,
         addToSubNav: false,
       },
       {
         id: 'crosscutting_architectures',
-        name: 'Cross-Cutting Architectures',
+        name: 'Cross-Cutting',
         path: 'crosscutting_architectures',
-        addToNav: false,
-        addToSubNav: true,
+        addToNav: true,
+        addToSubNav: false,
       },
       {
         id: 'technologies_and_tools',
@@ -662,7 +662,7 @@ export const contentCategories = [
       },
       {
         id: 'code_snippets_and_patterns',
-        name: 'Code Snippets and Practical Patterns',
+        name: 'Snippets and Patterns',
         path: 'code_snippets_and_patterns',
         addToNav: false,
         addToSubNav: true,
