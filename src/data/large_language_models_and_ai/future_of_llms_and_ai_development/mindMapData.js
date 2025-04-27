@@ -1,0 +1,96 @@
+import { COLORS } from '../../../theme/colors';
+
+export const nodes = [
+  {
+    id: 'root',
+    label: 'Future Directions\nand Final Thoughts',
+    shape: 'roundRect',
+    color: 'root',
+    definition: 'Emerging trends, developer opportunities, and mindset shifts for building the next generation of LLM and AI-powered applications.',
+  },
+  {
+    id: 'emerging_trends',
+    label: 'Emerging\nTrends',
+    shape: 'ellipse',
+    color: 'nodePositive1',
+    parent: 'root',
+    definition: 'Key technological shifts shaping the future of LLM development, architecture, and applications.',
+  },
+  {
+    id: 'multi_modal_models',
+    label: 'Multi-Modal\nAI Systems',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'emerging_trends',
+    definition: 'Models that combine text, images, audio, and video inputs/outputs to enable richer, more human-like interactions.',
+  },
+  {
+    id: 'efficient_models',
+    label: 'Smaller and\nMore Efficient Models',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'emerging_trends',
+    definition: 'Advances in architecture and training techniques are making powerful LLMs accessible on smaller hardware footprints.',
+  },
+  {
+    id: 'enhanced_reasoning',
+    label: 'Enhanced\nReasoning Capabilities',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'emerging_trends',
+    definition: 'Future LLMs are expected to improve at logical reasoning, planning, and multi-step problem solving.',
+  },
+  {
+    id: 'llmops_evolution',
+    label: 'LLMOps and\nOperational Maturity',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'emerging_trends',
+    definition: 'Operational best practices (LLMOps) will become as important to AI systems as DevOps is to traditional software.',
+  },
+  {
+    id: 'developer_mindset',
+    label: 'Developer\nMindset Shifts',
+    shape: 'ellipse',
+    color: 'nodePositive1',
+    parent: 'root',
+    definition: 'Ways developers must adapt their thinking to succeed in the new LLM-driven era.',
+  },
+  {
+    id: 'ai_system_thinking',
+    label: 'Thinking in\nSystems and Behaviors',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'developer_mindset',
+    definition: 'Move beyond static software design toward dynamic systems that learn, reason, and evolve through interactions.',
+  },
+  {
+    id: 'continuous_learning',
+    label: 'Continuous\nLearning and Adaptation',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'developer_mindset',
+    definition: 'Commit to ongoing education in AI ethics, tooling, security, and emerging LLM research to stay relevant.',
+  },
+  {
+    id: 'responsible_innovation',
+    label: 'Responsible\nInnovation',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'developer_mindset',
+    definition: 'Design with fairness, transparency, security, and long-term societal impact in mind from the very beginning.',
+  },
+];
+
+export const links = [
+  { source: 'root', target: 'emerging_trends' },
+  { source: 'emerging_trends', target: 'multi_modal_models' },
+  { source: 'emerging_trends', target: 'efficient_models' },
+  { source: 'emerging_trends', target: 'enhanced_reasoning' },
+  { source: 'emerging_trends', target: 'llmops_evolution' },
+
+  { source: 'root', target: 'developer_mindset' },
+  { source: 'developer_mindset', target: 'ai_system_thinking' },
+  { source: 'developer_mindset', target: 'continuous_learning' },
+  { source: 'developer_mindset', target: 'responsible_innovation' },
+];
