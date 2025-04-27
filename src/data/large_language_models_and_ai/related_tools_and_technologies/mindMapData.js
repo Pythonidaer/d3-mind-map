@@ -1,0 +1,116 @@
+import { COLORS } from '../../../theme/colors';
+
+export const nodes = [
+  {
+    id: 'root',
+    label: 'Related Tools\nand Technologies',
+    shape: 'roundRect',
+    color: 'root',
+    definition: 'Supporting frontend, backend, search, and integration tools that help build full-featured LLM and agentic AI applications.',
+  },
+  {
+    id: 'frontend_tools',
+    label: 'Frontend and\nUI Development',
+    shape: 'ellipse',
+    color: 'nodePositive1',
+    parent: 'root',
+    definition: 'Frameworks and libraries used to create user-facing interfaces for LLM-based applications.',
+  },
+  {
+    id: 'nextjs_react',
+    label: 'Next.js and React',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'frontend_tools',
+    definition: 'Popular frameworks for building fast, SEO-friendly web applications that interact with LLM services.',
+  },
+  {
+    id: 'nextui_component_library',
+    label: 'NextUI\nComponent Library',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'frontend_tools',
+    definition: 'Modern, accessible component library for rapidly building chatbots, dashboards, and AI-driven UIs.',
+  },
+  {
+    id: 'backend_tools',
+    label: 'Backend and\nAPI Development',
+    shape: 'ellipse',
+    color: 'nodePositive1',
+    parent: 'root',
+    definition: 'Frameworks used to build robust APIs and real-time services powering LLM interactions.',
+  },
+  {
+    id: 'fastapi',
+    label: 'FastAPI',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'backend_tools',
+    definition: 'High-performance Python framework ideal for creating REST APIs and streaming LLM responses efficiently.',
+  },
+  {
+    id: 'fullstack_templates',
+    label: 'Fullstack FastAPI\nTemplates',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'backend_tools',
+    definition: 'Starter projects combining FastAPI with React frontends, authentication, and deployment pipelines for LLM apps.',
+  },
+  {
+    id: 'search_tools',
+    label: 'Search and\nRetrieval Systems',
+    shape: 'ellipse',
+    color: 'nodePositive1',
+    parent: 'root',
+    definition: 'Specialized APIs and services that provide real-time, high-quality information retrieval for grounding LLM outputs.',
+  },
+  {
+    id: 'tavily_api',
+    label: 'Tavily API',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'search_tools',
+    definition: 'Dedicated search engine API optimized for LLM use cases like real-time fact retrieval and RAG systems.',
+  },
+  {
+    id: 'agent_integration',
+    label: 'Agent and\nOrchestration Integrations',
+    shape: 'ellipse',
+    color: 'nodePositive1',
+    parent: 'root',
+    definition: 'Tools that enable seamless connection of LLMs with search engines, APIs, databases, and agent workflows.',
+  },
+  {
+    id: 'langchain_support',
+    label: 'LangChain\nIntegrations',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'agent_integration',
+    definition: 'LangChain offers native support for integrating Tavily API, vector stores, external APIs, and tool agents.',
+  },
+  {
+    id: 'langgraph_support',
+    label: 'LangGraph\nfor Multi-Agent Systems',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'agent_integration',
+    definition: 'LangGraph extends LangChain with graph-based orchestration, managing multi-agent collaboration and tool invocation.',
+  },
+];
+
+export const links = [
+  { source: 'root', target: 'frontend_tools' },
+  { source: 'frontend_tools', target: 'nextjs_react' },
+  { source: 'frontend_tools', target: 'nextui_component_library' },
+
+  { source: 'root', target: 'backend_tools' },
+  { source: 'backend_tools', target: 'fastapi' },
+  { source: 'backend_tools', target: 'fullstack_templates' },
+
+  { source: 'root', target: 'search_tools' },
+  { source: 'search_tools', target: 'tavily_api' },
+
+  { source: 'root', target: 'agent_integration' },
+  { source: 'agent_integration', target: 'langchain_support' },
+  { source: 'agent_integration', target: 'langgraph_support' },
+];
