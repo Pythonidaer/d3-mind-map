@@ -579,13 +579,6 @@ export const contentCategories = [
         addToNav: false,
         addToSubNav: true,
       },
-      {
-        id: 'conclusion',
-        name: 'Conclusion',
-        path: 'conclusion',
-        addToNav: false,
-        addToSubNav: true,
-      },
     ],
   },
   {
