@@ -120,6 +120,10 @@ SonarQube is a free VSCode Extension that can help analyze the complexity of you
 
 Keeping track of bundle size is crucial for web performance. This project uses several tools to help analyze both the final build output and the source code itself.
 
+## Analyzing Bundle Size
+
+Keeping track of bundle size is crucial for web performance. This project uses several tools to help analyze both the final build output and the source code itself.
+
 ### Analyzing Source File Sizes (`analyze-src`)
 
 This uses a custom script (`analyze-src-sizes.js`) leveraging the `filesize` package to recursively list the size of each `.js` and `.jsx` file within the `src` directory. This is helpful for identifying large source files _before_ they get bundled.
@@ -140,18 +144,18 @@ This tool (`bundlesize`) checks the size of the generated production build asset
 npm test
 ```
 
-_(Note: This requires running `npm run build` first to generate the `dist` directory.)_
+_**Note:** This requires running `npm run build` first to generate the `dist` directory._
 
-### Visualizing Production Bundle (`vite-bundle-visualizer`)
+### Visualizing Production Bundle (Rollup Plugin Visualizer)
 
-This tool generates an interactive treemap visualization of the contents of your production bundle. It helps you understand which modules contribute the most to the final bundle size. This is useful for identifying large dependencies or code-splitting opportunities.
+This project uses the official `rollup-plugin-visualizer`, which works seamlessly with Vite.
 
-**Command:**
+#### Visualize
 
-Run this _after_ building the project (`npm run build`):
+Run this to build the project:
 
 ```bash
-npx vite-bundle-visualizer
+npm run build
 ```
 
-This will build the project (if not already built with the same config) and open an `stats.html` file in your browser with the visualization.
+This will open a `stats.html` file showing a treemap of your bundle. It visualizes which modules and dependencies are largest, helping identify code-splitting or optimization opportunities.

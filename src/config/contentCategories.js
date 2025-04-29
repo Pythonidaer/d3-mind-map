@@ -122,6 +122,13 @@ export const contentCategories = [
         addToNav: false,
         addToSubNav: true,
       },
+      {
+        id: 'benchmarking_js_react_next_ts',
+        name: 'Benchmarking',
+        path: 'benchmarking_js_react_next_ts',
+        addToNav: true,
+        addToSubNav: true,
+      },
       // Future fundamental topics (like 'variables', 'data-types') added here
     ],
   },

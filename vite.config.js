@@ -2,6 +2,7 @@ import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 import { resolve } from 'path'
 import { VitePWA } from 'vite-plugin-pwa'
+import { visualizer } from 'rollup-plugin-visualizer'
 
 export default defineConfig({
   plugins: [
@@ -49,6 +50,7 @@ export default defineConfig({
         ],
       },
     }),
+    visualizer({ open: true }), // 👈 auto-opens a stats.html after build
   ],
   build: {
     rollupOptions: {
