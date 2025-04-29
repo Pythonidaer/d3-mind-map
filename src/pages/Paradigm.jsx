@@ -86,9 +86,11 @@ const Paradigm = () => {
         <Suspense fallback={<Loading />}>
           {mindMapData?.nodes && articleData && (
             <>
-              {/* <h1 className={styles.title}>{pageTitle}</h1> */}
-              <MindMap nodes={mindMapData.nodes} links={mindMapData.links} />
-              <Article article={articleData} />
+              {/* <h1 className={styles.title}>{pageTitle}</h1>  */}
+              {mindMapData?.nodes && (
+                <MindMap nodes={mindMapData.nodes} links={mindMapData.links} />
+              )}
+              {articleData && <Article article={articleData} />}
             </>
           )}
         </Suspense>
