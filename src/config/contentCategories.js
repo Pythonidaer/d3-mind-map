@@ -1043,6 +1043,78 @@ export const contentCategories = [
       },
     ],
   },
+  {
+    id: 'optimizing_system_prompts_cascade_ai',
+    name: 'Cascade Prompting',
+    baseRoute: '/optimizing_system_prompts_cascade_ai',
+    dataPath: 'optimizing_system_prompts_cascade_ai',
+    addToNav: true,
+    subcategories: [
+      {
+        id: 'core_principles_prompt_engineering',
+        name: 'Core Principles',
+        path: 'core_principles_prompt_engineering',
+        addToNav: true,
+        addToSubNav: false,
+      },
+      {
+        id: 'consistent_naming_strategies',
+        name: 'Consistent Naming',
+        path: 'consistent_naming_strategies',
+        addToNav: true,
+        addToSubNav: false,
+      },
+      {
+        id: 'automatic_test_generation',
+        name: 'Automatic Test Generation',
+        path: 'automatic_test_generation',
+        addToNav: true,
+        addToSubNav: false,
+      },
+      {
+        id: 'modular_code_generation',
+        name: 'Modular Code Generation',
+        path: 'modular_code_generation',
+        addToNav: true,
+        addToSubNav: false,
+      },
+      {
+        id: 'eliciting_clarifying_questions',
+        name: 'Clarifying Questions',
+        path: 'eliciting_clarifying_questions',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'reducing_cognitive_complexity',
+        name: 'Reducing Cognitive Complexity',
+        path: 'reducing_cognitive_complexity',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'tailoring_prompts_cascade_ai',
+        name: 'Tailoring Prompts',
+        path: 'tailoring_prompts_cascade_ai',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'conclusion_recommendations',
+        name: 'Conclusion',
+        path: 'conclusion_recommendations',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'cascade_prompt_process',
+        name: 'Prompt Process',
+        path: 'cascade_prompt_process',
+        addToNav: false,
+        addToSubNav: true,
+      },
+    ],
+  },
   // Add future categories  here following the same structure
 ]
 
