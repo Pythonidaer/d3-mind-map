@@ -1115,6 +1115,57 @@ export const contentCategories = [
       },
     ],
   },
+  {
+    id: 'storybook_overview',
+    name: 'Storybook Overview',
+    baseRoute: '/storybook_overview',
+    dataPath: 'storybook_overview',
+    addToNav: true,
+    subcategories: [
+      {
+        id: 'core_concepts',
+        name: 'Core Concepts',
+        path: 'core_concepts',
+        addToNav: true,
+        addToSubNav: false,
+      },
+      {
+        id: 'primary_use_cases',
+        name: 'Primary Use Cases',
+        path: 'primary_use_cases',
+        addToNav: true,
+        addToSubNav: false,
+      },
+      {
+        id: 'full_scope_features',
+        name: 'Full Scope of Features',
+        path: 'full_scope_features',
+        addToNav: true,
+        addToSubNav: false,
+      },
+      {
+        id: 'typical_workflow',
+        name: 'Typical Workflow',
+        path: 'typical_workflow',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'benefits',
+        name: 'Why Use Storybook',
+        path: 'benefits',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'community_and_adoption',
+        name: 'Community & Adoption',
+        path: 'community_and_adoption',
+        addToNav: false,
+        addToSubNav: true,
+      },
+    ],
+  },
   // Add future categories  here following the same structure
 ]
 
