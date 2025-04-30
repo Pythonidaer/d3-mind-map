@@ -1045,7 +1045,7 @@ export const contentCategories = [
   },
   {
     id: 'optimizing_system_prompts_cascade_ai',
-    name: 'Cascade AI System Prompts',
+    name: 'Cascade Prompting',
     baseRoute: '/optimizing_system_prompts_cascade_ai',
     dataPath: 'optimizing_system_prompts_cascade_ai',
     addToNav: true,
