@@ -1117,7 +1117,7 @@ export const contentCategories = [
   },
   {
     id: 'storybook_overview',
-    name: 'Storybook Overview',
+    name: 'Storybook',
     baseRoute: '/storybook_overview',
     dataPath: 'storybook_overview',
     addToNav: true,

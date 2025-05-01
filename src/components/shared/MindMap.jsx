@@ -33,6 +33,54 @@ const MindMap = ({ nodes, links }) => {
     const width = container.clientWidth
     const height = container.clientHeight
 
+    // Assign 'level' property to each node (root=0, child=1, ...)
+    const nodeMap = new Map(nodes.map(n => [n.id, n]));
+    if (nodes.length > 0) {
+      nodes[0].level = 0;
+      nodes[0].fx = width / 2;
+      nodes[0].fy = height / 2;
+      // BFS to assign levels
+      let queue = [nodes[0]];
+      while (queue.length > 0) {
+        const curr = queue.shift();
+        const currLevel = curr.level || 0;
+        nodes.forEach(n => {
+          if (n.parent === curr.id && (n.level === undefined || n.level > currLevel + 1)) {
+            n.level = currLevel + 1;
+            queue.push(n);
+          }
+        });
+      }
+      // Pin all direct children at equal angles on a dynamically sized ring
+      const children = nodes.filter(n => n.level === 1);
+      const rootRadius = nodes[0].shapeWidth ? nodes[0].shapeWidth / 2 : 60;
+      const minGap = 60;
+      const childWidths = children.map(n => n.shapeWidth ? n.shapeWidth : 80);
+      const childCircumference = childWidths.reduce((a, b) => a + b, 0) + children.length * minGap;
+      const childCircleRadius = Math.max(
+        (childCircumference) / (2 * Math.PI),
+        rootRadius + minGap + Math.max(...childWidths.map(w => w/2)) + 40 // fallback minimum
+      );
+      children.forEach((child, i) => {
+        const angle = (2 * Math.PI * i) / children.length;
+        child.fx = width / 2 + childCircleRadius * Math.cos(angle);
+        child.fy = height / 2 + childCircleRadius * Math.sin(angle);
+      });
+      // Pin all grandchildren at equal angles on a dynamically sized outer ring
+      const grandchildren = nodes.filter(n => n.level === 2);
+      const grandchildWidths = grandchildren.map(n => n.shapeWidth ? n.shapeWidth : 80);
+      const grandchildCircumference = grandchildWidths.reduce((a, b) => a + b, 0) + grandchildren.length * minGap;
+      const grandchildCircleRadius = childCircleRadius + Math.max(
+        (grandchildCircumference) / (2 * Math.PI),
+        Math.max(...grandchildWidths.map(w => w/2)) + minGap + 60 // fallback minimum
+      );
+      grandchildren.forEach((grandchild, i) => {
+        const angle = (2 * Math.PI * i) / grandchildren.length;
+        grandchild.fx = width / 2 + grandchildCircleRadius * Math.cos(angle);
+        grandchild.fy = height / 2 + grandchildCircleRadius * Math.sin(angle);
+      });
+    }
+
     if (svgRef.current) {
       // Pre-calculate dimensions for each node
       nodes.forEach((d) => {
@@ -62,10 +110,38 @@ const MindMap = ({ nodes, links }) => {
           d3
             .forceLink(links)
             .id((d) => d.id)
-            .distance(270)
+            .distance((link) => {
+  // Enforce min/max link distance for all links
+  const rootId = nodes[0]?.id;
+  // Try to infer hierarchy: root-to-child shorter, others longer, but clamp all
+  let baseDist = link.source.id === rootId ? 140 : 220;
+  return Math.max(120, Math.min(baseDist, 300));
+}) // Custom link distance: min 120, max 300, tuned by hierarchy
         )
-        .force('charge', d3.forceManyBody().strength(-200))
+        .force('charge', d3.forceManyBody().strength(-800)) // Balanced repulsion
         .force('center', d3.forceCenter(width / 2, height / 2))
+        .force('collide', d3.forceCollide().radius((d) => {
+          // Use node size for collision radius, plus padding
+          return (d.shapeWidth ? d.shapeWidth/2 : 40) + 28;
+        })) // Dynamic collision radius for each node
+        // Radial force for immediate children of root
+        .force('radial', d3.forceRadial(
+          (d) => {
+            // Only apply radial force to grandchildren and deeper nodes
+            if (d.level === 2) return 320;
+            if (d.level > 2) return 420 + (d.level - 2) * 120;
+            return 0;
+          },
+          width / 2,
+          height / 2
+        ).strength((d) => d.level > 1 ? 1 : 0))
+        // Extra repulsion for direct children
+        .force('childCharge', d3.forceManyBody().strength((d) => {
+          const rootId = nodes[0]?.id;
+          return d.parent === rootId ? -1200 : 0;
+        }));
+
+      // Let the simulation run and animate nodes into place (no manual pre-ticking)
 
       const link = g
         .append('g')
@@ -267,6 +343,32 @@ const MindMap = ({ nodes, links }) => {
         })
 
       svg.call(zoom)
+
+      // --- Auto-fit mind map to viewport on initial render ---
+      setTimeout(() => {
+        // Compute bounding box of all nodes
+        const xVals = nodes.map((d) => d.x)
+        const yVals = nodes.map((d) => d.y)
+        const minX = Math.min(...xVals)
+        const maxX = Math.max(...xVals)
+        const minY = Math.min(...yVals)
+        const maxY = Math.max(...yVals)
+        const nodePadding = 180 // Extra padding for outliers
+        const boxWidth = maxX - minX + nodePadding * 2
+        const boxHeight = maxY - minY + nodePadding * 2
+        const svgWidth = container.clientWidth
+        const svgHeight = container.clientHeight
+        // Calculate scale to fit
+        const scale = Math.min(svgWidth / boxWidth, svgHeight / boxHeight, 1)
+        // Center the bounding box
+        const translateX = svgWidth / 2 - scale * (minX + maxX) / 2
+        const translateY = svgHeight / 2 - scale * (minY + maxY) / 2
+        svg.transition().duration(500).call(
+          zoom.transform,
+          d3.zoomIdentity.translate(translateX, translateY).scale(scale)
+        )
+      }, 700) // Increased delay for more simulation ticks
+      // --- End auto-fit logic ---
 
       const resizeObserver = new ResizeObserver(() => {
         const newWidth = container.clientWidth
