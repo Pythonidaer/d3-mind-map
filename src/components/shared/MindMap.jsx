@@ -39,6 +39,16 @@ const MindMap = ({ nodes, links }) => {
       nodes[0].level = 0;
       nodes[0].fx = width / 2;
       nodes[0].fy = height / 2;
+      // Mark root-to-child links
+      const rootId = nodes[0].id;
+      links.forEach(l => {
+        if ((typeof l.source === 'string' ? l.source : l.source.id) === rootId &&
+            (typeof l.target === 'string' ? nodeMap.get(l.target)?.level : l.target?.level) === 1) {
+          l.isRootToChild = true;
+        } else {
+          l.isRootToChild = false;
+        }
+      });
       // BFS to assign levels
       let queue = [nodes[0]];
       while (queue.length > 0) {
@@ -61,24 +71,11 @@ const MindMap = ({ nodes, links }) => {
         (childCircumference) / (2 * Math.PI),
         rootRadius + minGap + Math.max(...childWidths.map(w => w/2)) + 40 // fallback minimum
       );
-      children.forEach((child, i) => {
-        const angle = (2 * Math.PI * i) / children.length;
-        child.fx = width / 2 + childCircleRadius * Math.cos(angle);
-        child.fy = height / 2 + childCircleRadius * Math.sin(angle);
-      });
-      // Pin all grandchildren at equal angles on a dynamically sized outer ring
-      const grandchildren = nodes.filter(n => n.level === 2);
-      const grandchildWidths = grandchildren.map(n => n.shapeWidth ? n.shapeWidth : 80);
-      const grandchildCircumference = grandchildWidths.reduce((a, b) => a + b, 0) + grandchildren.length * minGap;
-      const grandchildCircleRadius = childCircleRadius + Math.max(
-        (grandchildCircumference) / (2 * Math.PI),
-        Math.max(...grandchildWidths.map(w => w/2)) + minGap + 60 // fallback minimum
-      );
-      grandchildren.forEach((grandchild, i) => {
-        const angle = (2 * Math.PI * i) / grandchildren.length;
-        grandchild.fx = width / 2 + grandchildCircleRadius * Math.cos(angle);
-        grandchild.fy = height / 2 + grandchildCircleRadius * Math.sin(angle);
-      });
+      // UNPIN all children: let D3 simulation handle them
+      children.forEach((child) => {
+        child.fx = null;
+        child.fy = null;
+      }); // We'll use forceRadial for all levels below
     }
 
     if (svgRef.current) {
@@ -103,26 +100,97 @@ const MindMap = ({ nodes, links }) => {
 
       const g = svg.append('g')
 
+      // Only apply forceLink to non-root-to-child links
+      const nonRootToChildLinks = links.filter(l => !l.isRootToChild);
       const simulation = d3
         .forceSimulation(nodes)
+        .alphaDecay(0.02) // Slower cooling for smoother movement
+        .velocityDecay(0.5) // More fluid transitions
         .force(
           'link',
           d3
-            .forceLink(links)
+            .forceLink(nonRootToChildLinks)
             .id((d) => d.id)
             .distance((link) => {
-  // Enforce min/max link distance for all links
-  const rootId = nodes[0]?.id;
-  // Try to infer hierarchy: root-to-child shorter, others longer, but clamp all
-  let baseDist = link.source.id === rootId ? 140 : 220;
-  return Math.max(120, Math.min(baseDist, 300));
-}) // Custom link distance: min 120, max 300, tuned by hierarchy
+              // For root-to-child links, use the exact no-overlap distance
+              const rootId = nodes[0]?.id;
+              if (link.source.id === rootId) {
+                const child = typeof link.target === 'object' ? link.target : nodes.find(n => n.id === link.target);
+                const rootRadius = nodes[0].shapeWidth ? nodes[0].shapeWidth / 2 : 60;
+                const minGap = 80;
+                const childRadius = child.shapeWidth ? child.shapeWidth / 2 : 40;
+                // Enforce a minimum root-to-child distance of 300px
+                return Math.max(rootRadius + minGap + childRadius, 300);
+              }
+              // For all other links, use the previous logic
+              let baseDist = 220;
+              return Math.max(120, Math.min(baseDist, 300));
+            }) // Per-link distance: root-to-child uses exact spacing
         )
-        .force('charge', d3.forceManyBody().strength(-800)) // Balanced repulsion
+        .force('charge', d3.forceManyBody().strength(-2000)) // Balanced repulsion
+        .force('radialRings', d3.forceRadial(
+          (d) => {
+            if (d.level >= 1) {
+              const minGap = 80;
+              const rootRadius = nodes[0].shapeWidth ? nodes[0].shapeWidth / 2 : 60;
+              // Gather all nodes by level
+              const levels = {};
+              nodes.forEach(n => {
+                if (n.level != null && n.level >= 1) {
+                  if (!levels[n.level]) levels[n.level] = [];
+                  levels[n.level].push(n);
+                }
+              });
+              // Precompute max radius for each level
+              const maxRadii = {};
+              Object.keys(levels).forEach(lvl => {
+                maxRadii[lvl] = Math.max(...levels[lvl].map(n => n.shapeWidth ? n.shapeWidth / 2 : 40));
+              });
+              // Calculate dynamic ring radii
+              let radii = {};
+              radii[0] = rootRadius;
+              let prevRadius = rootRadius;
+              let prevMax = rootRadius;
+              const maxLevel = Math.max(...Object.keys(levels).map(lvl => Number(lvl)));
+              // Special handling for children (level 1)
+              const grandchildrenExist = levels[2] && levels[2].length > 0;
+              const defaultChildRing = 200;
+              const maxChildRing = 240;
+              if (!grandchildrenExist) {
+                radii[1] = defaultChildRing;
+                prevRadius = radii[1];
+                prevMax = maxRadii[1] || 40;
+              } else {
+                // Usual dynamic calculation, but cap child ring
+                const currMax = maxRadii[1] || 40;
+                let calc = prevRadius + prevMax + minGap + currMax;
+                radii[1] = Math.min(calc, maxChildRing);
+                prevRadius = radii[1];
+                prevMax = currMax;
+              }
+              // Calculate outer rings
+              for (let lvl = 2; lvl <= maxLevel; lvl++) {
+                const currMax = maxRadii[lvl] || 40;
+                // Exponentially scale the gap for deeper levels
+                const scaledGap = minGap * Math.pow(1.8, lvl - 1);
+                radii[lvl] = prevRadius + prevMax + scaledGap + currMax;
+                prevRadius = radii[lvl];
+                prevMax = currMax;
+              }
+              // Use the calculated ring for this node's level
+              return radii[d.level] || (rootRadius + minGap + 80 * d.level);
+            }
+            return null;
+          },
+          width / 2,
+          height / 2
+        ).strength((d) => d.level >= 1 ? 1 : 0))
+        
         .force('center', d3.forceCenter(width / 2, height / 2))
         .force('collide', d3.forceCollide().radius((d) => {
           // Use node size for collision radius, plus padding
-          return (d.shapeWidth ? d.shapeWidth/2 : 40) + 28;
+          let pad = 28;
+          return (d.shapeWidth ? d.shapeWidth / 2 : 40) + pad;
         })) // Dynamic collision radius for each node
         // Radial force for immediate children of root
         .force('radial', d3.forceRadial(
@@ -150,8 +218,10 @@ const MindMap = ({ nodes, links }) => {
         .data(links)
         .enter()
         .append('line')
-        .attr('stroke', '#66BB6A')
-        .attr('stroke-width', 3)
+        .attr('stroke', '#7aff8a')
+        .attr('stroke-width', 2)
+        .attr('opacity', 0.9)
+
 
       const node = g
         .append('g')
