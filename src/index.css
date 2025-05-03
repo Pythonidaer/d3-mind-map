@@ -26,7 +26,7 @@ body {
 }
 
 
-[data-theme="dark"] {
+html[data-theme="dark"] {
   --loader-primary: #c4b5fd;
   --loader-accent: #fde047;
   --navbar-bg: #18191a;

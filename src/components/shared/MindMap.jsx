@@ -484,7 +484,7 @@ const MindMap = ({ nodes, links }) => {
         // Center the bounding box
         const translateX = svgWidth / 2 - scale * (minX + maxX) / 2
         const translateY = svgHeight / 2 - scale * (minY + maxY) / 2
-        svg.transition().duration(500).call(
+        svg.transition().duration(800).call(
           zoom.transform,
           d3.zoomIdentity.translate(translateX, translateY).scale(scale)
         )
