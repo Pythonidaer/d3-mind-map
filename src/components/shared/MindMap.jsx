@@ -18,14 +18,25 @@ const MindMap = ({ nodes, links }) => {
   const containerRef = useRef(null)
   const { palette } = useTheme()
 
-  // Map color keys to palette values for current theme
-  // (Do NOT use this for D3 simulation, only for color updates)
+  // ---
+// THEME COLOR MAPPING
+// Map color keys from node data to the current theme's palette.
+// This is only used for visual rendering, not for the D3 simulation itself.
+// ---
   const themedNodes = nodes.map((node) => ({
     ...node,
     color: palette[node.color] || node.color,
   }))
 
-  // --- D3 simulation: only run when nodes/links change ---
+  // ---
+// MAIN D3 SIMULATION EFFECT
+// This useEffect runs the entire D3 force simulation. It re-runs whenever the nodes or links change.
+// Responsible for:
+//   - Assigning node levels (depth in the tree)
+//   - Precomputing node dimensions
+//   - Initializing and configuring all D3 forces
+//   - Rendering the SVG mind map
+// ---
   useEffect(() => {
     const container = containerRef.current
     if (!container) return
@@ -33,13 +44,19 @@ const MindMap = ({ nodes, links }) => {
     const width = container.clientWidth
     const height = container.clientHeight
 
-    // Assign 'level' property to each node (root=0, child=1, ...)
+    // ---
+// NODE LEVEL ASSIGNMENT
+// Assigns a 'level' property to each node, representing its depth from the root.
+// Root node gets level 0, direct children get level 1, etc.
+// This is used to arrange nodes in concentric rings and to apply custom forces by level.
+// ---
     const nodeMap = new Map(nodes.map(n => [n.id, n]));
     if (nodes.length > 0) {
       nodes[0].level = 0;
       nodes[0].fx = width / 2;
       nodes[0].fy = height / 2;
       // Mark root-to-child links
+// These links are treated specially in forceLink, as they define the first ring from the root.
       const rootId = nodes[0].id;
       links.forEach(l => {
         if ((typeof l.source === 'string' ? l.source : l.source.id) === rootId &&
@@ -49,7 +66,8 @@ const MindMap = ({ nodes, links }) => {
           l.isRootToChild = false;
         }
       });
-      // BFS to assign levels
+      // Breadth-First Search (BFS) to assign levels to all nodes
+// Ensures that every node gets a correct level, even if the input is not strictly ordered.
       let queue = [nodes[0]];
       while (queue.length > 0) {
         const curr = queue.shift();
@@ -61,7 +79,9 @@ const MindMap = ({ nodes, links }) => {
           }
         });
       }
-      // Pin all direct children at equal angles on a dynamically sized ring
+      // (Legacy) Pinning logic for direct children.
+// This section used to pin direct children at equal angles, but now the simulation handles layout via forceRadial.
+// Children are unpinned to allow D3 to position them naturally.
       const children = nodes.filter(n => n.level === 1);
       const rootRadius = nodes[0].shapeWidth ? nodes[0].shapeWidth / 2 : 60;
       const minGap = 60;
@@ -71,7 +91,7 @@ const MindMap = ({ nodes, links }) => {
         (childCircumference) / (2 * Math.PI),
         rootRadius + minGap + Math.max(...childWidths.map(w => w/2)) + 40 // fallback minimum
       );
-      // UNPIN all children: let D3 simulation handle them
+      // UNPIN all children: let D3 simulation handle them (see above comment).
       children.forEach((child) => {
         child.fx = null;
         child.fy = null;
@@ -79,7 +99,11 @@ const MindMap = ({ nodes, links }) => {
     }
 
     if (svgRef.current) {
-      // Pre-calculate dimensions for each node
+      // ---
+// PRECOMPUTE NODE DIMENSIONS
+// For each node, measure its label and calculate the required width and height for its shape.
+// This ensures that forceCollide and other forces can account for real node sizes.
+// ---
       nodes.forEach((d) => {
         const { textWidth, textHeight } = getTextDimensions(d.label || '')
         const { shapeWidth, shapeHeight } = calculateShapeDimensions(
@@ -100,19 +124,25 @@ const MindMap = ({ nodes, links }) => {
 
       const g = svg.append('g')
 
-      // Only apply forceLink to non-root-to-child links
+      // ---
+// D3 FORCE SIMULATION CONFIGURATION
+// This is the heart of the mind map layout. Each force is explained below:
+// ---
+// Only apply forceLink to non-root-to-child links
+// Root-to-child links are handled separately for custom spacing.
       const nonRootToChildLinks = links.filter(l => !l.isRootToChild);
       const simulation = d3
         .forceSimulation(nodes)
-        .alphaDecay(0.02) // Slower cooling for smoother movement
-        .velocityDecay(0.5) // More fluid transitions
+        .alphaDecay(0.01) // Slower cooling for smoother movement
+        .velocityDecay(.5) // More fluid transitions
         .force(
           'link',
           d3
             .forceLink(nonRootToChildLinks)
             .id((d) => d.id)
             .distance((link) => {
-              // For root-to-child links, use the exact no-overlap distance
+              // For root-to-child links, use a custom distance to ensure direct children are spaced far enough from the root.
+// This prevents overlap between the root and its children, especially when nodes are large.
               const rootId = nodes[0]?.id;
               if (link.source.id === rootId) {
                 const child = typeof link.target === 'object' ? link.target : nodes.find(n => n.id === link.target);
@@ -122,18 +152,19 @@ const MindMap = ({ nodes, links }) => {
                 // Enforce a minimum root-to-child distance of 300px
                 return Math.max(rootRadius + minGap + childRadius, 300);
               }
-              // For all other links, use the previous logic
+              // For all other links, use a default or capped distance.
               let baseDist = 220;
               return Math.max(120, Math.min(baseDist, 300));
-            }) // Per-link distance: root-to-child uses exact spacing
+            }) // Per-link distance: root-to-child uses exact spacing, others use a default range.
         )
-        .force('charge', d3.forceManyBody().strength(-2000)) // Balanced repulsion
+        .force('charge', d3.forceManyBody().strength(-2000)) // Repulsion force: pushes all nodes apart. Tune this for overall map density.
         .force('radialRings', d3.forceRadial(
           (d) => {
             if (d.level >= 1) {
               const minGap = 80;
               const rootRadius = nodes[0].shapeWidth ? nodes[0].shapeWidth / 2 : 60;
               // Gather all nodes by level
+// This is used to compute ring radii for each level (concentric circles).
               const levels = {};
               nodes.forEach(n => {
                 if (n.level != null && n.level >= 1) {
@@ -141,18 +172,25 @@ const MindMap = ({ nodes, links }) => {
                   levels[n.level].push(n);
                 }
               });
-              // Precompute max radius for each level
+              // For each level, compute the maximum node radius (half width) in that level.
+// This helps space out rings so that large nodes don't overlap.
               const maxRadii = {};
               Object.keys(levels).forEach(lvl => {
                 maxRadii[lvl] = Math.max(...levels[lvl].map(n => n.shapeWidth ? n.shapeWidth / 2 : 40));
               });
-              // Calculate dynamic ring radii
+              // ---
+// DYNAMIC RING RADIUS CALCULATION
+// For each level, calculate the radius of the concentric ring that nodes should be placed on.
+// The radius is increased based on the size and number of nodes at each level, with extra spacing for deeper levels.
+// ---
               let radii = {};
               radii[0] = rootRadius;
               let prevRadius = rootRadius;
               let prevMax = rootRadius;
               const maxLevel = Math.max(...Object.keys(levels).map(lvl => Number(lvl)));
-              // Special handling for children (level 1)
+              // Special handling for the first ring (direct children):
+// If there are no grandchildren, use a fixed radius for a tight circle.
+// If there are grandchildren, expand the ring but cap it to avoid excessive spacing.
               const grandchildrenExist = levels[2] && levels[2].length > 0;
               const defaultChildRing = 200;
               const maxChildRing = 240;
@@ -168,7 +206,8 @@ const MindMap = ({ nodes, links }) => {
                 prevRadius = radii[1];
                 prevMax = currMax;
               }
-              // Calculate outer rings
+              // For deeper levels (grandchildren, etc.),
+// exponentially increase the gap between rings to prevent crowding.
               for (let lvl = 2; lvl <= maxLevel; lvl++) {
                 const currMax = maxRadii[lvl] || 40;
                 // Exponentially scale the gap for deeper levels
@@ -177,7 +216,8 @@ const MindMap = ({ nodes, links }) => {
                 prevRadius = radii[lvl];
                 prevMax = currMax;
               }
-              // Use the calculated ring for this node's level
+              // Return the calculated ring radius for this node's level.
+// If not found, fall back to a default formula.
               return radii[d.level] || (rootRadius + minGap + 80 * d.level);
             }
             return null;
@@ -187,12 +227,22 @@ const MindMap = ({ nodes, links }) => {
         ).strength((d) => d.level >= 1 ? 1 : 0))
         
         .force('center', d3.forceCenter(width / 2, height / 2))
-        .force('collide', d3.forceCollide().radius((d) => {
-          // Use node size for collision radius, plus padding
-          let pad = 28;
-          return (d.shapeWidth ? d.shapeWidth / 2 : 40) + pad;
-        })) // Dynamic collision radius for each node
-        // Radial force for immediate children of root
+        .force('collide', d3.forceCollide().radius(d => {
+          let pad = 36; // try 36 or even 48 for more space
+          if (d.shapeWidth && d.shapeHeight) {
+            return 0.5 * Math.sqrt(d.shapeWidth ** 2 + d.shapeHeight ** 2) + pad;
+          }
+          return 40 + pad;
+        })) // ---
+// COLLISION FORCE
+// Prevents nodes from overlapping by setting a collision radius.
+// Currently uses (width/2 + padding), but for rectangles this may not be perfect.
+// For best results, consider using the diagonal length for wide/rectangular nodes.
+// ---
+        // ---
+// EXTRA RADIAL FORCE (for grandchildren and deeper)
+// Applies an additional radial force to nodes at level 2 and beyond to help push them outward.
+// ---
         .force('radial', d3.forceRadial(
           (d) => {
             // Only apply radial force to grandchildren and deeper nodes
@@ -423,6 +473,7 @@ const MindMap = ({ nodes, links }) => {
         const maxX = Math.max(...xVals)
         const minY = Math.min(...yVals)
         const maxY = Math.max(...yVals)
+        // adds to zoom
         const nodePadding = 180 // Extra padding for outliers
         const boxWidth = maxX - minX + nodePadding * 2
         const boxHeight = maxY - minY + nodePadding * 2
@@ -437,7 +488,7 @@ const MindMap = ({ nodes, links }) => {
           zoom.transform,
           d3.zoomIdentity.translate(translateX, translateY).scale(scale)
         )
-      }, 700) // Increased delay for more simulation ticks
+      }, 500) // Increased delay for more simulation ticks
       // --- End auto-fit logic ---
 
       const resizeObserver = new ResizeObserver(() => {

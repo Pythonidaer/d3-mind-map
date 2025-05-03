@@ -99,7 +99,7 @@ export const nodes = [
   // Pitfalls
   {
     id: 'specialized_libraries_pitfalls',
-    label: 'Specialized Libraries\nPitfalls',
+    label: 'Specialized \nLibraries\nPitfalls',
     shape: 'hexagon',
     color: 'nodeNegative1',
     parent: 'root',

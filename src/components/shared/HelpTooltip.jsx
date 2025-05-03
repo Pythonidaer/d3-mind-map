@@ -62,7 +62,8 @@ export default function HelpTooltip() {
             <h2 className={styles.modalHeading}>How to use the Mind Map</h2>
             <ul>
               <li><strong>Zoom:</strong> Use your trackpad (two-finger pinch or scroll) or pinch (on mobile) to zoom in and out.</li>
-              <li><strong>Move:</strong> Click and drag (or touch and drag) to move the map.</li>
+              <li><strong>Move Map:</strong> Click and drag (or touch and drag) the background to pan the map.</li>
+              <li><strong>Drag Nodes:</strong> Click and drag any node to manually rearrange the mind map. If nodes overlap or get stuck, simply drag them apart—customizing the layout is encouraged!</li>
               <li><strong>Node Info:</strong> Hover over nodes (or tap on mobile) for more information.</li>
             </ul>
             <p style={{marginTop: '1em', fontSize: '0.95em', color: 'var(--main-fg, #333)'}}>You can close this help at any time by clicking outside, pressing <kbd>ESC</kbd>, or clicking the × button.</p>
