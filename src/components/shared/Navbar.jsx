@@ -131,7 +131,7 @@ const Navbar = () => {
     };
   }, [categoryDropdownRef]);
 
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile(1100);
   // Filter subcategories for subnav
   const subNavSubcategories = selectedCategory?.subcategories?.filter(
     (sub) => sub.addToSubNav

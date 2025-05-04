@@ -14,22 +14,57 @@
 }
 
 .subnavInnerContainer {
-  max-width: 1200px;
+  max-width: 1150px;
   margin-left: auto;
   margin-right: auto;
   width: 100%;
+  min-width: 0;
   display: flex;
   align-items: center;
+  gap: 0.5rem;
+  position: relative;
 }
+
+.subnavInnerContainer::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 36px; /* width of right arrow button */
+  width: 36px;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.2s;
+  background: linear-gradient(to right, rgba(243, 239, 239, 0.01) 0%, rgb(243, 239, 239) 90%);
+}
+:global([data-theme="dark"]) .subnavInnerContainer::after {
+  background: linear-gradient(to right, rgba(47, 47, 47, 0.01) 0%, #2f2f2f 90%);
+}
+
+.subnavInnerContainer.showRightFade::after {
+  opacity: 1;
+}
+
 
 
 .subnavContainer {
   display: flex;
+  flex: 1 1 auto;
   overflow-x: auto;
   white-space: nowrap;
-  padding: 0 0.5rem;
-  width: 100%;
-  justify-content: center;
+  padding: 0;
+  justify-content: flex-start;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+  position: relative;
+}
+
+
+
+.subnavContainer::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Webkit */
 }
 
 .subnavItem {
@@ -65,6 +100,38 @@
 :global([data-theme="dark"]) .subnavItem span::after {
   background-color: #fff;
 }
+
+.arrowBtn {
+  background: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #222;
+  cursor: pointer;
+  transition: color 0.15s;
+  z-index: 2;
+  position: static;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  height: auto;
+}
+
+
+
+:global([data-theme="dark"]) .arrowBtn {
+  background: transparent;
+  color: #fff;
+  border: none;
+}
+:global([data-theme="dark"]) .arrowBtn img {
+  filter: invert(1) brightness(2);
+}
+
 
 
 

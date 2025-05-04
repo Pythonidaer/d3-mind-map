@@ -124,7 +124,7 @@
   height: 100%;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1100px) {
   .navGrid {
     display: none;
   }
@@ -174,7 +174,7 @@
   }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 1101px) {
   .themeToggleMobile {
     display: none !important;
   }
@@ -435,7 +435,7 @@
   color: #fff !important;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1100px) {
   .mobileBar,
   .themeToggleMobile,
   .themeToggleMobile .themeButton,
@@ -534,7 +534,7 @@
 
 
 /* Responsive styles for mobile devices */
-@media (max-width: 768px) {
+@media (max-width: 1100px) {
   .brand {
     font-size: 1rem;
   }
