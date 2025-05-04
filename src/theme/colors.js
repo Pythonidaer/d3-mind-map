@@ -36,12 +36,19 @@ export const lightTheme = {
   // nodeNegative1: '#FF8A80',
   // nodeNegative2: '#FFB3B3',
   // nodeNegative3: '#FFE0E0',
-  nodePositive1: '#00d4ff',   // Bright Cyan (navbar gradient end)
-  nodePositive2: '#38bdf8',   // Sky Blue (harmonious with gradient)
-  nodePositive3: '#e0f7fa',   // Light Cyan (background/highlight)
-  nodeNegative1: '#ee0979',   // Vivid Magenta (contrasts with blue)
-  nodeNegative2: '#ff6a88',   // Pinkish Coral
-  nodeNegative3: '#fce4ec', 
+  // nodePositive1: '#00d4ff',   // Bright Cyan (navbar gradient end)
+  // nodePositive2: '#38bdf8',   // Sky Blue (harmonious with gradient)
+  // nodePositive3: '#e0f7fa',   // Light Cyan (background/highlight)
+  // nodeNegative1: '#ee0979',   // Vivid Magenta (contrasts with blue)
+  // nodeNegative2: '#ff6a88',   // Pinkish Coral
+  // nodeNegative3: '#fce4ec', 
+  nodePositive1: '#FF9505', // vibrant teal (anchor)
+  nodePositive2: '#FFB627', // light, lively teal
+  nodePositive3: '#FFC971', // pale teal (highlight/secondary)
+
+nodeNegative1: '#EF57D6', // vibrant magenta (lighter than #800080, but not neon)
+nodeNegative2: '#ff4fff', // bright magenta-pink
+nodeNegative3: '#ffb3ff', // soft pastel magenta (for highlight/secondary)
   // Add more as needed
 };
 /*
@@ -93,15 +100,20 @@ export const darkTheme = {
   // nodeNegative2: '#ff867f',
   // nodeNegative3: '#ffb3b3',
     // Positive (Purple gradient)
-    nodePositive1: '#c4b5fd', // purple-400 (most prominent/primary positive)
-    nodePositive2: '#a78bfa', // purple-300 (midpoint)
-    nodePositive3: '#d8b4fe', // purple-800 (deep accent)
+    // nodePositive1: '#c4b5fd', // purple-400 (most prominent/primary positive)
+    // nodePositive2: '#a78bfa', // purple-300 (midpoint)
+    // nodePositive3: '#d8b4fe', // purple-800 (deep accent)
   
-    // Negative (Yellow gradient)
-    nodeNegative1: '#fde047', // yellow-300 (primary negative/warning)
-    nodeNegative2: '#facc15', // yellow-400 (midpoint, bright)
-    nodeNegative3: '#fef9c3', // yellow-100 (softest, background/tertiary)
-  
+    // // Negative (Yellow gradient)
+    // nodeNegative1: '#fde047', // yellow-300 (primary negative/warning)
+    // nodeNegative2: '#facc15', // yellow-400 (midpoint, bright)
+    // nodeNegative3: '#fef9c3', // yellow-100 (softest, background/tertiary)
+    nodePositive1: '#01fdf6', // bright pink
+    nodePositive2: '#a7ff9f', // bright peach
+    nodePositive3: '#d0fe84', // bright yellow-orange
+    nodeNegative1: '#F9F871', // vivid light yellow
+    nodeNegative2: '#FFFACD', // lemon chiffon (very light yellow)
+    nodeNegative3: '#FFFFFF', // white (highlight/disabled)
   // Adjust for dark mode contrast
 };
 
