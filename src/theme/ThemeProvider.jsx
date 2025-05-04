@@ -14,13 +14,25 @@ export const ThemeProvider = ({ children }) => {
     }
     return 'system';
   };
-  const [theme, setTheme] = useState(getInitialTheme);
-  const [resolvedTheme, setResolvedTheme] = useState(() => {
+  // Read initial theme from <html> if set by inline script
+  const getInitialResolvedTheme = () => {
+    if (typeof document !== 'undefined') {
+      const htmlTheme = document.documentElement.getAttribute('data-theme');
+      if (htmlTheme === 'dark' || htmlTheme === 'light') return htmlTheme;
+    }
     if (theme === 'system') {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      return typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
     return theme;
-  });
+  };
+  const [theme, setTheme] = useState(getInitialTheme);
+  const [resolvedTheme, setResolvedTheme] = useState(getInitialResolvedTheme);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
 
   useEffect(() => {
     // Save theme selection
@@ -52,7 +64,7 @@ export const ThemeProvider = ({ children }) => {
 
   useEffect(() => {
     if (typeof document !== 'undefined') {
-      document.body.setAttribute('data-theme', resolvedTheme);
+      document.documentElement.setAttribute('data-theme', resolvedTheme);
     }
   }, [resolvedTheme]);
 

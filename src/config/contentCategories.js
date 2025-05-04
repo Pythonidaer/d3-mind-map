@@ -126,7 +126,7 @@ export const contentCategories = [
         id: 'benchmarking_js_react_next_ts',
         name: 'Benchmarking',
         path: 'benchmarking_js_react_next_ts',
-        addToNav: true,
+        addToNav: false,
         addToSubNav: true,
       },
       // Future fundamental topics (like 'variables', 'data-types') added here
@@ -777,37 +777,9 @@ export const contentCategories = [
     addToNav: true,
     subcategories: [
       {
-        id: 'srp',
-        name: 'SRP',
-        path: 'srp',
-        addToNav: true,
-        addToSubNav: false,
-      },
-      {
-        id: 'ocp',
-        name: 'OCP',
-        path: 'ocp',
-        addToNav: true,
-        addToSubNav: false,
-      },
-      {
-        id: 'lsp',
-        name: 'LSP',
-        path: 'lsp',
-        addToNav: true,
-        addToSubNav: false,
-      },
-      {
-        id: 'isp',
-        name: 'ISP',
-        path: 'isp',
-        addToNav: true,
-        addToSubNav: false,
-      },
-      {
-        id: 'dip',
-        name: 'DIP',
-        path: 'dip',
+        id: 'solid',
+        name: 'SOLID',
+        path: 'solid',
         addToNav: true,
         addToSubNav: false,
       },
@@ -1117,7 +1089,7 @@ export const contentCategories = [
   },
   {
     id: 'storybook_overview',
-    name: 'Storybook Overview',
+    name: 'Storybook',
     baseRoute: '/storybook_overview',
     dataPath: 'storybook_overview',
     addToNav: true,

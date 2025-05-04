@@ -47,7 +47,7 @@ export const nodes = [
   },
   {
     id: 'programmatic_navigation',
-    label: 'Programmatic Navigation',
+    label: 'Programmatic \n Navigation',
     shape: 'ellipse',
     color: 'nodePositive1',
     parent: 'root',

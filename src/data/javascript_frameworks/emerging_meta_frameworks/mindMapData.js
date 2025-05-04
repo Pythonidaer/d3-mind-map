@@ -3,7 +3,7 @@ import { COLORS } from '../../../theme/colors'
 export const nodes = [
   {
     id: 'root',
-    label: 'Emerging & Meta-Frameworks',
+    label: 'Emerging & \nMeta-Frameworks',
     shape: 'roundRect',
     color: 'root',
     definition:

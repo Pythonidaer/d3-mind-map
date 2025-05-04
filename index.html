@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Prevent theme flicker: Set theme ASAP -->
+    <script>
+      (function() {
+        try {
+          var theme = localStorage.getItem('theme');
+          if (!theme || theme === 'system') {
+            theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          }
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {}
+      })();
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
@@ -19,13 +31,13 @@
     <!-- Light theme -->
     <meta
       name="theme-color"
-      content="#EE0979"
+      content="#18191a"
       media="(prefers-color-scheme: light)"
     />
     <!-- Dark theme -->
     <meta
       name="theme-color"
-      content="#FDE047"
+      content="#18191a"
       media="(prefers-color-scheme: dark)"
     />
   </head>

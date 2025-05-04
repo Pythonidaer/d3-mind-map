@@ -5,11 +5,11 @@
 }
 
 :root {
-  --subnav-bg: #f6f7f9;
+  --subnav-bg: rgb(243, 239, 239);
   --subnav-fg: #232323;
 }
 :global([data-theme="dark"]) {
-  --subnav-bg: #23272a;
+  --subnav-bg: #2f2f2f;
   --subnav-fg: #f1f1f1;
 }
 
