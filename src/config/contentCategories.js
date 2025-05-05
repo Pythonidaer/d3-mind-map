@@ -1236,6 +1236,13 @@ export const contentCategories = [
         addToNav: false,
         addToSubNav: true,
       },
+      {
+        id: 'budget_and_timeline',
+        name: 'Budget & Timeline',
+        path: 'budget_and_timeline',
+        addToNav: false,
+        addToSubNav: true
+      }
     ]
   }
   // Add future categories  here following the same structure
