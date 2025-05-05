@@ -1140,7 +1140,7 @@ export const contentCategories = [
   },
   {
     id: 'small_business_web_dev',
-    name: 'Website Dev for Small Biz',
+    name: 'Web Dev for Small Biz',
     baseRoute: '/small_business_web_dev',
     dataPath: 'small_business_web_dev',
     addToNav: true,
