@@ -1138,6 +1138,113 @@ export const contentCategories = [
       },
     ],
   },
+  {
+    id: 'small_business_web_dev',
+    name: 'Web Dev for Small Biz',
+    baseRoute: '/small_business_web_dev',
+    dataPath: 'small_business_web_dev',
+    addToNav: true,
+    subcategories: [
+      {
+        id: 'pricing_models',
+        name: 'Pricing Models',
+        path: 'pricing_models',
+        addToNav: true,
+        addToSubNav: false,
+      },
+      {
+        id: 'cms_comparison',
+        name: 'CMS Comparison',
+        path: 'cms_comparison',
+        addToNav: true,
+        addToSubNav: false,
+      },
+      {
+        id: 'custom_vs_existing',
+        name: 'Custom vs Existing CMS',
+        path: 'custom_vs_existing',
+        addToNav: true,
+        addToSubNav: false,
+      },
+      {
+        id: 'domain_and_hosting',
+        name: 'Domain & Hosting',
+        path: 'domain_and_hosting',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'freelancer_hiring',
+        name: 'Hiring a Developer',
+        path: 'freelancer_hiring',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'project_discussion',
+        name: 'Discussing Scope & Pricing',
+        path: 'project_discussion',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'seo_basics',
+        name: 'Basic SEO Practices',
+        path: 'seo_basics',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'maintenance_packages',
+        name: 'Maintenance Packages',
+        path: 'maintenance_packages',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'business_understanding',
+        name: 'Understanding the Business',
+        path: 'business_understanding',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'current_online_presence',
+        name: 'Current Online Presence',
+        path: 'current_online_presence',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'website_objectives',
+        name: 'Website Objectives',
+        path: 'website_objectives',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'detailed_requirements',
+        name: 'Detailed Requirements',
+        path: 'detailed_requirements',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'technical_considerations',
+        name: 'Technical Considerations',
+        path: 'technical_considerations',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'budget_and_timeline',
+        name: 'Budget & Timeline',
+        path: 'budget_and_timeline',
+        addToNav: false,
+        addToSubNav: true
+      }
+    ]
+  }
   // Add future categories  here following the same structure
 ]
 
