@@ -1244,6 +1244,71 @@ export const contentCategories = [
         addToSubNav: true
       }
     ]
+  },
+  {
+    id: 'startup_success',
+    name: 'Startup Success Foundations',
+    baseRoute: '/startup_success_foundations',
+    dataPath: 'startup_success_foundations',
+    addToNav: true,
+    subcategories: [
+      {
+        id: 'lean_startup_basics',
+        name: 'Lean Startup Basics',
+        path: 'lean_startup_basics',
+        addToNav: true,
+        addToSubNav: false,
+      },
+      {
+        id: 'website_traction_and_design',
+        name: 'Website Traction & Design',
+        path: 'website_traction_and_design',
+        addToNav: true,
+        addToSubNav: false,
+      },
+      {
+        id: 'brand_and_ui_strategy',
+        name: 'Branding & UI Strategy',
+        path: 'brand_and_ui_strategy',
+        addToNav: true,
+        addToSubNav: false,
+      },
+      {
+        id: 'user_acquisition',
+        name: 'User Acquisition',
+        path: 'user_acquisition',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'user_feedback_loops',
+        name: 'User Feedback Loops',
+        path: 'user_feedback_loops',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'funding_readiness',
+        name: 'Funding Readiness',
+        path: 'funding_readiness',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'startup_case_studies',
+        name: 'Startup Case Studies',
+        path: 'startup_case_studies',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'startup_summary',
+        name: 'Startup Journey Summary',
+        path: 'startup_summary',
+        addToNav: false,
+        addToSubNav: true,
+      },
+    ],
   }
   // Add future categories  here following the same structure
 ]
