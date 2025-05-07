@@ -174,6 +174,13 @@ export const contentCategories = [
         addToNav: false,
         addToSubNav: true,
       },
+      {
+        id: 'js_paradigm_breakdown',
+        name: 'JavaScript Paradigm Performance',
+        path: 'js_paradigm_breakdown',
+        addToNav: false,
+        addToSubNav: true,
+      },
     ],
   },
   {
