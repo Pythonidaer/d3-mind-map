@@ -176,7 +176,7 @@ export const contentCategories = [
       },
       {
         id: 'js_paradigm_breakdown',
-        name: 'JavaScript Paradigm Performance',
+        name: 'JavaScript Syntax by Paradigm',
         path: 'js_paradigm_breakdown',
         addToNav: false,
         addToSubNav: true,

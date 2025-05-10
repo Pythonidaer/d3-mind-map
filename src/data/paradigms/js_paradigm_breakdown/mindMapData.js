@@ -144,6 +144,22 @@ export const nodes = [
     parent: 'oop',
     definition: 'Instance fields and methods as part of an object’s encapsulated state.',
   },
+  {
+    id: 'new_instance',
+    label: '`new` Keyword\n(Instances)',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'oop',
+    definition: 'Creates an instance from a constructor or class. Used in object-oriented instantiation.',
+  },
+  {
+    id: 'instanceof_operator',
+    label: '`instanceof`\nOperator',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'oop',
+    definition: 'Checks if an object inherits from a class or prototype in its chain.',
+  },
 
   // Procedural children
   {
@@ -171,12 +187,36 @@ export const nodes = [
     definition: '`for`, `while`, and `do…while` control flow loops represent sequential steps.',
   },
   {
+    id: 'switch_statement',
+    label: 'switch\nStatement',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'procedural',
+    definition: 'Multi-branch conditional logic using case-based control flow.',
+  },
+  {
+    id: 'if_else_structure',
+    label: 'if/else if/\nelse Structure',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'procedural',
+    definition: 'Standard conditional flow control with multiple branches.',
+  },
+  {
     id: 'try_catch',
     label: 'try/catch\nBlocks',
     shape: 'rect',
     color: 'nodePositive2',
     parent: 'procedural',
     definition: 'Encapsulates logic that may throw, with recovery logic after failure.',
+  },
+  {
+    id: 'throw_statement',
+    label: '`throw`\nStatement',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'procedural',
+    definition: 'Manually throws an exception to be caught or to terminate execution.',
   },
 
   // Imperative children
@@ -212,41 +252,83 @@ export const nodes = [
     parent: 'imperative',
     definition: 'Suspends execution at `await` points. Looks synchronous but hides promise resolution.',
   },
+  {
+    id: 'for_each',
+    label: 'forEach\nMethod',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'imperative',
+    definition: 'Array iteration method that executes a callback for each element. Commonly used with side effects.',
+  },
+  {
+    id: 'error_object_instantiation',
+    label: '`new Error()`\nObject',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'imperative',
+    definition: 'Creates an error object to be thrown, logged, or passed through code.',
+  },
+  {
+    id: 'typeof_operator',
+    label: '`typeof`\nOperator',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'imperative',
+    definition: 'Returns a string indicating the type of a variable or expression.',
+  },
+  {
+    id: 'in_operator',
+    label: '`in`\nOperator',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'imperative',
+    definition: 'Checks whether a property exists in an object or its prototype chain.',
+  },
 ]
 
 export const links = [
+  // Paradigm roots
   { source: 'root', target: 'functional' },
   { source: 'root', target: 'declarative' },
   { source: 'root', target: 'oop' },
   { source: 'root', target: 'procedural' },
   { source: 'root', target: 'imperative' },
 
-  // Functional links
+  // Functional
   { source: 'functional', target: 'pure_functions' },
   { source: 'functional', target: 'immutability_const' },
   { source: 'functional', target: 'higher_order' },
   { source: 'higher_order', target: 'map_filter_reduce' },
 
-  // Declarative links
+  // Declarative
   { source: 'declarative', target: 'expression_based' },
   { source: 'expression_based', target: 'ternary_usage' },
   { source: 'declarative', target: 'array_methods' },
   { source: 'declarative', target: 'promises_then' },
 
-  // OOP links
+  // OOP
   { source: 'oop', target: 'classes' },
   { source: 'oop', target: 'prototypes' },
   { source: 'oop', target: 'object_properties' },
+  { source: 'oop', target: 'new_instance' },
+  { source: 'oop', target: 'instanceof_operator' },
 
-  // Procedural links
+  // Procedural
   { source: 'procedural', target: 'function_procedures' },
   { source: 'procedural', target: 'variable_steps' },
   { source: 'procedural', target: 'loops' },
+  { source: 'procedural', target: 'switch_statement' },
+  { source: 'procedural', target: 'if_else_structure' },
   { source: 'procedural', target: 'try_catch' },
+  { source: 'procedural', target: 'throw_statement' },
 
-  // Imperative links
+  // Imperative
   { source: 'imperative', target: 'dom_manipulation' },
   { source: 'imperative', target: 'event_listeners' },
   { source: 'imperative', target: 'state_mutation' },
   { source: 'imperative', target: 'async_await' },
+  { source: 'imperative', target: 'for_each' },
+  { source: 'imperative', target: 'error_object_instantiation' },
+  { source: 'imperative', target: 'typeof_operator' },
+  { source: 'imperative', target: 'in_operator' },
 ]

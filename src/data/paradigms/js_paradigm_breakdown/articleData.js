@@ -1,64 +1,95 @@
 const articleData = {
-    introduction: `JavaScript is a multi-paradigm language that supports Functional, Declarative, Object-Oriented, Procedural, and Imperative programming. Each of these paradigms influences how code is structured, written, and maintained. This article expands on the mind map by exploring each paradigm in detail, showing how JavaScript syntax and features align with them, and providing code examples to illustrate their practical application.`,
+    introduction: `JavaScript is a multi-paradigm language that supports Functional, Declarative, Object-Oriented, Procedural, and Imperative programming. Each paradigm represents a different mental model for writing and organizing code. This article dives into each paradigm, explaining how JavaScript syntax aligns with them, where they overlap, and what tradeoffs they bring. It also integrates broader distinctions such as expressions vs. statements, callbacks, async/await behavior, and the relevance of event-driven and reactive patterns.`,
   
     keyPrinciples: {
       title: 'Key Paradigm Principles in JavaScript',
       content: [
-        'Functional Programming: Focuses on pure functions, immutability, and composition.',
-        'Declarative Programming: Expresses what the program should accomplish without specifying control flow.',
-        'Object-Oriented Programming: Organizes code into reusable objects with state and behavior.',
-        'Procedural Programming: Structures programs as sequences of instructions grouped in procedures.',
-        'Imperative Programming: Provides explicit commands to control program state and flow.'
+        'Functional Programming: Composes logic using pure functions, immutability, and values passed and returned via expressions.',
+        'Declarative Programming: Describes what the code should accomplish, often using expressions that yield values and abstracting control flow.',
+        'Object-Oriented Programming: Encapsulates state and behavior inside objects and uses inheritance or composition.',
+        'Procedural Programming: Breaks down tasks into sequences of instructions and organizes them into procedures or routines.',
+        'Imperative Programming: Explicitly dictates how the computer should perform each step using statements and mutations.'
       ]
     },
   
     benefits: {
       title: 'Benefits of Multi-Paradigm JavaScript',
       content: [
-        'Flexible code organization—choose the best paradigm for the task.',
-        'Improved code readability and maintainability.',
-        'Enhanced testing with pure functions and declarative logic.',
-        'Efficient asynchronous flows with promises and async/await.',
-        'Modular and reusable components via objects, classes, and higher-order functions.'
+        'Lets developers choose the best style for a problem, increasing flexibility and adaptability.',
+        'Promotes clearer abstractions: functional for data flows, OOP for entity behavior, and imperative for direct control.',
+        'Enables composability and reuse with functions and modules.',
+        'Supports asynchronous logic and event-driven systems natively.',
+        'Encourages better organization through expressions, classes, or structured steps depending on the use case.'
       ]
     },
   
     cons: {
       title: 'Challenges to Watch For',
       content: [
-        'Mixing paradigms poorly can create confusing codebases.',
-        'OOP misuse may lead to over-encapsulation or class hierarchy bloat.',
-        'Imperative styles can lead to hard-to-maintain, side-effect-ridden code.',
-        'Lack of immutability can cause hidden bugs and unpredictable behavior.'
+        'Overmixing paradigms can lead to tangled or confusing code.',
+        'Relying too much on mutable state increases the risk of bugs.',
+        'Class-based OOP can become overly hierarchical or abstract.',
+        'Improper use of async/await or callbacks can obscure execution flow.',
+        'Declarative abstractions may hide performance pitfalls or debugging complexity.'
       ]
     },
   
     antiPatterns: {
       title: 'Common Anti-Patterns Across Paradigms',
       content: [
-        'Mutating shared state in functional-style code.',
-        'Overusing class-based OOP for simple data structures.',
-        'Deeply nested imperative code that hides business logic.',
-        'Using array mutation (`push`, `splice`) when immutability is preferred.',
-        'Mixing control flow with UI logic imperatively instead of composing with declarative tools.'
+        'Using imperative logic inside functional pipelines (e.g., side effects in map).',
+        'Mutating shared state in a function intended to be pure.',
+        'Excessive reliance on nested callbacks (callback hell).',
+        'Treating all problems as object-oriented when simpler constructs suffice.',
+        'Overusing conditional logic in declarative frameworks instead of composing small components.'
       ]
     },
   
     codeExamples: [
       {
-        title: 'Functional Example: map + filter',
-        code: `const nums = [1, 2, 3, 4, 5];
-  const doubledEvens = nums.filter(n => n % 2 === 0).map(n => n * 2);`
+        title: 'Functional Programming Examples',
+        code: `// Pure function
+  const square = x => x * x;
+  
+  // Higher-order function
+  const withLogging = fn => (...args) => {
+    console.log('Calling function');
+    return fn(...args);
+  };
+  
+  // Immutability with const
+  const PI = 3.14;
+  const area = r => PI * r * r;
+  
+  // Chaining with map, filter, reduce
+  const result = [1, 2, 3, 4]
+    .filter(n => n % 2 === 0)
+    .map(n => n * 2)
+    .reduce((sum, n) => sum + n, 0);`
       },
+  
       {
-        title: 'Declarative Example: Ternary and Template',
-        code: `const isDark = true;
-  const theme = isDark ? 'Dark Mode' : 'Light Mode';
-  console.log(\`Using \${theme}\`);`
+        title: 'Declarative Programming Examples',
+        code: `// Ternary expression
+  const greeting = isLoggedIn ? 'Welcome' : 'Please login';
+  
+  // Template literal
+  const message = \`Hello, \${name}!\`;
+  
+  // Destructuring and rest/spread
+  const [a, b] = [1, 2];
+  const clone = { ...original };
+  
+  // Promise chaining (declarative async)
+  fetch('/api')
+    .then(res => res.json())
+    .then(data => console.log(data));`
       },
+  
       {
-        title: 'OOP Example: ES6 Class',
-        code: `class Dog {
+        title: 'Object-Oriented Programming Examples',
+        code: `// Class syntax
+  class Dog {
     constructor(name) {
       this.name = name;
     }
@@ -66,45 +97,115 @@ const articleData = {
       console.log(\`\${this.name} says woof!\`);
     }
   }
-  const fido = new Dog('Fido');
-  fido.bark();`
+  const fido = new Dog('Fido'); // using 'new'
+  
+  // Object literal with methods
+  const user = {
+    name: 'Alice',
+    greet() {
+      console.log(\`Hi, I'm \${this.name}\`);
+    }
+  };
+  
+  // Prototypal inheritance
+  function Animal(name) {
+    this.name = name;
+  }
+  Animal.prototype.speak = function () {
+    console.log(\`\${this.name} makes a noise.\`);
+  };`
       },
+  
       {
-        title: 'Procedural Example: Loop and Mutation',
-        code: `let sum = 0;
-  const numbers = [1, 2, 3, 4];
+        title: 'Procedural Programming Examples',
+        code: `// if/else if/else
+  let status = '';
+  if (score > 90) {
+    status = 'A';
+  } else if (score > 80) {
+    status = 'B';
+  } else {
+    status = 'C';
+  }
+  
+  // switch statement
+  switch (statusCode) {
+    case 200:
+      console.log('OK');
+      break;
+    case 404:
+      console.log('Not Found');
+      break;
+    default:
+      console.log('Unknown');
+  }
+  
+  // while loop
+  let count = 0;
+  while (count < 3) {
+    console.log('Counting:', count);
+    count++;
+  }
+  
+  // for...in loop
+  const obj = { a: 1, b: 2 };
+  for (const key in obj) {
+    console.log(key, obj[key]);
+  }
+  
+  // for loop and accumulator
+  let total = 0;
+  const numbers = [1, 2, 3];
   for (let i = 0; i < numbers.length; i++) {
-    sum += numbers[i];
+    total += numbers[i];
+  }
+  
+  // forEach loop
+  [1, 2, 3].forEach(n => {
+    console.log('Value:', n);
+  });
+  
+  // try/catch block for safe error handling
+  function parseJSON(jsonStr) {
+    try {
+      return JSON.parse(jsonStr);
+    } catch (err) {
+      console.error('Failed to parse:', err);
+      return null;
+    }
   }`
       },
+  
       {
-        title: 'Imperative Example: DOM Manipulation',
-        code: `const el = document.getElementById('message');
-  el.textContent = 'Hello, world!';`
-      },
-      {
-        title: 'Async Example: Promise then()',
-        code: `fetch('/data.json')
-    .then(res => res.json())
-    .then(data => console.log(data))
-    .catch(err => console.error(err));`
-      },
-      {
-        title: 'Async/Await Example',
-        code: `async function loadData() {
+        title: 'Imperative Programming Examples',
+        code: `// Direct DOM manipulation
+  const el = document.getElementById('app');
+  el.textContent = 'Hello world';
+  
+  // Event listener
+  button.addEventListener('click', () => {
+    alert('Clicked!');
+  });
+  
+  // State mutation
+  let count = 0;
+  count++;
+  
+  // Async/Await with sequential logic
+  async function loadData() {
     try {
-      const res = await fetch('/data.json');
-      const data = await res.json();
-      console.log(data);
+      const res = await fetch('/data');
+      const json = await res.json();
+      console.log(json);
     } catch (err) {
-      console.error(err);
+      console.error('Async error:', err);
     }
   }`
       }
     ],
   
-    conclusion: `JavaScript’s multi-paradigm nature is one of its greatest strengths, allowing developers to adapt their coding style to the problem at hand. From writing highly readable functional pipelines to structuring complex systems with OOP and managing user interactions imperatively, each paradigm provides useful tools. Understanding which paradigm you are working within—and why—helps you write better, clearer, and more maintainable JavaScript.`
-  }
+    conclusion: `Understanding how JavaScript supports multiple paradigms helps you choose the most appropriate one for a given task. Functional and declarative paradigms focus on building and returning values through expressions, improving predictability and composability. Imperative and procedural paradigms offer hands-on control and step-by-step logic that’s often more intuitive in asynchronous or UI-driven contexts. Object-oriented programming helps model complex systems using encapsulation and behavior. Additionally, JavaScript is heavily event-driven, and frameworks like React blend declarative syntax with imperative mechanics behind the scenes. The best JavaScript developers know not only how to use each paradigm—but when, why, and how to blend them effectively.`
+  };
   
   export default articleData;
   
