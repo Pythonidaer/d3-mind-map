@@ -608,7 +608,71 @@ export const contentCategories = [
       },
     ],
   },
-
+  {
+    id: 'website_components_and_features',
+    name: 'Website Components and Features',
+    baseRoute: '/website_components_and_features',
+    dataPath: 'website_components_and_features',
+    addToNav: true,
+    subcategories: [
+      {
+        id: 'navigation_patterns',
+        name: 'Navigation Patterns',
+        path: 'navigation_patterns',
+        addToNav: true,
+        addToSubNav: false,
+      },
+      {
+        id: 'content_presentation',
+        name: 'Content Presentation',
+        path: 'content_presentation',
+        addToNav: true,
+        addToSubNav: false,
+      },
+      {
+        id: 'interactive_elements',
+        name: 'Interactive Elements',
+        path: 'interactive_elements',
+        addToNav: true,
+        addToSubNav: false,
+      },
+      {
+        id: 'visual_design',
+        name: 'Visual Design',
+        path: 'visual_design',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'forms_and_input',
+        name: 'Forms and Input',
+        path: 'forms_and_input',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'data_visualization',
+        name: 'Data Visualization',
+        path: 'data_visualization',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'website_types',
+        name: 'Website Types',
+        path: 'website_types',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'spa_vs_mpa',
+        name: 'SPA vs MPA',
+        path: 'spa_vs_mpa',
+        addToNav: false,
+        addToSubNav: true,
+      },
+    ]
+  },
   // {
   //   id: 'religions',
   //   name: 'Religious Studies',
