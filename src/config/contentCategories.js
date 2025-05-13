@@ -233,6 +233,27 @@ export const contentCategories = [
         addToSubNav: false,
       },
       {
+        id: 'optimize_re_renders',
+        name: 'Optimize Re-renders',
+        path: 'optimize_re_renders',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'scalability',
+        name: 'Scalability',
+        path: 'scalability',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'network_performance',
+        name: 'Network Performance',
+        path: 'network_performance',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
         id: 'database_performance',
         name: 'Database Performance',
         path: 'database_performance',
