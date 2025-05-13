@@ -609,8 +609,80 @@ export const contentCategories = [
     ],
   },
   {
+    id: 'figma_comprehensive_guide',
+    name: 'Figma',
+    baseRoute: '/figma_comprehensive_guide',
+    dataPath: 'figma_comprehensive_guide',
+    addToNav: true,
+    subcategories: [
+      {
+        id: 'core_figma_concepts',
+        name: 'Core Concepts',
+        path: 'core_figma_concepts',
+        addToNav: true,
+        addToSubNav: false
+      },
+      {
+        id: 'interface_navigation',
+        name: 'Navigating the Figma Interface',
+        path: 'interface_navigation',
+        addToNav: true,
+        addToSubNav: false
+      },
+      {
+        id: 'collaboration_communication',
+        name: 'Collaboration in Figma',
+        path: 'collaboration_communication',
+        addToNav: true,
+        addToSubNav: false
+      },
+      {
+        id: 'prototyping',
+        name: 'Leveraging Figma Prototypes',
+        path: 'prototyping',
+        addToNav: false,
+        addToSubNav: true
+      },
+      {
+        id: 'essential_plugins',
+        name: 'Essential Figma Plugins for Developers',
+        path: 'essential_plugins',
+        addToNav: false,
+        addToSubNav: true
+      },
+      {
+        id: 'figma_api',
+        name: 'Exploring the Figma API',
+        path: 'figma_api',
+        addToNav: false,
+        addToSubNav: true
+      },
+      {
+        id: 'figma_to_code',
+        name: 'The Figma-to-Code Landscape',
+        path: 'figma_to_code',
+        addToNav: false,
+        addToSubNav: true
+      },
+      {
+        id: 'code_and_ai_to_figma',
+        name: 'Code & AI to Figma Generation',
+        path: 'code_and_ai_to_figma',
+        addToNav: false,
+        addToSubNav: true
+      },
+      {
+        id: 'best_practices',
+        name: 'Best Practices for Developers Using Figma',
+        path: 'best_practices',
+        addToNav: false,
+        addToSubNav: true
+      },
+    ]
+  },
+  {
     id: 'website_components_and_features',
-    name: 'Website Components and Features',
+    name: 'Website Components',
     baseRoute: '/website_components_and_features',
     dataPath: 'website_components_and_features',
     addToNav: true,
