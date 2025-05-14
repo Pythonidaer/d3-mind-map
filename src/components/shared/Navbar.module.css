@@ -465,15 +465,29 @@
   color: var(--navbar-fg) !important;
   font-weight: 500;
   border: 1px solid var(--dropdown-primary-border, #cbd5e1);
-  border-radius: 7px;
+  border-radius: 7px 0 0 7px; /* consider 0 in the future for custom scrollbar */
   list-style: none;
   padding: 5px 0;
   margin: 5px 0 0 0;
-  min-width: 180px;
+  min-width: 220px;
   z-index: 1001;
   box-shadow: 0 2px 12px rgba(30, 64, 175, 0.08);
   transition: background 0.18s, color 0.18s;
+  max-height: 400px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
 }
+
+/* 
+Future feature idea would be to add a custom scrollbar
+.categoryDropdownMenu::-webkit-scrollbar {
+  width: 8px;
+  background: #eee;
+}
+.categoryDropdownMenu::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 7px;
+} */
 
 .categoryDropdownItem {
   background: none;
