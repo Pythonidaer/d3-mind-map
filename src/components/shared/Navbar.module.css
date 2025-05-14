@@ -566,20 +566,23 @@ Future feature idea would be to add a custom scrollbar
     top: 0;
     right: 0;
     width: 250px;
-    height: 100vh;
     background-color: var(--navbar-bg, white);
     color: var(--navbar-fg, #232323);
     padding: 2rem;
     gap: 1.5rem;
     z-index: 1001;
     transition: transform 0.3s ease-in-out;
-    transform: translateX(100%); 
+    transform: translateX(100%);
     align-items: start;
+    height: 100vh;
+    min-height: 100vh;
   }
 
   /* When mobile menu is active, slide it in */
   .mobileMenu {
     transform: translateX(0); /* Slide into view */
+    overflow-y: auto;
+    /* No forced max-height or padding-bottom; will scroll only if content overflows viewport */
   }
 
   /* Show hamburger on mobile */
@@ -590,5 +593,11 @@ Future feature idea would be to add a custom scrollbar
   /* Show close button on mobile */
   .close-button {
     display: block;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1100;
+    background: transparent;
+    box-shadow: none;
   }
 }
