@@ -1,0 +1,176 @@
+import { COLORS } from '../../../theme/colors';
+
+export const nodes = [
+  {
+    id: 'root',
+    label: 'D3.js\nPurpose & Audience',
+    shape: 'roundRect',
+    color: 'root',
+    definition: 'Explores the intended role of D3.js, the problems it solves, and who it is best suited for.',
+  },
+
+  {
+    id: 'purpose',
+    label: 'Purpose of D3.js',
+    shape: 'ellipse',
+    color: 'nodePositive1',
+    parent: 'root',
+    definition: 'D3 provides foundational primitives to build completely custom data visualizations from scratch.',
+  },
+  {
+    id: 'solve_chart_limits',
+    label: 'Solves Chart\nLibrary Limits',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'purpose',
+    definition: 'Addresses the inflexibility of traditional chart libraries with a low-level approach.',
+  },
+  {
+    id: 'dynamic_interaction',
+    label: 'Dynamic &\nInteractive Visuals',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'purpose',
+    definition: 'Enables real-time updates, transitions, zooming, filtering, and other user interactions.',
+  },
+
+  {
+    id: 'philosophy',
+    label: 'Philosophy of D3',
+    shape: 'ellipse',
+    color: 'nodePositive1',
+    parent: 'root',
+    definition: 'D3 empowers developers to fully control how data is bound to the DOM and transformed into visuals.',
+  },
+  {
+    id: 'data_driven',
+    label: 'Data-Driven\nDocuments',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'philosophy',
+    definition: 'Visualization is driven directly by data updates, not UI state or templates.',
+  },
+  {
+    id: 'visual_freedom',
+    label: 'Visual\nFreedom',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'philosophy',
+    definition: 'No enforced layouts or aesthetics — developers define their own grammar of graphics.',
+  },
+
+  {
+    id: 'target_audience',
+    label: 'Target Audience',
+    shape: 'ellipse',
+    color: 'nodePositive1',
+    parent: 'root',
+    definition: 'Geared toward those who need fully customized, interactive, and responsive visualizations.',
+  },
+  {
+    id: 'developers',
+    label: 'Frontend\nDevelopers',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'target_audience',
+    definition: 'Developers can use D3 to add interactive graphics to modern web apps and frameworks.',
+  },
+  {
+    id: 'data_journalists',
+    label: 'Data\nJournalists',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'target_audience',
+    definition: 'Create exploratory, interactive stories for readers to explore datasets.',
+  },
+  {
+    id: 'analysts_researchers',
+    label: 'Analysts &\nResearchers',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'target_audience',
+    definition: 'Use D3 to visualize complex, multidimensional, or hierarchical datasets.',
+  },
+
+  {
+    id: 'use_cases',
+    label: 'Use Case\nExamples',
+    shape: 'ellipse',
+    color: 'nodePositive1',
+    parent: 'root',
+    definition: 'Demonstrates the broad domains where D3 has been successfully applied.',
+  },
+  {
+    id: 'dashboards',
+    label: 'Custom\nDashboards',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'use_cases',
+    definition: 'Companies use D3 for visual performance tracking, KPI dashboards, and real-time insights.',
+  },
+  {
+    id: 'news_graphics',
+    label: 'Interactive\nNews Graphics',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'use_cases',
+    definition: 'Newsrooms like NYT, The Guardian, and The Pudding build reader-driven visuals with D3.',
+  },
+  {
+    id: 'scientific',
+    label: 'Scientific\nResearch',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'use_cases',
+    definition: 'Used in genomics, climate science, and epidemiology to present complex data clearly.',
+  },
+
+  {
+    id: 'anti_patterns',
+    label: 'Anti-Patterns',
+    shape: 'hexagon',
+    color: 'nodeNegative1',
+    parent: 'root',
+    definition: 'Common misconceptions or misuses that hinder the true potential of D3.',
+  },
+  {
+    id: 'wrong_tool',
+    label: 'Wrong Tool\nfor Job',
+    shape: 'rect',
+    color: 'nodeNegative2',
+    parent: 'anti_patterns',
+    definition: 'Using D3 for basic charts when simpler libraries would suffice wastes effort.',
+  },
+  {
+    id: 'template_mindset',
+    label: 'Treating D3\nLike a Template',
+    shape: 'rect',
+    color: 'nodeNegative2',
+    parent: 'anti_patterns',
+    definition: 'Forgetting D3 is meant to be customized, not to drop in cookie-cutter visuals.',
+  },
+];
+
+export const links = [
+  { source: 'root', target: 'purpose' },
+  { source: 'purpose', target: 'solve_chart_limits' },
+  { source: 'purpose', target: 'dynamic_interaction' },
+
+  { source: 'root', target: 'philosophy' },
+  { source: 'philosophy', target: 'data_driven' },
+  { source: 'philosophy', target: 'visual_freedom' },
+
+  { source: 'root', target: 'target_audience' },
+  { source: 'target_audience', target: 'developers' },
+  { source: 'target_audience', target: 'data_journalists' },
+  { source: 'target_audience', target: 'analysts_researchers' },
+
+  { source: 'root', target: 'use_cases' },
+  { source: 'use_cases', target: 'dashboards' },
+  { source: 'use_cases', target: 'news_graphics' },
+  { source: 'use_cases', target: 'scientific' },
+
+  { source: 'root', target: 'anti_patterns' },
+  { source: 'anti_patterns', target: 'wrong_tool' },
+  { source: 'anti_patterns', target: 'template_mindset' },
+];
