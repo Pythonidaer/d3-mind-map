@@ -1,0 +1,186 @@
+import { COLORS } from '../../../theme/colors'
+
+export const nodes = [
+  {
+    id: 'root',
+    label: 'Migration &\nBackup Strategies',
+    shape: 'roundRect',
+    color: 'root',
+    definition: 'Processes and tools for safely moving WordPress sites and preserving data integrity through backups.',
+  },
+
+  // Level 1
+  {
+    id: 'manual_migration',
+    label: 'Manual\nMigration',
+    shape: 'ellipse',
+    color: 'nodePositive1',
+    parent: 'root',
+    definition: 'Migrating WordPress files and databases manually via FTP and tools like phpMyAdmin.',
+  },
+  {
+    id: 'plugin_migration',
+    label: 'Plugin-Based\nMigration',
+    shape: 'ellipse',
+    color: 'nodePositive1',
+    parent: 'root',
+    definition: 'Using dedicated WordPress plugins to automate migration tasks like file transfer and URL rewriting.',
+  },
+  {
+    id: 'staging',
+    label: 'Staging\nEnvironments',
+    shape: 'ellipse',
+    color: 'nodePositive1',
+    parent: 'root',
+    definition: 'Cloned versions of your live site used for testing changes before deployment.',
+  },
+  {
+    id: 'backup_strategies',
+    label: 'Backup\nStrategies',
+    shape: 'ellipse',
+    color: 'nodePositive1',
+    parent: 'root',
+    definition: 'Best practices for creating, storing, and restoring site backups securely and regularly.',
+  },
+
+  // Level 2
+  {
+    id: 'ftp_database',
+    label: 'FTP +\nDatabase Export',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'manual_migration',
+    definition: 'Manual transfer of site files via FTP and export/import of MySQL databases.',
+  },
+  {
+    id: 'search_replace',
+    label: 'Search/Replace\nOld URLs',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'manual_migration',
+    definition: 'Rewriting domain URLs in the database to reflect the new server or environment.',
+  },
+  {
+    id: 'popular_plugins',
+    label: 'Popular Migration\nPlugins',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'plugin_migration',
+    definition: 'Plugins like Duplicator, All-in-One WP Migration, and Migrate Guru that handle end-to-end migration.',
+  },
+  {
+    id: 'plugin_benefits',
+    label: 'Benefits of\nPlugin Use',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'plugin_migration',
+    definition: 'Saves time, handles serialized data, and minimizes technical errors.',
+  },
+  {
+    id: 'staging_hosts',
+    label: 'Host-Provided\nStaging',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'staging',
+    definition: 'Managed hosts like WP Engine offer 1-click staging environments.',
+  },
+  {
+    id: 'deployment_workflow',
+    label: 'Safe\nDeployment Flow',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'staging',
+    definition: 'Work locally → stage → test → deploy. Prevents bugs from reaching live users.',
+  },
+  {
+    id: 'plugin_backups',
+    label: 'Backup\nPlugins',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'backup_strategies',
+    definition: 'Plugins like UpdraftPlus, BlogVault, or BackWPup automate full-site and remote backups.',
+  },
+  {
+    id: 'storage_locations',
+    label: 'Off-Site\nStorage',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'backup_strategies',
+    definition: 'Backups should be stored off-server in services like Dropbox, GDrive, or S3 for safety.',
+  },
+  {
+    id: 'schedule_frequency',
+    label: 'Backup\nSchedules',
+    shape: 'rect',
+    color: 'nodePositive2',
+    parent: 'backup_strategies',
+    definition: 'Regular full-site backups—daily, weekly—ensure disaster recovery readiness.',
+  },
+
+  // Level 3
+  {
+    id: 'sql_import',
+    label: 'phpMyAdmin\nSQL Import',
+    shape: 'diamond',
+    color: 'nodePositive3',
+    parent: 'ftp_database',
+    definition: 'Upload and import database dump files into the new server’s MySQL instance.',
+  },
+  {
+    id: 'wp_config_update',
+    label: 'Update\nwp-config.php',
+    shape: 'diamond',
+    color: 'nodePositive3',
+    parent: 'ftp_database',
+    definition: 'Adjust DB credentials and site settings in the wp-config.php file after migration.',
+  },
+  {
+    id: 'duplicator',
+    label: 'Duplicator\nPlugin',
+    shape: 'diamond',
+    color: 'nodePositive3',
+    parent: 'popular_plugins',
+    definition: 'Creates a package (ZIP + installer.php) for easily migrating WordPress sites manually or via upload.',
+  },
+  {
+    id: 'aio_migration',
+    label: 'All-in-One\nWP Migration',
+    shape: 'diamond',
+    color: 'nodePositive3',
+    parent: 'popular_plugins',
+    definition: 'Exports and imports full sites through the WP dashboard with optional extensions for large sites.',
+  },
+  {
+    id: 'migrate_guru',
+    label: 'Migrate\nGuru',
+    shape: 'diamond',
+    color: 'nodePositive3',
+    parent: 'popular_plugins',
+    definition: 'Uses external servers to perform the migration, reducing risk of timeout on large sites.',
+  },
+]
+
+export const links = [
+  { source: 'root', target: 'manual_migration' },
+  { source: 'root', target: 'plugin_migration' },
+  { source: 'root', target: 'staging' },
+  { source: 'root', target: 'backup_strategies' },
+
+  { source: 'manual_migration', target: 'ftp_database' },
+  { source: 'manual_migration', target: 'search_replace' },
+  { source: 'ftp_database', target: 'sql_import' },
+  { source: 'ftp_database', target: 'wp_config_update' },
+
+  { source: 'plugin_migration', target: 'popular_plugins' },
+  { source: 'plugin_migration', target: 'plugin_benefits' },
+  { source: 'popular_plugins', target: 'duplicator' },
+  { source: 'popular_plugins', target: 'aio_migration' },
+  { source: 'popular_plugins', target: 'migrate_guru' },
+
+  { source: 'staging', target: 'staging_hosts' },
+  { source: 'staging', target: 'deployment_workflow' },
+
+  { source: 'backup_strategies', target: 'plugin_backups' },
+  { source: 'backup_strategies', target: 'storage_locations' },
+  { source: 'backup_strategies', target: 'schedule_frequency' },
+]
