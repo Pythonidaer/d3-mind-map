@@ -1515,6 +1515,92 @@ export const contentCategories = [
     ],
   },
   {
+    id: 'wordpress_elementor',
+    name: 'Elementor',
+    baseRoute: '/wordpress_elementor',
+    dataPath: 'wordpress_elementor',
+    addToNav: true,
+    subcategories: [
+      {
+        id: 'overview',
+        name: 'Overview and Core Features',
+        path: 'overview',
+        addToNav: true,
+        addToSubNav: false,
+      },
+      {
+        id: 'elementor_free',
+        name: 'Elementor Free',
+        path: 'elementor_free',
+        addToNav: true,
+        addToSubNav: false,
+      },
+      {
+        id: 'elementor_pro',
+        name: 'Elementor Pro',
+        path: 'elementor_pro',
+        addToNav: true,
+        addToSubNav: false,
+      },
+      {
+        id: 'widgets_library',
+        name: 'Widgets Library',
+        path: 'widgets_library',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'theme_compatibility',
+        name: 'Theme Compatibility and Setup',
+        path: 'theme_compatibility',
+        addToNav: false,
+        addToSubNav: true
+      },
+      {
+        id: 'building_blocks',
+        name: 'Building Blocks and Components',
+        path: 'building_blocks',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'templates_kits',
+        name: 'Templates and Website Kits',
+        path: 'templates_kits',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'practical_examples',
+        name: 'Practical Use Cases',
+        path: 'practical_examples',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'design_showcase',
+        name: 'Elementor Website Examples',
+        path: 'design_showcase',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'limitations',
+        name: 'Limitations and Drawbacks',
+        path: 'limitations',
+        addToNav: false,
+        addToSubNav: true,
+      },
+      {
+        id: 'best_practices',
+        name: 'Best Practices',
+        path: 'best_practices',
+        addToNav: false,
+        addToSubNav: true,
+      }
+    ]
+  },
+  {
     id: 'large_language_models_and_ai',
     name: 'LLMs and AI',
     baseRoute: '/large_language_models_and_ai',
