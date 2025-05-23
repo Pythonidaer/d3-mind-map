@@ -1238,6 +1238,85 @@ export const contentCategories = [
     ],
   },
   {
+    id: 'web_accessibility',
+    name: 'Web Accessibility',
+    baseRoute: '/web_accessibility',
+    dataPath: 'web_accessibility',
+    addToNav: true,
+    subcategories: [
+      {
+        id: 'core_concepts',
+        name: 'Core Concepts',
+        path: 'core_concepts',
+        addToNav: true,
+        addToSubNav: false
+      },
+      {
+        id: 'ethical_legal_business_case',
+        name: 'Ethical, Legal & Business Case',
+        path: 'ethical_legal_business_case',
+        addToNav: false,
+        addToSubNav: true
+      },
+      {
+        id: 'wcag_standards',
+        name: 'WCAG Standards & POUR',
+        path: 'wcag_standards',
+        addToNav: true,
+        addToSubNav: false
+      },
+      {
+        id: 'conformance_levels',
+        name: 'Conformance Levels',
+        path: 'conformance_levels',
+        addToNav: false,
+        addToSubNav: true
+      },
+      {
+        id: 'technical_staples',
+        name: 'Technical Staples',
+        path: 'technical_staples',
+        addToNav: false,
+        addToSubNav: true
+      },
+      {
+        id: 'testing_strategies',
+        name: 'Testing Strategies',
+        path: 'testing_strategies',
+        addToNav: false,
+        addToSubNav: true
+      },
+      {
+        id: 'evaluation_methodology',
+        name: 'WCAG Evaluation Methodology',
+        path: 'evaluation_methodology',
+        addToNav: false,
+        addToSubNav: true
+      },
+      {
+        id: 'resources_tools',
+        name: 'Resources & Tools',
+        path: 'resources_tools',
+        addToNav: false,
+        addToSubNav: true
+      },
+      {
+        id: 'accessibility_checklist',
+        name: 'Accessibility Checklist',
+        path: 'accessibility_checklist',
+        addToNav: true,
+        addToSubNav: false
+      },
+      {
+        id: 'integrating_accessibility',
+        name: 'Integrating Accessibility & Future Outlook',
+        path: 'integrating_accessibility',
+        addToNav: false,
+        addToSubNav: true
+      }
+    ]
+  },
+  {
     id: 'auth_deep_dive',
     name: 'Authentication & Authorization',
     baseRoute: '/auth_deep_dive',
