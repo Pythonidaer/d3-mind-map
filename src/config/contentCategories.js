@@ -2,6 +2,71 @@
 
 export const contentCategories = [
   {
+    id: 'vite_react_vitest_docs',
+    name: 'Vite + React + Vitest Documentation',
+    baseRoute: '/vite_react_vitest_docs',
+    dataPath: 'vite_react_vitest_docs',
+    addToNav: true,
+    subcategories: [
+      {
+        id: 'overview',
+        name: 'Overview',
+        path: 'overview',
+        addToNav: true,
+        addToSubNav: false
+      },
+      {
+        id: 'foundational_principles',
+        name: 'Foundational Principles',
+        path: 'foundational_principles',
+        addToNav: true,
+        addToSubNav: false
+      },
+      {
+        id: 'project_maintainability',
+        name: 'Documentation for Maintainability',
+        path: 'project_maintainability',
+        addToNav: false,
+        addToSubNav: true
+      },
+      {
+        id: 'documentation_types',
+        name: 'Documentation Types and Purpose',
+        path: 'documentation_types',
+        addToNav: true,
+        addToSubNav: false
+      },
+      {
+        id: 'automation_generation',
+        name: 'Automating Documentation',
+        path: 'automation_generation',
+        addToNav: false,
+        addToSubNav: true
+      },
+      {
+        id: 'tooling_comparison',
+        name: 'Tooling and Platform Comparison',
+        path: 'tooling_comparison',
+        addToNav: false,
+        addToSubNav: true
+      },
+      {
+        id: 'sustaining_docs',
+        name: 'Sustaining Documentation',
+        path: 'sustaining_docs',
+        addToNav: false,
+        addToSubNav: true
+      },
+      {
+        id: 'special_cases',
+        name: 'Special Documentation Cases',
+        path: 'special_cases',
+        addToNav: false,
+        addToSubNav: true
+      }
+    ]
+  },
+  {
     id: 'cognitive_learning',
     name: 'Cognitive Systems',
     baseRoute: '/cognitive_learning',
