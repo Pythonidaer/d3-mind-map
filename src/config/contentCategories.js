@@ -249,6 +249,99 @@ export const contentCategories = [
     ],
   },
   {
+    id: 'dashboard_best_practices',
+    name: 'Dashboard',
+    baseRoute: '/dashboard_best_practices',
+    dataPath: 'dashboard_best_practices',
+    addToNav: true,
+    subcategories: [
+      {
+        id: 'foundational_ux',
+        name: 'Foundational UX Principles',
+        path: 'foundational_ux',
+        addToNav: false,
+        addToSubNav: true
+      },
+      {
+        id: 'data_visualization',
+        name: 'Data Visualization',
+        path: 'data_visualization',
+        addToNav: true,
+        addToSubNav: false
+      },
+      {
+        id: 'responsive_design',
+        name: 'Responsive Design',
+        path: 'responsive_design',
+        addToNav: false,
+        addToSubNav: true
+      },
+      {
+        id: 'technical_architecture',
+        name: 'Technical Architecture',
+        path: 'technical_architecture',
+        addToNav: false,
+        addToSubNav: true
+      },
+      {
+        id: 'performance_optimization',
+        name: 'Performance Optimization',
+        path: 'performance_optimization',
+        addToNav: false,
+        addToSubNav: true
+      },
+      {
+        id: 'modular_design',
+        name: 'Modular Component Design',
+        path: 'modular_design',
+        addToNav: false,
+        addToSubNav: true
+      },
+      {
+        id: 'data_handling',
+        name: 'Data Handling & Uploads',
+        path: 'data_handling',
+        addToNav: false,
+        addToSubNav: true
+      },
+      {
+        id: 'user_flows',
+        name: 'User Flows & Onboarding',
+        path: 'user_flows',
+        addToNav: true,
+        addToSubNav: false
+      },
+      {
+        id: 'security_privacy',
+        name: 'Security & Privacy',
+        path: 'security_privacy',
+        addToNav: false,
+        addToSubNav: true
+      },
+      {
+        id: 'analytics_feedback',
+        name: 'Analytics & Feedback',
+        path: 'analytics_feedback',
+        addToNav: false,
+        addToSubNav: true
+      },
+      {
+        id: 'testing_quality',
+        name: 'Testing & Quality Assurance',
+        path: 'testing_quality',
+        addToNav: false,
+        addToSubNav: true
+      },
+      {
+        id: 'visual_best_practices',
+        name: 'Best Practices & Anti-Patterns',
+        path: 'visual_best_practices',
+        addToNav: true,
+        addToSubNav: false
+      }
+    ]
+  },
+  {
     id: 'performance',
     name: 'Performance',
     baseRoute: '/performance',
